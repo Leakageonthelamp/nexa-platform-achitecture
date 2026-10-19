@@ -17,6 +17,8 @@ Deals on the cart are a draft answer to O-21. v1 applies the rules in a fixed or
 
 **Overview** — `voucher-campaign-overview.drawio`
 
+`domain-overview.md` is the plain reading of the HLD and the LLD. Read that instead of the overview page.
+
 Deals, the hold, settling it, and who may write or read the book. A solid line is someone asking. A dashed line is Kafka. Not a replacement for an SHLD. The rulebook is [`overview-guideline.md`](../overview-guideline.md).
 
 **HLD** — `voucher-campaign-hld.drawio`

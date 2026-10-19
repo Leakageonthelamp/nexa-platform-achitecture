@@ -15,6 +15,8 @@ Admin writes the draft. Publish emits the facts. Shoppers and aggregators only r
 
 **Overview** — `catalog-overview.drawio`
 
+`domain-overview.md` is the plain reading of the HLD and the LLD. Read that instead of the overview page.
+
 Draft, publish, sold out, and reading the menu. A solid line is another domain asking. A dashed line is Kafka. Not a replacement for the SHLD. The rulebook is [`overview-guideline.md`](../overview-guideline.md).
 
 **SHLD** — `catalog-menu-shld.drawio`

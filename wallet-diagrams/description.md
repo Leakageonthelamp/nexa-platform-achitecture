@@ -19,6 +19,8 @@ Who uses the stored-value balance, what Wallet does, and how a wallet payment an
 
 **Overview (tryout)** — `wallet-overview.drawio`. The rulebook for the next one is [`overview-guideline.md`](../overview-guideline.md).
 
+`domain-overview.md` is the plain reading of the HLD and the LLD. Read that instead of the overview page.
+
 A system overview: four doors into one ledger, then Payments, Notifications, and the nightly check. A solid line is another domain asking. A dashed line is Kafka. Each door is marked with the choice that serves it: gRPC where the caller waits, Kafka for the top-up and the customer message, Aurora PostgreSQL for the ledger, and a daily job for the nightly check. Not a replacement for the SHLD.
 
 **HLD** — `wallet-hld.drawio`

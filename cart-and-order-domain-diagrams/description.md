@@ -19,6 +19,8 @@ The cart is lines and coupon codes, not prices. There is one open cart per brand
 
 **Overview** — `cart-order-overview.drawio`
 
+`domain-overview.md` is the plain reading of the HLD and the LLD. Read that instead of the overview page.
+
 The cart, placing an order, the kitchen, and closing the order. A solid line is someone asking. A dashed line is Kafka. Not a replacement for the SHLD. The rulebook is [`overview-guideline.md`](../overview-guideline.md).
 
 **SHLD** — `cart-order-shld.drawio`

@@ -17,6 +17,8 @@ The source is the [Loyalty target architecture](https://minordigital.atlassian.n
 
 **Overview** — `loyalty-membercard-overview.drawio`
 
+`domain-overview.md` is the plain reading of the HLD and the LLD. Read that instead of the overview page.
+
 Redeem, earn, a correction, and a lookup. A solid line is someone asking. A dashed line is Kafka. Not a replacement for an SHLD. The rulebook is [`overview-guideline.md`](../overview-guideline.md).
 
 **HLD** — `loyalty-membercard-hld.drawio`

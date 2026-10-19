@@ -100,7 +100,7 @@ the domain `description.md`, then the HLD.
 
 1. Clone this repository.
 2. Open the `.drawio` file in diagrams.net (File → Open From → Device) or in the desktop app.
-3. Read the folder's `description.md` before the picture. It names which file is current.
+3. Read the folder's `description.md` before the picture. It names which file is current. For a system overview, read `domain-overview.md` and do not open `*-overview.drawio` for the words.
 4. Export a PNG with `draw.io -x -f png` only to check layout by eye. Leave the PNG uncommitted.
 
 Files without a suffix are the baseline. Superseded `-v2` drafts live in

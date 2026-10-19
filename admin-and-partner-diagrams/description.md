@@ -15,6 +15,8 @@ Login is synchronous. The caller is always waiting, so nothing here is a Kafka t
 
 **Overview** — `admin-partner-overview.drawio`
 
+`domain-overview.md` is the plain reading of the HLD and the LLD. Read that instead of the overview page.
+
 Staff sign-in, grants, a partner token, and client keys. Every line waits. Nothing here is Kafka. Not a replacement for the SHLD. The rulebook is [`overview-guideline.md`](../overview-guideline.md).
 
 **SHLD** — `admin-partner-shld.drawio`

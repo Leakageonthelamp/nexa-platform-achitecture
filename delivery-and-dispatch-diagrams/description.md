@@ -17,6 +17,8 @@ Riders use `brand_id = mfg`, because one pool serves every brand. The delivery i
 
 **Overview** — `delivery-overview.drawio`
 
+`domain-overview.md` is the plain reading of the HLD and the LLD. Read that instead of the overview page.
+
 Quote, dispatch, tracking, and rider pay. A solid line is another domain asking. A dashed line is Kafka. Not a replacement for the SHLD. The rulebook is [`overview-guideline.md`](../overview-guideline.md).
 
 **SHLD** — `delivery-dispatch-shld.drawio`

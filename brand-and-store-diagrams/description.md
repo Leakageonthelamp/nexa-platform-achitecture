@@ -17,6 +17,8 @@ Open-now is not stored. A reader derives it from hours, status, and the current 
 
 **Overview** — `brand-store-overview.drawio`
 
+`domain-overview.md` is the plain reading of the HLD and the LLD. Read that instead of the overview page.
+
 Writing a store, finding one that is open, telling Catalog and Delivery, and the import. A solid line is another domain asking. A dashed line is Kafka. Not a replacement for the SHLD. The rulebook is [`overview-guideline.md`](../overview-guideline.md).
 
 **SHLD** — `brand-store-shld.drawio`

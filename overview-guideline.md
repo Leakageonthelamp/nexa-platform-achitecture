@@ -140,9 +140,9 @@ The subtitle is one sentence. The Not-here line is one sentence.
 
 ## 9. How to make the next one
 
-1. Read `architecture.md`, then `kafka-topics.md`, then the domain `description.md`, then the HLD and its script. Write a scratch list, not a new file: four features, the contact for each, the technology for each, the Kafka direction, the infrastructure, and one Not-here line.
+1. Read `architecture.md`, then `kafka-topics.md`, then the domain `description.md`, then the HLD and the LLD. Do not read the overview page or the HLD script for the words. Write them into `domain-overview.md`: four features, the contact for each, the technology for each, the Kafka direction from the HLD edges, the infrastructure, and one Not-here line. Each feature names the HLD door and the LLD pages it absorbed.
 2. Copy `wallet-diagrams/wallet-overview.drawio` to `<domain>-diagrams/<domain>-overview.drawio`. Change the diagram `id` and `name`. Keep the styles.
-3. Replace the words. Keep the bullet lists as lists. Point each Kafka arrow the way the message travels.
+3. Replace the words from `domain-overview.md`. Keep the bullet lists as lists. Point each Kafka arrow the way the HLD edge travels.
 4. Delete an infrastructure card the domain does not contract with. Add one only when the HLD names it, and copy its logo from §7.
 5. Export a PNG and read it. Fix a clipped bullet, a chip sitting on a title, a logo sitting on text, and an arrow that crosses a card. Don't commit the PNG.
 6. In the domain `description.md`, under `## Diagrams`, add `**Overview** — \`<file>\`` and two lines: what the page shows, and that it is not a replacement for the SHLD.

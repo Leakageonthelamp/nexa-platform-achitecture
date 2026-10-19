@@ -17,6 +17,8 @@ Aggregator orders are skipped. Grab, LINE MAN, and Shopee Food already notify th
 
 **Overview** — `notification-overview.drawio`
 
+`domain-overview.md` is the plain reading of the HLD and the LLD. Read that instead of the overview page.
+
 Order status, a refund, the one-time code, and the inbox. A solid line is another domain asking. A dashed line is Kafka. Not a replacement for the SHLD. The rulebook is [`overview-guideline.md`](../overview-guideline.md).
 
 **SHLD** — `notification-shld.drawio`

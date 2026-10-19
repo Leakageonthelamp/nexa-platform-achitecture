@@ -6,6 +6,8 @@ One shared platform runs every brand, from the menu to the doorstep. The picture
 
 **Overview** — `mfg-eplatform-overview.drawio`
 
+`domain-overview.md` is the plain reading of the platform HLD, checked against the rulebook. There is no platform LLD. Read that instead of the overview page.
+
 Sign in, checkout, the kitchen and the rider, and telling the customer. A solid line is someone asking. A dashed line is Kafka. Not a replacement for the SHLD. The rulebook is [`overview-guideline.md`](../overview-guideline.md).
 
 **SHLD** — `mfg-eplatform-shld.drawio`

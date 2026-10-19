@@ -15,6 +15,8 @@ Food payments are authorized first and captured later. The hold is placed at aut
 
 **Overview** — `payment-overview.drawio`
 
+`domain-overview.md` is the plain reading of the HLD and the LLD. Read that instead of the overview page.
+
 Charge, capture, refund, and rider payout. A solid line is another domain asking. A dashed line is Kafka. Not a replacement for the SHLD. The rulebook is [`overview-guideline.md`](../overview-guideline.md).
 
 **SHLD** — `payment-billing-shld.drawio`
