@@ -196,6 +196,5 @@ The pictures name these contracts. The rules for each one are in [`architecture.
 ### Diagram checks
 
 - A third-party box carries its logo at 30×30, 16px from the left edge, embedded in the file.
-- Every Kafka consume ends in a green Ack pill. Sync calls and publishes stop
-  at the response or the publish.
+- A Kafka consume ends in a green Ack pill after the last step.
 - Export a PNG and read it. A line through a box, or a label sitting on a line, fails review.

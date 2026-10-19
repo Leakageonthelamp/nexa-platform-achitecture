@@ -13,6 +13,10 @@ Every caller is waiting, so every door is gRPC. Kong reads the public half of th
 
 ## Diagrams
 
+**Overview** — `identity-customer-overview.drawio`
+
+Sign in, the profile, closing the account, and a live read of contacts or the address. Every line waits. Nothing here is Kafka. Not a replacement for the SHLD. The rulebook is [`overview-guideline.md`](../overview-guideline.md).
+
 **SHLD** — `identity-customer-shld.drawio`
 
 Who holds a Minor ID, what this domain keeps, and how a customer signs up once and then joins a second brand.
