@@ -126,13 +126,14 @@ Files without a suffix are the baseline. Superseded `-v2` drafts live in
 ├── payment-domain-diagrams/        Transactions, invoices, receipts.
 ├── delivery-and-dispatch-diagrams/ Quote, dispatch, rider, earnings ledger.
 ├── wallet-diagrams/                Stored-value ledger and holds. Overview reference.
+├── loyalty-and-membercard-diagrams/ Points, tier, and the member card.
 ├── voucher-and-campaign-diagrams/  Campaigns, vouchers, member cards.
 ├── notification-diagrams/          Templates, inbox, and outbound channels.
 ├── refs/                           Source notes and the 2029 HTML demo.
 └── archive/                        Pre-EDA and v2 drafts. Historical.
 ```
 
-Loyalty (points and tier) is a domain in the rulebook. It has no diagram folder yet.
+Loyalty & MemberCard is drawn from the [Loyalty target architecture](https://minordigital.atlassian.net/wiki/spaces/BackEnd/pages/3898146819/Loyalty+Domain+-+Target+Architecture). Topics follow [`kafka-topics.md`](kafka-topics.md): `order.events` in, `notification.requested` out.
 
 | Domain | Diagrams |
 | --- | --- |
@@ -145,6 +146,7 @@ Loyalty (points and tier) is a domain in the rulebook. It has no diagram folder 
 | Payment & Billing | [payment-domain-diagrams](payment-domain-diagrams/description.md) |
 | Delivery & Dispatch | [delivery-and-dispatch-diagrams](delivery-and-dispatch-diagrams/description.md) |
 | Wallet | [wallet-diagrams](wallet-diagrams/description.md) |
+| Loyalty & MemberCard | [loyalty-and-membercard-diagrams](loyalty-and-membercard-diagrams/description.md) |
 | Voucher & Campaign | [voucher-and-campaign-diagrams](voucher-and-campaign-diagrams/description.md) |
 | Notification | [notification-diagrams](notification-diagrams/description.md) |
 
