@@ -1,0 +1,349 @@
+<mxfile host="Electron">
+  <diagram name="Page-1" id="NHH7U9onUP1STbpbOhzo">
+    <mxGraphModel dx="1222" dy="950" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=20;fontColor=#0F172A;fontStyle=1;" value="Who calls Campaign — Menu · Cart · Admin BFF · Order events (v1 · Campaign is a pure responder)" vertex="1">
+          <mxGeometry height="32" width="1944" x="410" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=12;fontColor=#64748B;" value="Orange = request → · teal dashed = response ← · red dashed = rejected/error · Campaign never initiates a call to Menu, Cart, Order, or Admin — every arrow into Campaign is someone else asking it something" vertex="1">
+          <mxGeometry height="22" width="1944" x="410" y="438" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-3" parent="1" style="rounded=1;arcSize=20;whiteSpace=wrap;html=1;align=left;spacingLeft=14;fontFamily=Arial;fontSize=11;fontColor=#EA580C;fillColor=#FFF7ED;strokeColor=#EA580C;strokeWidth=2;" value="request →" vertex="1">
+          <mxGeometry height="30" width="250" x="410" y="468" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-4" parent="1" style="rounded=1;arcSize=20;whiteSpace=wrap;html=1;align=left;spacingLeft=14;fontFamily=Arial;fontSize=11;fontColor=#0F766E;fillColor=#ECFDF5;strokeColor=#0F766E;strokeWidth=2;" value="response ← (dashed)" vertex="1">
+          <mxGeometry height="30" width="250" x="670" y="468" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-5" parent="1" style="rounded=1;arcSize=20;whiteSpace=wrap;html=1;align=left;spacingLeft=14;fontFamily=Arial;fontSize=11;fontColor=#DC2626;fillColor=#FEF2F2;strokeColor=#DC2626;strokeWidth=2;" value="rejected / error (dashed)" vertex="1">
+          <mxGeometry height="30" width="300" x="930" y="468" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-6" parent="1" style="rounded=1;arcSize=20;whiteSpace=wrap;html=1;align=left;spacingLeft=14;fontFamily=Arial;fontSize=11;fontColor=#A21CAF;fillColor=#FDF4FF;strokeColor=#A21CAF;strokeWidth=2;" value="Campaign = rules + redemptions (pure responder)" vertex="1">
+          <mxGeometry height="30" width="420" x="1240" y="468" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-7" parent="1" style="rounded=1;arcSize=20;whiteSpace=wrap;html=1;align=left;spacingLeft=14;fontFamily=Arial;fontSize=11;fontColor=#1D4ED8;fillColor=#EFF6FF;strokeColor=#1D4ED8;strokeWidth=2;" value="Callers: Menu · Cart · Admin BFF · Order (async) — never the reverse" vertex="1">
+          <mxGeometry height="30" width="684" x="1670" y="468" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-8" parent="1" style="rounded=1;arcSize=4;whiteSpace=wrap;html=1;fillColor=#FDF4FF;strokeColor=#A21CAF;" value="" vertex="1">
+          <mxGeometry height="170" width="1944" x="410" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-9" parent="1" style="rounded=0;fillColor=#A21CAF;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="170" width="10" x="410" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-10" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=14;fontColor=#86198F;fontStyle=1;" value="&lt;b&gt;A. Browse&lt;/b&gt; — Menu calls Campaign for display promos (not a price promise)" vertex="1">
+          <mxGeometry height="26" width="1900" x="438" y="518" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-11" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1.5;" value="&lt;b&gt;App&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;GetMenu(store, channel)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="280" x="438" y="554" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-12" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#EFF6FF;strokeColor=#93C5FD;strokeWidth=1.5;" value="&lt;b&gt;Menu&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;catalog: Pizza ฿399 · Coke ฿25&lt;br&gt;calls Campaign for display promos&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="280" x="838" y="554" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-13" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FDF4FF;strokeColor=#A21CAF;strokeWidth=2;" value="&lt;b&gt;Campaign&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;GetDisplayPromos(skus[])&lt;br&gt;one batch call · cached · read-only&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="300" x="1238" y="554" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-14" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1.5;" value="&lt;b&gt;Customer sees&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;Coke &lt;s&gt;฿25&lt;/s&gt; ฿20 (item promo → display_price) · Pizza ฿399 + “Buy 1 Get 1” badge&lt;br&gt;Basket promos are badges only — Menu can’t know cart qty&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="700" x="1598" y="554" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-15" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-11" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2.5;strokeColor=#EA580C;fontColor=#EA580C;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-12" value="1 GetMenu">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-16" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-12" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2.5;strokeColor=#EA580C;fontColor=#EA580C;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-13" value="2 GetDisplayPromos">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-17" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-13" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2;strokeColor=#0F766E;fontColor=#0F766E;dashed=1;dashPattern=6 4;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-12" value="3 promos">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-18" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-12" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2;strokeColor=#0F766E;fontColor=#0F766E;dashed=1;dashPattern=6 4;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-11" value="4 items + badges">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-19" parent="1" style="rounded=1;arcSize=4;whiteSpace=wrap;html=1;fillColor=#FDF4FF;strokeColor=#A21CAF;" value="" vertex="1">
+          <mxGeometry height="250" width="1944" x="410" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-20" parent="1" style="rounded=0;fillColor=#A21CAF;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="250" width="10" x="410" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-21" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=14;fontColor=#86198F;fontStyle=1;" value="&lt;b&gt;B. Cart Preview (GetCart)&lt;/b&gt; — Cart calls Menu + Campaign, merges automatic promos" vertex="1">
+          <mxGeometry height="26" width="1900" x="438" y="708" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-22" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1.5;" value="&lt;b&gt;App&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;GetCart(cart_id)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="280" x="438" y="744" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-23" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#EFF6FF;strokeColor=#93C5FD;strokeWidth=1.5;" value="&lt;b&gt;Cart&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;load lines from Redis&lt;br&gt;ask Menu for prices&lt;br&gt;ask Campaign to evaluate basket&lt;br&gt;merge → cache preview + pricing_version&lt;/font&gt;" vertex="1">
+          <mxGeometry height="184" width="280" x="838" y="744" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-24" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#EFF6FF;strokeColor=#93C5FD;strokeWidth=1.5;" value="&lt;b&gt;Menu&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;GetPrices(skus[]) · fresh price + availability&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="300" x="1238" y="744" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-25" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FDF4FF;strokeColor=#A21CAF;strokeWidth=2;" value="&lt;b&gt;Campaign&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;EvaluateBasket(lines, prices, vouchers) · automatic promos: BOGO, bundle, free-ship threshold&lt;/font&gt;" vertex="1">
+          <mxGeometry height="78" width="300" x="1238" y="850" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-26" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1.5;" value="&lt;b&gt;Running total (preview)&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;Pizza 2 × ฿399 = ฿798&lt;br&gt;Buy 1 Get 1 −฿399 (auto promo)&lt;br&gt;&lt;b&gt;Total ฿399&lt;/b&gt; · pricing_version pv_8c1f&lt;br&gt;No voucher applied yet&lt;/font&gt;" vertex="1">
+          <mxGeometry height="184" width="700" x="1598" y="744" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-27" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-22" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2.5;strokeColor=#EA580C;fontColor=#EA580C;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.15;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-23" value="1 GetCart">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-28" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-23" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2.5;strokeColor=#EA580C;fontColor=#EA580C;exitX=1;exitY=0.2;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-24" value="2 GetPrices">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-29" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-24" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2;strokeColor=#0F766E;fontColor=#0F766E;dashed=1;dashPattern=6 4;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.35;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-23" value="3 prices">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-30" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-23" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2.5;strokeColor=#EA580C;fontColor=#EA580C;exitX=1;exitY=0.65;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-25" value="4 EvaluateBasket">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-31" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-25" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2;strokeColor=#0F766E;fontColor=#0F766E;dashed=1;dashPattern=6 4;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.8;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-23" value="5 allocations">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-32" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-23" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2;strokeColor=#0F766E;fontColor=#0F766E;dashed=1;dashPattern=6 4;exitX=0;exitY=0.9;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-22" value="6 preview">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-33" parent="1" style="rounded=1;arcSize=4;whiteSpace=wrap;html=1;fillColor=#FDF4FF;strokeColor=#A21CAF;" value="" vertex="1">
+          <mxGeometry height="210" width="1944" x="410" y="970" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-34" parent="1" style="rounded=0;fillColor=#A21CAF;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="210" width="10" x="410" y="970" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-35" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=14;fontColor=#86198F;fontStyle=1;" value="&lt;b&gt;C. Apply Voucher Code&lt;/b&gt; — Cart calls Campaign to validate (dry-run, not yet redeemed)" vertex="1">
+          <mxGeometry height="26" width="1900" x="438" y="978" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-36" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1.5;" value="&lt;b&gt;App&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;Enter code at cart page&lt;br&gt;ApplyVoucher(cart_id, code: SAVE10)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="280" x="438" y="1014" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-37" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#EFF6FF;strokeColor=#93C5FD;strokeWidth=1.5;" value="&lt;b&gt;Cart&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;forwards code to Campaign for validation&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="280" x="838" y="1014" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-38" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FDF4FF;strokeColor=#A21CAF;strokeWidth=2;" value="&lt;b&gt;Campaign&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;ValidateVoucher(code, user, basket)&lt;br&gt;checks: expiry, min spend, usage cap, user segment, stackability&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="300" x="1238" y="1014" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-39" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1.5;" value="&lt;b&gt;Voucher applied (preview only)&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;SAVE10 → −฿40 (10%, cap ฿50) · new total ฿759 · not yet redeemed — becomes permanent only after checkout commits&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="700" x="1598" y="1014" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-40" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FEF2F2;strokeColor=#DC2626;strokeWidth=2;" value="&lt;b&gt;Rejected (422)&lt;/b&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt; — INVALID_CODE · EXPIRED · LIMIT_REACHED · NOT_ELIGIBLE — shown inline on the voucher field, cart total unchanged&lt;/font&gt;" vertex="1">
+          <mxGeometry height="56" width="700" x="1598" y="1104" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-41" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-36" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2.5;strokeColor=#EA580C;fontColor=#EA580C;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-37" value="1 ApplyVoucher">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-42" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-37" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2.5;strokeColor=#EA580C;fontColor=#EA580C;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-38" value="2 ValidateVoucher">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-43" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-38" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2;strokeColor=#0F766E;fontColor=#0F766E;dashed=1;dashPattern=6 4;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-37" value="3 discount">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-44" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-37" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2;strokeColor=#0F766E;fontColor=#0F766E;dashed=1;dashPattern=6 4;exitX=0;exitY=0.85;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-36" value="4 updated total">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-45" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-38" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2;strokeColor=#DC2626;fontColor=#DC2626;dashed=1;dashPattern=6 4;exitX=1;exitY=0.9;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-40" value="3b rejected">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-46" parent="1" style="rounded=1;arcSize=4;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;" value="" vertex="1">
+          <mxGeometry height="630" width="1944" x="410" y="1200" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-47" parent="1" style="rounded=0;fillColor=#059669;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="630" width="10" x="410" y="1200" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-48" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=14;fontColor=#047857;fontStyle=1;" value="&lt;b&gt;D. Checkout&lt;/b&gt; — Phase 1 reprice + verify → Phase 2 reserve → create → commit → clear cart" vertex="1">
+          <mxGeometry height="26" width="1900" x="438" y="1208" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-49" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=12;fontColor=#047857;fontStyle=1;" value="&lt;b&gt;Phase 1 — reprice fresh, verify against what the customer saw (price AND voucher)&lt;/b&gt;" vertex="1">
+          <mxGeometry height="22" width="1000" x="438" y="1238" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-50" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1.5;" value="&lt;b&gt;App&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;Checkout · Idempotency-Key&lt;br&gt;expected pv_8c1f / ฿759&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="280" x="438" y="1266" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-51" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#EFF6FF;strokeColor=#93C5FD;strokeWidth=1.5;" value="&lt;b&gt;Cart&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;reprice fresh (never trust preview)&lt;br&gt;re-validate voucher is still usable&lt;br&gt;compare with expected pricing_version/total&lt;br&gt;changed → 409 · match → Phase 2&lt;/font&gt;" vertex="1">
+          <mxGeometry height="184" width="280" x="838" y="1266" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-52" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#EFF6FF;strokeColor=#93C5FD;strokeWidth=1.5;" value="&lt;b&gt;Menu&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;GetPrices · fresh&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="300" x="1238" y="1266" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-53" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FDF4FF;strokeColor=#A21CAF;strokeWidth=2;" value="&lt;b&gt;Campaign&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;EvaluateBasket + ValidateVoucher · fresh&lt;/font&gt;" vertex="1">
+          <mxGeometry height="78" width="300" x="1238" y="1372" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-54" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1.5;" value="&lt;b&gt;Verified basket&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;new pricing_version = pv_8c1f, total ฿759 = expected → continue to Phase 2&lt;br&gt;Same Idempotency-Key retried → same result, no 2nd order&lt;/font&gt;" vertex="1">
+          <mxGeometry height="184" width="700" x="1598" y="1266" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-55" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FEF2F2;strokeColor=#DC2626;strokeWidth=2;" value="&lt;b&gt;App · 409 PRICE_CHANGED&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;show new total or voucher-no-longer-valid&lt;br&gt;customer confirms → retry&lt;/font&gt;" vertex="1">
+          <mxGeometry height="78" width="280" x="438" y="1372" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-56" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=12;fontColor=#047857;fontStyle=1;" value="&lt;b&gt;Phase 2 — reserve voucher, create order, commit, clear cart&lt;/b&gt;" vertex="1">
+          <mxGeometry height="22" width="1000" x="438" y="1470" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-57" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1.5;" value="&lt;b&gt;App&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;201 · order_id: ORD-7b21de&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="280" x="438" y="1498" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-58" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#EFF6FF;strokeColor=#93C5FD;strokeWidth=1.5;" value="&lt;b&gt;Cart&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;reserve voucher (TTL 10 min)&lt;br&gt;create order with locked lines + allocations&lt;br&gt;commit redemption&lt;br&gt;clear cart&lt;/font&gt;" vertex="1">
+          <mxGeometry height="316" width="280" x="838" y="1498" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-59" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FDF4FF;strokeColor=#A21CAF;strokeWidth=2;" value="&lt;b&gt;Campaign · Reserve&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;ReserveRedemption · TTL 10 min&lt;/font&gt;" vertex="1">
+          <mxGeometry height="72" width="300" x="1238" y="1498" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-60" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#ECFDF5;strokeColor=#059669;strokeWidth=2;" value="&lt;b&gt;Order · CreateOrder&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;idempotency_key · locked lines · pricing_version&lt;/font&gt;" vertex="1">
+          <mxGeometry height="72" width="300" x="1238" y="1578" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-61" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FDF4FF;strokeColor=#A21CAF;strokeWidth=2;" value="&lt;b&gt;Campaign · Commit&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;CommitRedemption(reservation_id, order_id)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="72" width="300" x="1238" y="1658" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-62" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FEF2F2;strokeColor=#DC2626;strokeWidth=2;" value="&lt;b&gt;Redis&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;clear cart&lt;/font&gt;" vertex="1">
+          <mxGeometry height="72" width="300" x="1238" y="1738" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-63" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1.5;" value="&lt;b&gt;Order stores (permanent)&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;Pizza qty 2 · unit ฿399 · subtotal ฿798&lt;br&gt;discount_allocations: BOGO −฿399, voucher SAVE10 −฿40&lt;br&gt;&lt;b&gt;total ฿759&lt;/b&gt; · reservation_id · pricing_version&lt;br&gt;finance &amp; campaign reports read from this record&lt;/font&gt;" vertex="1">
+          <mxGeometry height="184" width="700" x="1598" y="1498" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-64" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#92400E;fillColor=#FFFBEB;strokeColor=#D97706;strokeWidth=1.5;" value="&lt;b&gt;If something fails&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#92400E&quot; style=&quot;font-size:10px&quot;&gt;CreateOrder fails → Cart calls ReleaseRedemption(reservation_id)&lt;br&gt;Cart crashes mid-flow → reservation expires after TTL, nothing leaks&lt;br&gt;Commit fails after order created → async retry via outbox, order stays valid&lt;br&gt;Voucher cap hit exactly at Reserve → re-evaluate → 409/422 shown before payment&lt;/font&gt;" vertex="1">
+          <mxGeometry height="124" width="700" x="1598" y="1690" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-65" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-50" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2.5;strokeColor=#EA580C;fontColor=#EA580C;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.1;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-51" value="1 Checkout">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-66" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-51" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2;strokeColor=#DC2626;fontColor=#DC2626;dashed=1;dashPattern=6 4;exitX=0;exitY=0.9;exitDx=0;exitDy=0;entryX=1;entryY=0.3;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-55" value="if price or voucher changed">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-67" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-51" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2.5;strokeColor=#EA580C;fontColor=#EA580C;exitX=1;exitY=0.2;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-52" value="2 GetPrices">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-68" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-52" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2;strokeColor=#0F766E;fontColor=#0F766E;dashed=1;dashPattern=6 4;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.35;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-51" value="3 prices">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-69" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-51" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2.5;strokeColor=#EA580C;fontColor=#EA580C;exitX=1;exitY=0.65;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-53" value="4 Evaluate+Validate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-70" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-53" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2;strokeColor=#0F766E;fontColor=#0F766E;dashed=1;dashPattern=6 4;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.8;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-51" value="5 allocations">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-71" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-51" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2;strokeColor=#334155;fontColor=#334155;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-58" value="match → Phase 2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-72" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-57" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2.5;strokeColor=#EA580C;fontColor=#EA580C;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.08;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-58" value="7 proceed">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-73" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-58" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2.5;strokeColor=#EA580C;fontColor=#EA580C;exitX=1;exitY=0.15;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-59" value="8 Reserve">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-74" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-59" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2;strokeColor=#0F766E;fontColor=#0F766E;dashed=1;dashPattern=6 4;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-58" value="9 reservation_id">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-75" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-58" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2.5;strokeColor=#EA580C;fontColor=#EA580C;exitX=1;exitY=0.4;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-60" value="10 CreateOrder">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-76" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-60" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2;strokeColor=#0F766E;fontColor=#0F766E;dashed=1;dashPattern=6 4;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.45;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-58" value="11 order_id">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-77" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-58" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2.5;strokeColor=#EA580C;fontColor=#EA580C;exitX=1;exitY=0.65;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-61" value="12 Commit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-78" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-61" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2;strokeColor=#0F766E;fontColor=#0F766E;dashed=1;dashPattern=6 4;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-58" value="ok">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-79" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-58" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2.5;strokeColor=#EA580C;fontColor=#EA580C;exitX=1;exitY=0.85;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-62" value="13 clear cart">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-80" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-58" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2;strokeColor=#0F766E;fontColor=#0F766E;dashed=1;dashPattern=6 4;exitX=0;exitY=0.9;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-57" value="14 order_id">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-81" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-60" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2;strokeColor=#334155;fontColor=#334155;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-63" value="stores">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-82" parent="1" style="rounded=1;arcSize=4;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#1D4ED8;" value="" vertex="1">
+          <mxGeometry height="170" width="1944" x="410" y="1850" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-83" parent="1" style="rounded=0;fillColor=#1D4ED8;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="170" width="10" x="410" y="1850" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-84" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=14;fontColor=#1D4ED8;fontStyle=1;" value="&lt;b&gt;E. Admin Management&lt;/b&gt; — Admin BFF calls Campaign directly (write path, admin-authenticated, separate from the runtime read path above)" vertex="1">
+          <mxGeometry height="26" width="1900" x="438" y="1858" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-85" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1.5;" value="&lt;b&gt;Admin BFF&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;Ops console: create/edit a campaign or voucher&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="280" x="438" y="1894" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-86" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FDF4FF;strokeColor=#A21CAF;strokeWidth=2;" value="&lt;b&gt;Campaign (api mode)&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;validates admin payload, writes campaign/voucher config&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="280" x="912" y="1894" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-87" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#EFF6FF;strokeColor=#1D4ED8;strokeWidth=1.5;" value="&lt;b&gt;PostgreSQL&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;campaigns, promo_rules, vouchers — same DB the runtime path reads from&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="300" x="1282" y="1894" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-88" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1.5;" value="&lt;b&gt;Campaign live&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;New campaign/voucher is immediately visible to EvaluateBasket / ValidateVoucher — no deploy needed&lt;br&gt;Worker activates scheduled campaigns automatically at start_at&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="700" x="1598" y="1894" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-89" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-85" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2.5;strokeColor=#EA580C;fontColor=#EA580C;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-86" value="1 CreateCampaign / CreateVoucher">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-90" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-86" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2.5;strokeColor=#EA580C;fontColor=#EA580C;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-87" value="2 write">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-91" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-87" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2;strokeColor=#0F766E;fontColor=#0F766E;dashed=1;dashPattern=6 4;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-86" value="3 ok">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-92" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-86" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2;strokeColor=#0F766E;fontColor=#0F766E;dashed=1;dashPattern=6 4;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-85" value="4 campaign_id / voucher_id">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-93" parent="1" style="rounded=1;arcSize=4;whiteSpace=wrap;html=1;fillColor=#EEF2FF;strokeColor=#4F46E5;" value="" vertex="1">
+          <mxGeometry height="234" width="1944" x="410" y="2040" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-94" parent="1" style="rounded=0;fillColor=#4F46E5;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="234" width="10" x="410" y="2040" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-95" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Arial;fontSize=14;fontColor=#3730A3;fontStyle=1;" value="&lt;b&gt;F. Async (Kafka, fire-and-forget)&lt;/b&gt; — nobody waits on these; Cart&#39;s synchronous call is always the primary path" vertex="1">
+          <mxGeometry height="26" width="1900" x="438" y="2048" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-96" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#ECFDF5;strokeColor=#059669;strokeWidth=1.5;" value="&lt;b&gt;Order domain&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;publishes order.created / order.cancelled&lt;/font&gt;" vertex="1">
+          <mxGeometry height="84" width="596" x="438" y="2082" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-97" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#E0E7FF;strokeColor=#4F46E5;strokeWidth=1.5;" value="&lt;b&gt;Kafka&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;order.* topics&lt;/font&gt;" vertex="1">
+          <mxGeometry height="84" width="596" x="1082" y="2082" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-98" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FDF4FF;strokeColor=#A21CAF;strokeWidth=2;" value="&lt;b&gt;Campaign (consumer mode)&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;confirm commit / release reservation — safety net only&lt;/font&gt;" vertex="1">
+          <mxGeometry height="84" width="596" x="1726" y="2082" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-99" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-96" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2;strokeColor=#4F46E5;fontColor=#4F46E5;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-97" value="1 publish">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-100" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-97" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2;strokeColor=#4F46E5;fontColor=#4F46E5;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-98" value="2 consume">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-101" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FDF4FF;strokeColor=#A21CAF;strokeWidth=2;" value="&lt;b&gt;Campaign&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;publishes campaign.redemption.committed, campaign.voucher.expiring&lt;/font&gt;" vertex="1">
+          <mxGeometry height="84" width="596" x="438" y="2182" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-102" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#E0E7FF;strokeColor=#4F46E5;strokeWidth=1.5;" value="&lt;b&gt;Kafka&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;campaign.* topics&lt;/font&gt;" vertex="1">
+          <mxGeometry height="84" width="596" x="1082" y="2182" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-103" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FFFFFF;strokeColor=#CBD5E1;strokeWidth=1.5;" value="&lt;b&gt;Notification + S3&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;push “voucher expiring soon” · redemption/budget data → S3 for reporting&lt;/font&gt;" vertex="1">
+          <mxGeometry height="84" width="596" x="1726" y="2182" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-104" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-101" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2;strokeColor=#4F46E5;fontColor=#4F46E5;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-102" value="3 publish">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-105" edge="1" parent="1" source="xtRJX9auNKFBbhNHjHC0-102" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=blockThin;endFill=1;fontSize=10;fontFamily=Arial;fontStyle=1;labelBackgroundColor=#FFFFFF;strokeWidth=2;strokeColor=#4F46E5;fontColor=#4F46E5;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" target="xtRJX9auNKFBbhNHjHC0-103" value="4 consume">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-106" parent="1" style="rounded=1;arcSize=4;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#64748B;" value="" vertex="1">
+          <mxGeometry height="100" width="1944" x="410" y="2294" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-107" parent="1" style="rounded=0;fillColor=#64748B;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="100" width="10" x="410" y="2294" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-108" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FDF4FF;strokeColor=#A21CAF;strokeWidth=1.5;" value="&lt;b&gt;A Browse&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;Menu → Campaign · display only&lt;/font&gt;" vertex="1">
+          <mxGeometry height="68" width="300" x="438" y="2310" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-109" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FDF4FF;strokeColor=#A21CAF;strokeWidth=1.5;" value="&lt;b&gt;B Preview&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;Cart → Menu + Campaign · merged&lt;/font&gt;" vertex="1">
+          <mxGeometry height="68" width="300" x="754" y="2310" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-110" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#FDF4FF;strokeColor=#A21CAF;strokeWidth=1.5;" value="&lt;b&gt;C Apply Voucher&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;Cart → Campaign · dry-run&lt;/font&gt;" vertex="1">
+          <mxGeometry height="68" width="300" x="1070" y="2310" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-111" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#ECFDF5;strokeColor=#059669;strokeWidth=1.5;" value="&lt;b&gt;D Checkout&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;reprice+verify → reserve → commit&lt;/font&gt;" vertex="1">
+          <mxGeometry height="68" width="300" x="1386" y="2310" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-112" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#EFF6FF;strokeColor=#1D4ED8;strokeWidth=1.5;" value="&lt;b&gt;E Admin&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;Admin BFF → Campaign · CRUD&lt;/font&gt;" vertex="1">
+          <mxGeometry height="68" width="300" x="1702" y="2310" as="geometry" />
+        </mxCell>
+        <mxCell id="xtRJX9auNKFBbhNHjHC0-113" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacing=10;fontFamily=Arial;fontSize=12;fontColor=#0F172A;fillColor=#EEF2FF;strokeColor=#4F46E5;strokeWidth=1.5;" value="&lt;b&gt;F Async&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#64748B&quot; style=&quot;font-size:10px&quot;&gt;Order events in · notify/report out&lt;/font&gt;" vertex="1">
+          <mxGeometry height="68" width="300" x="2018" y="2310" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

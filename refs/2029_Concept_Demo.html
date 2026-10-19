@@ -1,0 +1,1436 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bonchon App 2029 – Concept Demo</title>
+<style>
+:root{--bg:#F2ECE5;--ink:#1D1A20;--muted:#6F6874;--line:#E8E0D7;--red:#D0402E;--red-d:#A93120;--red-l:#FCEAE6;--amber:#EFA23A;--gold:#A87A22;--gold-l:#F7E8C3;--ai:#5B3FF0;--ai-l:#EFEBFF;--navy:#10264A;--teal:#1E7F86;--cream:#FFF8F1;--ok:#17945A;--ok-l:#E2F4EA;--s:1}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%}
+body{background:var(--bg);color:var(--ink);font:14px/1.45 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans Thai","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+svg{display:block}
+.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.i.f{fill:currentColor;stroke:none}
+.i.s{width:16px;height:16px}
+.i.xs{width:13px;height:13px;stroke-width:2.4}
+.i.l{width:24px;height:24px}
+
+/* ---------- page chrome ---------- */
+.top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 24px 6px;max-width:1320px;margin:0 auto}
+.logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(140deg,var(--red),#E87A3A);display:grid;place-items:center;color:#fff;flex:none}
+.top h1{font-size:19px;line-height:1.2;letter-spacing:-.01em}
+.top p{color:var(--muted);font-size:13px}
+.ctrls{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{height:36px;padding:0 14px;border-radius:18px;background:#fff;border:1px solid var(--line);font-weight:650;font-size:13px;display:inline-flex;align-items:center;gap:6px;transition:.2s}
+.btn:hover{border-color:#cdc2b6}
+.btn.pri{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn.pri.on{background:var(--red);border-color:var(--red)}
+.seg{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:18px;padding:3px;height:36px}
+.seg button{padding:0 12px;border-radius:14px;font-size:12.5px;font-weight:650;color:var(--muted)}
+.seg button.on{background:var(--ink);color:#fff}
+.pills{display:flex;gap:6px;padding:6px 24px 12px;max-width:1320px;margin:0 auto;overflow-x:auto;scrollbar-width:none}
+.pills::-webkit-scrollbar{display:none}
+.pill{flex:none;height:30px;padding:0 12px 0 5px;border-radius:15px;background:#fff;border:1px solid var(--line);font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:7px;white-space:nowrap;font-weight:600;transition:.2s}
+.pill b{display:grid;place-items:center;width:20px;height:20px;border-radius:10px;background:var(--bg);font-size:11px;color:var(--ink)}
+.pill.on{background:var(--red);border-color:var(--red);color:#fff}
+.pill.on b{background:#fff;color:var(--red)}
+.pill.mid{border-color:#BFD9DB}
+.pill.mid.on{background:linear-gradient(90deg,var(--navy),var(--teal));border-color:transparent}
+.pill.mid.on b{color:var(--navy)}
+.stage{display:flex;gap:32px;justify-content:center;align-items:flex-start;padding:4px 24px 10px;max-width:1320px;margin:0 auto}
+.foot{max-width:1320px;margin:0 auto;padding:8px 24px 22px;color:var(--muted);font-size:11.5px;text-align:center}
+@media (max-width:860px){.stage{flex-direction:column;align-items:center;padding:4px 16px}.top{padding:12px 16px 4px}.pills{padding:6px 16px 10px}.ctrls{margin-left:0}}
+
+/* ---------- phone ---------- */
+.phonebox{flex:none;width:calc(414px*var(--s));height:calc(868px*var(--s));position:relative}
+.phone{position:absolute;left:0;top:0;width:414px;height:868px;transform:scale(var(--s));transform-origin:0 0;border-radius:64px;background:linear-gradient(145deg,#2c2b31,#0d0d10);padding:12px;box-shadow:0 40px 70px -30px rgba(60,30,10,.45),inset 0 0 0 2px #3b3a41,inset 0 0 0 5px #111}
+.screen{position:relative;width:390px;height:844px;border-radius:52px;overflow:hidden;background:var(--cream);isolation:isolate}
+.island{position:absolute;top:11px;left:50%;width:122px;height:35px;margin-left:-61px;border-radius:20px;background:#000;z-index:90}
+.sbar{position:absolute;top:0;left:0;right:0;height:52px;display:flex;align-items:center;justify-content:space-between;padding:4px 32px 0 40px;font-weight:650;font-size:15.5px;z-index:80;pointer-events:none;color:var(--ink);transition:color .3s}
+.sbar.light{color:#fff}
+.sbar .r{display:flex;gap:6px;align-items:center}
+.homebar{position:absolute;bottom:8px;left:50%;width:134px;height:5px;margin-left:-67px;border-radius:3px;background:#1D1A20;opacity:.85;z-index:95;pointer-events:none}
+.scr{position:absolute;inset:0;display:none;flex-direction:column;background:var(--cream);overflow:hidden}
+.scr.on{display:flex}
+.body{flex:1;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;padding:54px 18px 110px}
+.body::-webkit-scrollbar{display:none}
+.scr.play .a{animation:up .55s cubic-bezier(.2,.8,.2,1) both;animation-delay:var(--d,0s)}
+.scr.play .pop{animation:pop .5s cubic-bezier(.3,1.5,.5,1) both;animation-delay:var(--d,0s)}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:none}}
+@keyframes blink{50%{opacity:0}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(208,64,46,.45)}100%{box-shadow:0 0 0 16px rgba(208,64,46,0)}}
+@keyframes pulseV{0%{box-shadow:0 0 0 0 rgba(91,63,240,.5)}100%{box-shadow:0 0 0 16px rgba(91,63,240,0)}}
+@keyframes pulseT{0%{box-shadow:0 0 0 0 rgba(94,214,222,.6)}100%{box-shadow:0 0 0 18px rgba(94,214,222,0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes rip{0%{transform:scale(.35);opacity:1}100%{transform:scale(1.5);opacity:0}}
+.hide{display:none!important}
+#s2::after,#s3::after,#s4::after,#s5::after,#s6::after,#s7::after,#s8::after{content:"";position:absolute;left:0;right:0;top:0;height:50px;background:linear-gradient(var(--cream) 64%,rgba(255,248,241,0));z-index:6;pointer-events:none}
+#s2body{padding-bottom:165px}
+.card{background:#fff;border-radius:18px;box-shadow:0 1px 2px rgba(60,30,10,.05),0 8px 20px -14px rgba(60,30,10,.35)}
+.row{display:flex;align-items:center;gap:10px}
+.sp{flex:1}
+.muted{color:var(--muted)}
+.cta{height:54px;border-radius:27px;background:var(--red);color:#fff;font-weight:750;font-size:16px;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s,filter .15s;box-shadow:0 10px 20px -10px rgba(208,64,46,.7)}
+.cta.dark{background:var(--ink);box-shadow:0 10px 20px -10px rgba(0,0,0,.6)}
+.press{transform:scale(.95)!important;filter:brightness(.92)}
+.pulse{animation:pulse 1.1s ease-out 2!important}
+.pulseV{animation:pulseV 1.1s ease-out 2!important}
+.badge{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:800;letter-spacing:.04em;padding:3px 7px;border-radius:8px;text-transform:uppercase;line-height:1.2;white-space:nowrap}
+.b-red{background:var(--red-l);color:var(--red)}
+.b-ai{background:var(--ai-l);color:var(--ai)}
+.b-hot{background:#FFE7DA;color:#C2410C}
+.b-ok{background:var(--ok-l);color:var(--ok)}
+.b-gold{background:var(--gold-l);color:#7A5512}
+.topbar{display:flex;align-items:center;gap:10px;height:44px;margin-bottom:6px}
+.topbar h3{flex:1;text-align:center;font-size:17px}
+.ib{width:38px;height:38px;border-radius:19px;background:#fff;display:grid;place-items:center;box-shadow:0 1px 3px rgba(0,0,0,.07);flex:none}
+.food{border-radius:16px;display:grid;place-items:center;overflow:hidden;flex:none;position:relative}
+.food svg{width:94%;height:94%}
+.bg-w{background:radial-gradient(circle at 30% 25%,#FFEBCD,#FAD19D)}
+.bg-s{background:radial-gradient(circle at 30% 25%,#FFE1D7,#F7B6A2)}
+.bg-h{background:radial-gradient(circle at 30% 25%,#FFF4CC,#F8DC86)}
+.bg-b{background:radial-gradient(circle at 30% 25%,#F3F1E6,#DCD7BC)}
+.bg-n{background:radial-gradient(circle at 30% 25%,#F7EDE0,#E5CDAE)}
+.bg-g{background:radial-gradient(circle at 30% 25%,#EBF5E0,#CDE3B2)}
+.bg-d{background:radial-gradient(circle at 30% 25%,#F5FBDC,#DAEE9C)}
+.bg-x{background:radial-gradient(circle at 30% 25%,#FFE4E4,#F6B7BC)}
+.bg-p{background:radial-gradient(circle at 30% 25%,#FCE8F2,#F1C2D9)}
+
+/* nav, toast, taps, toggles, overlays */
+.nav{position:absolute;left:0;right:0;bottom:0;height:86px;padding:6px 10px 28px;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);display:flex;justify-content:space-around;align-items:center;z-index:30;transition:transform .35s cubic-bezier(.2,.9,.2,1),opacity .25s}
+.nav.off{transform:translateY(140%);opacity:0;pointer-events:none}
+.nav button{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;color:#9C949F;font-weight:650;width:62px}
+.nav button.on{color:var(--red)}
+.nav .aib{width:54px;height:54px;border-radius:27px;background:linear-gradient(135deg,#8A6BFF,var(--ai));color:#fff;margin-top:-30px;box-shadow:0 10px 20px -8px rgba(91,63,240,.75);display:grid;place-items:center}
+.nav button.on .aib{box-shadow:0 0 0 4px #E3DCFF,0 10px 20px -8px rgba(91,63,240,.75)}
+.toast{position:absolute;top:58px;left:50%;transform:translate(-50%,-24px);opacity:0;background:var(--ink);color:#fff;padding:10px 16px;border-radius:22px;font-size:13px;font-weight:650;display:flex;align-items:center;gap:8px;white-space:nowrap;z-index:85;transition:.35s cubic-bezier(.2,.9,.2,1);box-shadow:0 12px 26px -10px rgba(0,0,0,.45);pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast.mid{background:linear-gradient(90deg,var(--navy),var(--teal))}
+.toast.ok{background:var(--ok)}
+.toast.ai{background:var(--ai)}
+.rip{position:absolute;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:rgba(40,40,40,.28);border:2px solid rgba(255,255,255,.9);z-index:99;pointer-events:none;animation:rip .65s ease-out forwards}
+.tog{width:48px;height:29px;border-radius:15px;background:#D8D1DB;position:relative;transition:.3s;flex:none}
+.tog::after{content:"";position:absolute;top:3px;left:3px;width:23px;height:23px;border-radius:12px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:.3s cubic-bezier(.3,1.4,.5,1)}
+.tog.on{background:var(--ok)}
+.tog.on::after{left:22px}
+.fid{position:absolute;inset:0;background:rgba(20,16,24,.35);display:grid;place-items:center;opacity:0;pointer-events:none;transition:.25s;z-index:88}
+.fid.on{opacity:1}
+.fid .box{width:150px;height:150px;border-radius:36px;background:rgba(28,26,32,.9);display:grid;place-items:center;color:#fff;font-size:13px;font-weight:650;text-align:center}
+.fid .box .i{width:64px;height:64px;stroke-width:1.4;margin:0 auto 6px}
+.fid.scan .box .i{animation:blink .5s steps(1) infinite}
+.fid.ok .box{color:#5BE29B}
+
+/* ---------- s1 sign-in + Minor ID ---------- */
+#s1{background:#fff}
+.hero1{height:318px;flex:none;position:relative;overflow:hidden;color:#fff;padding:92px 26px 0;background:radial-gradient(120% 90% at 85% 10%,#F07A45 0%,transparent 60%),linear-gradient(165deg,#E04B33,#B32F1E)}
+.hero1 .wm{font-weight:900;font-size:32px;letter-spacing:.01em}
+.hero1 p{opacity:.92;margin-top:4px;font-size:15px;max-width:190px}
+.hero1 svg.big{position:absolute;right:-30px;bottom:-30px;width:236px;height:236px;transform:rotate(-12deg);filter:drop-shadow(0 18px 20px rgba(0,0,0,.25))}
+.form1{flex:1;margin-top:-34px;background:#fff;border-radius:30px 30px 0 0;position:relative;padding:24px 22px 0}
+.form1 h2{font-size:22px;letter-spacing:-.02em}
+.form1 .sub{color:var(--muted);font-size:13.5px;margin:2px 0 16px}
+.field{background:#FAF7F4;border:1.5px solid var(--line);border-radius:16px;height:56px;display:flex;align-items:center;padding:0 16px;gap:10px;font-size:17px;font-weight:650}
+.field .cc{color:var(--muted);padding-right:10px;border-right:1px solid var(--line)}
+.caret{display:inline-block;width:2px;height:21px;background:var(--red);animation:blink 1s steps(1) infinite;margin-left:1px;vertical-align:middle}
+.otpw{max-height:0;overflow:hidden;transition:max-height .5s}
+.otpw.show{max-height:110px}
+.otp{display:flex;gap:8px;margin-top:12px}
+.otp i{flex:1;height:54px;border-radius:14px;background:#FAF7F4;border:1.5px solid var(--line);display:grid;place-items:center;font-style:normal;font-size:22px;font-weight:750;transition:.2s}
+.otp i.f{border-color:var(--red);background:var(--red-l)}
+.sms{display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-size:12px;font-weight:650;color:var(--ok);opacity:0;transition:.3s}
+.sms.show{opacity:1}
+.form1 .cta{margin-top:14px}
+.alt{margin-top:16px;text-align:center;color:var(--muted);font-size:12px}
+.alt .row{margin-top:8px}
+.alt .row span{flex:1;height:42px;border-radius:14px;border:1px solid var(--line);display:grid;place-items:center;font-weight:650;color:var(--ink);font-size:13px}
+.dim{position:absolute;inset:0;background:rgba(8,14,30,.5);opacity:0;transition:.45s;z-index:33;pointer-events:none}
+.dim.on{opacity:1}
+.sheet{position:absolute;left:0;right:0;bottom:0;border-radius:30px 30px 0 0;transform:translateY(105%);transition:transform .65s cubic-bezier(.2,.9,.2,1);z-index:34}
+.sheet.up{transform:none}
+#mid{color:#fff;padding:10px 20px 34px;background:radial-gradient(90% 60% at 50% 30%,rgba(94,214,222,.22),transparent 70%),linear-gradient(170deg,#0D2046 0%,#12395E 58%,#1C7680 100%);box-shadow:0 -20px 40px -10px rgba(0,0,0,.4)}
+.grab{width:40px;height:5px;border-radius:3px;background:rgba(255,255,255,.35);margin:0 auto 12px}
+.newb{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.06em;padding:4px 10px;border-radius:12px;background:linear-gradient(90deg,#F7D27A,#E9B44C);color:#3B2A06}
+#mid h2{font-size:23px;line-height:1.2;letter-spacing:-.02em;margin:10px 0 4px}
+#mid .sub{opacity:.82;font-size:13.5px}
+.orbit{position:relative;height:196px;margin:8px -4px 6px}
+.orbit svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.ln{stroke:#5ED6DE;stroke-width:1.4;stroke-dasharray:1;stroke-dashoffset:1;opacity:.75}
+.go .ln{animation:draw .5s ease forwards;animation-delay:var(--d)}
+@keyframes draw{to{stroke-dashoffset:0}}
+.core{position:absolute;left:50%;top:50%;width:80px;height:80px;margin:-40px 0 0 -40px;border-radius:50%;display:grid;place-items:center;text-align:center;font-weight:850;font-size:14px;line-height:1.05;background:radial-gradient(circle at 35% 30%,#3FB7C0,#155E7A 70%);box-shadow:0 0 0 6px rgba(94,214,222,.15),0 0 30px rgba(94,214,222,.55)}
+.go .core{animation:pulseT 1.6s ease-out infinite}
+.chipb{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;font-size:11.5px;font-weight:700;padding:5px 10px;border-radius:13px;background:#173F61;border:1px solid rgba(255,255,255,.3);opacity:0;transition:background .3s,border-color .3s}
+.go .chipb{animation:popc .45s cubic-bezier(.3,1.5,.5,1) forwards;animation-delay:var(--d)}
+@keyframes popc{from{opacity:0;transform:translate(-50%,-50%) scale(.5)}to{opacity:1;transform:translate(-50%,-50%)}}
+.chipb.me{background:#fff;color:var(--red);border-color:#fff}
+.linked .chipb{border-color:#5ED6DE;background:#1B5E70}
+.linked .chipb.me{background:#fff}
+.perks{display:grid;gap:9px;margin:4px 0 12px}
+.perks div{display:flex;gap:10px;align-items:center;font-size:13.5px;font-weight:600}
+.perks .pi{width:30px;height:30px;border-radius:10px;background:rgba(255,255,255,.12);display:grid;place-items:center;flex:none;color:#7FE3EA}
+.consent{display:flex;gap:12px;align-items:center;padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.08);font-size:12px;line-height:1.35;margin-bottom:12px}
+.consent .tog.on{background:#2FB5A6}
+.btn-mid{height:54px;border-radius:27px;width:100%;background:linear-gradient(90deg,#F7D27A,#E9B44C);color:#2B1E04;font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s,background .3s}
+.btn-mid.done{background:#5ED6DE;color:#0D2046}
+.notnow{display:block;width:100%;text-align:center;margin-top:10px;font-size:13.5px;font-weight:650;opacity:.78}
+.fr{font-size:10.5px;opacity:.55;text-align:center;margin-top:8px}
+
+/* ---------- s2 home ---------- */
+.hdr{display:flex;align-items:center;gap:10px;height:44px}
+.loc{font-size:11px;color:var(--muted);line-height:1.2}
+.loc b{display:flex;align-items:center;gap:3px;font-size:14px;color:var(--ink)}
+.av{width:38px;height:38px;border-radius:19px;padding:2px;background:linear-gradient(135deg,var(--navy),#3FB7C0);flex:none}
+.av span{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:#FBE3D3;color:var(--red-d);font-weight:800;font-size:14px;border:2px solid #fff}
+.greet{font-size:25px;letter-spacing:-.02em;margin-top:8px;line-height:1.15}
+.ailine{display:flex;gap:8px;align-items:flex-start;background:var(--ai-l);color:#3B28B8;border-radius:14px;padding:9px 12px;font-size:13px;margin-top:8px;min-height:58px;font-weight:550}
+.ailine .i{color:var(--ai);margin-top:1px}
+.mstrip{display:grid;grid-template-columns:1.25fr 1fr 1fr;margin-top:12px;border-radius:18px;padding:11px 14px;color:#fff;background:radial-gradient(80% 140% at 100% 0%,rgba(247,210,122,.55),transparent 60%),linear-gradient(120deg,#2A2017,#5B4222)}
+.mstrip div+div{border-left:1px solid rgba(255,255,255,.18);padding-left:12px}
+.mstrip small{display:block;font-size:10.5px;opacity:.75;font-weight:600}
+.mstrip b{font-size:15.5px}
+.mstrip .g{color:#F7D27A}
+.again{display:flex;gap:12px;align-items:center;padding:10px;margin-top:12px}
+.again h4{font-size:14px;line-height:1.25}
+.again p{font-size:12px;color:var(--muted)}
+.sbtn{margin-left:auto;background:var(--red);color:#fff;border-radius:14px;height:36px;padding:0 12px;font-weight:750;font-size:12.5px;display:flex;align-items:center;gap:5px;flex:none}
+.sec{display:flex;justify-content:space-between;align-items:baseline;margin:16px 2px 8px}
+.sec h3{font-size:16px;display:flex;align-items:center;gap:6px}
+.sec a{font-size:12px;color:var(--muted)}
+.hs{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;margin:0 -18px;padding:2px 18px 6px}
+.hs::-webkit-scrollbar{display:none}
+.pick{flex:none;width:140px;padding:8px;border-radius:18px}
+.pick h5{font-size:13px;margin-top:6px;line-height:1.2}
+.pick .rs{font-size:10.5px;color:var(--ai);font-weight:650;margin-top:2px;line-height:1.25}
+.pick .pp{font-size:12.5px;font-weight:750;margin-top:3px}
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.cat{border-radius:16px;padding:8px 2px 7px;text-align:center;font-size:11px;font-weight:650;line-height:1.15}
+.cat .food{width:46px;height:46px;margin:0 auto 5px;border-radius:13px}
+.askai{position:absolute;bottom:98px;left:0;right:0;margin:0 auto;width:max-content;z-index:25;height:42px;padding:0 16px;border-radius:21px;background:#fff;color:var(--ai);font-weight:700;font-size:13px;display:flex;align-items:center;gap:7px;white-space:nowrap;box-shadow:0 10px 24px -10px rgba(91,63,240,.6);border:1px solid #DCD3FF}
+
+/* ---------- s3 menu ---------- */
+.tabs{display:flex;gap:20px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--line);margin:0 -18px;padding:0 18px}
+.tabs span{flex:none;padding:10px 0;font-weight:650;color:var(--muted);font-size:14px}
+.tabs span.on{color:var(--ink);box-shadow:inset 0 -3px 0 var(--red)}
+.filters{display:flex;gap:8px;margin:12px -18px 4px;padding:0 18px;overflow-x:auto;scrollbar-width:none}
+.fchip{flex:none;height:32px;padding:0 12px;border-radius:16px;background:#fff;border:1px solid var(--line);font-size:12.5px;font-weight:650;display:flex;align-items:center;gap:6px;transition:.25s}
+.fchip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.gnote{display:flex;align-items:center;gap:6px;font-size:12px;color:#7A5512;background:var(--gold-l);border-radius:12px;padding:7px 10px;margin-top:8px;font-weight:600}
+.item{display:flex;gap:12px;padding:10px;margin-top:10px;align-items:center;max-height:130px;transition:max-height .45s,opacity .35s,margin .45s,padding .45s}
+.item.gone{max-height:0;opacity:0;margin-top:0;padding-top:0;padding-bottom:0;overflow:hidden}
+.item .food{width:80px;height:80px}
+.item .tx{flex:1;min-width:0}
+.item h4{font-size:14.5px;line-height:1.25}
+.item p{font-size:11.5px;color:var(--muted);line-height:1.3;margin-top:1px}
+.pr{margin-top:5px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.pr s{color:#A79EAA;font-size:12px}
+.pr b{font-size:15px;color:var(--gold)}
+.add{width:34px;height:34px;border-radius:17px;background:var(--red);color:#fff;display:grid;place-items:center;flex:none;align-self:flex-end;transition:transform .15s}
+.minicart{position:absolute;left:14px;right:14px;bottom:98px;height:58px;border-radius:18px;background:var(--ink);color:#fff;display:flex;align-items:center;padding:0 16px;gap:12px;transform:translateY(200px);transition:transform .5s cubic-bezier(.2,.9,.2,1);z-index:22}
+.minicart.show{transform:none}
+.minicart .n{width:28px;height:28px;border-radius:14px;background:var(--red);display:grid;place-items:center;font-weight:800;font-size:13px}
+.minicart small{display:block;font-size:11px;color:#F7D27A;font-weight:650;white-space:nowrap}
+.minicart>b{white-space:nowrap}
+
+/* ---------- s4 AI chat ---------- */
+.aihd{display:flex;align-items:center;gap:10px;height:48px}
+.aihd .orb{width:38px;height:38px;border-radius:19px;background:linear-gradient(135deg,#8A6BFF,var(--ai));color:#fff;display:grid;place-items:center}
+.aihd h3{font-size:16px}
+.aihd p{font-size:11.5px;color:var(--muted)}
+.chat{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.bub{max-width:84%;padding:10px 14px;border-radius:18px;font-size:14px;line-height:1.4}
+.bub.me{align-self:flex-end;background:var(--red);color:#fff;border-bottom-right-radius:6px}
+.bub.ai{align-self:flex-start;background:#fff;border-bottom-left-radius:6px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.dots{display:inline-flex;gap:4px;padding:14px 16px}
+.dots i{width:7px;height:7px;border-radius:4px;background:#B9AEF8;animation:blink 1s infinite}
+.dots i:nth-child(2){animation-delay:.2s}.dots i:nth-child(3){animation-delay:.4s}
+.steps{display:flex;gap:6px;flex-wrap:wrap}
+.steps span{font-size:11px;font-weight:700;padding:4px 9px;border-radius:10px;background:var(--ai-l);color:var(--ai);display:inline-flex;align-items:center;gap:4px}
+.basket{padding:10px 12px;width:100%}
+.bl{display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:1px dashed var(--line);font-size:12.5px}
+.bl:last-child{border-bottom:0}
+.bl .food{width:34px;height:34px;border-radius:10px}
+.bl .q{font-weight:800;color:var(--muted);width:22px}
+.bl .nm{flex:1;line-height:1.2}
+.bl .nm small{display:block;color:var(--ai);font-weight:650;font-size:10.5px}
+.bl .p{font-weight:700}
+.ck{list-style:none;display:grid;gap:4px;margin-top:8px}
+.ck li{display:flex;gap:7px;font-size:12px;align-items:flex-start;line-height:1.3}
+.ck .c{width:17px;height:17px;border-radius:9px;background:var(--ok-l);color:var(--ok);display:grid;place-items:center;flex:none}
+.qrep{display:flex;gap:6px;flex-wrap:wrap}
+.qrep span{font-size:12px;font-weight:650;padding:6px 11px;border-radius:14px;border:1px solid #DCD3FF;color:var(--ai);background:#fff}
+.composer{position:absolute;left:12px;right:12px;bottom:96px;height:50px;border-radius:25px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;padding:0 6px 0 16px;gap:8px;z-index:22;font-size:14px;box-shadow:0 8px 20px -14px rgba(0,0,0,.4)}
+.composer .t{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.composer .ph{color:#A79EAA}
+.composer .snd{width:38px;height:38px;border-radius:19px;background:var(--ai);color:#fff;display:grid;place-items:center}
+
+/* ---------- s3b dish page (manual order) ---------- */
+#s3b::after{content:"";position:absolute;left:0;right:0;top:0;height:104px;background:var(--cream);box-shadow:0 8px 16px -12px rgba(60,30,10,.4);z-index:6;pointer-events:none;opacity:0;transition:opacity .2s}
+.dtt{flex:1;text-align:center;align-self:center;font-weight:750;font-size:16px;opacity:0;transition:opacity .2s}
+#s3b.scrolled .dtt{opacity:1}
+#s3b.scrolled::after{opacity:1}
+.dhero{height:290px;position:relative;overflow:hidden;background:radial-gradient(90% 80% at 50% 62%,#FFE6C2,#F8C88E 68%,#EFAE6A)}
+.dtop{position:absolute;top:54px;left:18px;right:18px;display:flex;gap:10px;z-index:8}
+.dimg{position:absolute;left:50%;top:58px;width:262px;height:262px;margin-left:-131px;filter:drop-shadow(0 18px 18px rgba(120,60,10,.3))}
+.scr.play .dimg{animation:dimgIn .7s cubic-bezier(.2,.8,.2,1) both}
+@keyframes dimgIn{from{opacity:0;transform:scale(.85) rotate(-8deg)}to{opacity:1;transform:none}}
+.cartb{position:relative}
+.cartb .cnt{position:absolute;top:-4px;right:-4px;min-width:19px;height:19px;border-radius:10px;background:var(--red);color:#fff;font-size:10.5px;font-weight:800;display:grid;place-items:center;padding:0 5px;transform:scale(0);transition:transform .3s cubic-bezier(.3,1.5,.5,1)}
+.cartb .cnt.show{transform:none}
+.dcard{margin-top:-26px;position:relative;background:var(--cream);border-radius:26px 26px 0 0;padding:18px 18px 0}
+.dt{font-size:24px;letter-spacing:-.02em;margin-top:8px}
+.dmeta{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);font-weight:600;margin-top:2px}
+.dd{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.4}
+.dprice{display:flex;align-items:center;gap:10px;margin-top:8px}
+.dprice b{font-size:20px}
+.gp{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:750;color:#7A5512;background:var(--gold-l);padding:4px 9px;border-radius:10px}
+.opt{margin-top:16px}
+.oh{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.oh b{font-size:15px}
+.req{font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:8px;background:#F4ECE4;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;transition:.25s}
+.req.ok{background:var(--ok-l);color:var(--ok)}
+.opt2{font-size:11px;color:var(--muted);font-weight:650}
+.seg3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.seg3 span{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:8px 6px;text-align:center;font-weight:750;font-size:14px;transition:.2s;cursor:pointer}
+.seg3 span small{display:block;font-weight:600;color:var(--muted);font-size:11.5px}
+.seg3 span.sel{border-color:var(--red);background:var(--red-l)}
+.gl{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.gl span{display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;font-weight:650;font-size:13px;transition:.2s;cursor:pointer;white-space:nowrap}
+.gl span small{margin-left:auto;color:var(--muted);font-weight:600}
+.gl i{width:18px;height:18px;border-radius:9px;border:2px solid #CFC7D2;flex:none;transition:.2s}
+.gl span.sel{border-color:var(--red);background:var(--red-l)}
+.gl span.sel i{border:5px solid var(--red)}
+.ex{display:flex;align-items:center;gap:10px;padding:9px 2px;font-size:13.5px;font-weight:600;border-bottom:1px dashed var(--line);cursor:pointer}
+.ex em{margin-left:auto;font-style:normal;color:var(--muted);font-weight:600;font-size:12.5px}
+.cb{width:20px;height:20px;border-radius:6px;border:2px solid #CFC7D2;flex:none;display:grid;place-items:center;transition:.2s}
+.ex.sel .cb{background:var(--red);border-color:var(--red)}
+.ex.sel .cb::after{content:"";width:9px;height:5px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
+.note{background:#fff;border:1.5px solid var(--line);border-radius:14px;min-height:46px;padding:12px 14px;font-size:14px}
+.note .caret{display:none}
+.note.typing{border-color:var(--red)}
+.note.typing .caret{display:inline-block}
+.note .ph{color:#A79EAA}
+.dbar{position:absolute;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:10px 18px 30px;z-index:20;border-radius:22px 22px 0 0;box-shadow:0 -10px 30px -18px rgba(0,0,0,.3)}
+.bogo{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--ok);margin:0 2px;max-height:0;opacity:0;overflow:hidden;transition:.35s}
+.bogo.show{max-height:24px;opacity:1;margin-bottom:8px}
+.qty{display:flex;align-items:center;gap:4px;background:#F4EFEA;border-radius:27px;height:54px;padding:0 6px;margin-right:10px;flex:none}
+.qty button{width:40px;height:40px;border-radius:20px;background:#fff;font-size:20px;font-weight:700;display:grid;place-items:center;transition:transform .15s}
+.qty b{width:22px;text-align:center;font-size:17px}
+.fly{position:absolute;width:60px;height:60px;border-radius:30px;z-index:60;pointer-events:none;transition:left .7s cubic-bezier(.5,-.3,.6,1),top .7s cubic-bezier(.3,.6,.4,1),transform .7s,opacity .7s;box-shadow:0 8px 16px -6px rgba(0,0,0,.35)}
+.cm{background:#fff;border-radius:28px 28px 0 0;padding:10px 18px 30px;box-shadow:0 -20px 40px -10px rgba(0,0,0,.3)}
+.cm h4{font-size:15px;margin:14px 0 2px}
+.cm .row b{font-size:14.5px}
+.cm .row small{display:block;font-size:12px;color:var(--ok);font-weight:650}
+.ck2b{width:34px;height:34px;border-radius:17px;background:var(--ok);color:#fff;display:grid;place-items:center;flex:none}
+.cmi{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px dashed var(--line)}
+.cmi .food{width:48px;height:48px;border-radius:12px}
+.cmi .tx{flex:1;min-width:0}
+.cmi b{font-size:14px}
+.cmi small{display:block;font-size:11.5px;color:var(--muted)}
+.cmi small.ai{color:var(--ai);font-weight:650}
+.cmi .pp{font-weight:750;font-size:13.5px;margin-right:4px}
+.cmi .add{align-self:center}
+.add.done{background:var(--ok)}
+.cm .cta{margin-top:14px}
+.aihint{display:flex;align-items:center;gap:8px;justify-content:center;margin-top:10px;height:44px;border-radius:22px;border:1px solid #DCD3FF;background:var(--ai-l);color:var(--ai);font-weight:700;font-size:13px;width:100%}
+.bl .nm small.ic{color:var(--muted)}
+
+/* ---------- s5 cart ---------- */
+.cl{padding:6px 14px}
+.cl .bl{font-size:13px}
+.dlv{display:flex;gap:10px;align-items:center;padding:10px 14px;margin-top:10px;font-size:12px;color:var(--muted)}
+.dlv b{display:block;font-size:13.5px;color:var(--ink)}
+.deals{padding:12px 14px;margin-top:10px}
+.deals h4{display:flex;align-items:center;gap:6px;font-size:13.5px;margin-bottom:4px}
+.dr{display:flex;align-items:center;gap:10px;padding:7px 0;font-size:12.5px;border-top:1px dashed var(--line);line-height:1.3}
+.dr .di{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;flex:none}
+.dr .amt{margin-left:auto;font-weight:750;color:var(--ok);white-space:nowrap}
+.dr.sub .amt{color:var(--ink)}
+.dr.unused{opacity:.62}
+.dr.unused .amt{color:var(--muted);text-decoration:line-through}
+.dr.hid{display:none}
+.dr.in{animation:up .45s cubic-bezier(.2,.8,.2,1) both}
+.find{font-size:12px;color:var(--ai);font-weight:650;display:flex;align-items:center;gap:6px;padding:6px 0}
+.spin{width:14px;height:14px;border:2px solid #CFC5FF;border-top-color:var(--ai);border-radius:50%;animation:spin .8s linear infinite;flex:none}
+.totbar{position:absolute;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:12px 18px 32px;z-index:20;border-radius:24px 24px 0 0;box-shadow:0 -10px 30px -18px rgba(0,0,0,.3)}
+.tot{display:flex;align-items:baseline;justify-content:space-between}
+.tot span{font-size:13px;color:var(--muted);font-weight:650}
+.tot b{font-size:28px;letter-spacing:-.02em}
+.svd{display:flex;justify-content:space-between;align-items:center;margin:2px 0 10px;font-size:12.5px;font-weight:700;min-height:22px}
+.svd .ok{color:var(--ok)}
+.svd .pt{color:var(--gold)}
+
+/* ---------- s6 pay ---------- */
+.popt{display:flex;gap:12px;align-items:center;padding:11px 14px;background:#fff;border-radius:16px;border:1.5px solid transparent;margin-top:8px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.popt.sel{border-color:var(--ink)}
+.popt .pi{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;flex:none}
+.popt .tx{flex:1;min-width:0}
+.popt b{font-size:14px;display:flex;align-items:center;gap:6px}
+.popt small{display:block;font-size:11.5px;color:var(--muted);line-height:1.3}
+.radio{width:21px;height:21px;border-radius:11px;border:2px solid #CFC7D2;flex:none;transition:.2s}
+.popt.sel .radio{border:6px solid var(--ink)}
+.route{margin-top:14px;background:#15122C;color:#E9E6FF;border-radius:18px;padding:12px 14px;font-size:12px}
+.route h4{font-size:12.5px;display:flex;align-items:center;gap:6px;color:#fff}
+.route .note{font-size:11px;opacity:.65;margin:2px 0 8px;line-height:1.35}
+.rh,.rr{display:grid;grid-template-columns:72px 1fr 46px 52px;gap:8px;align-items:center;padding:5px 6px;border-radius:10px;transition:.3s}
+.rh{font-size:10px;opacity:.55;text-transform:uppercase;letter-spacing:.05em;padding-top:0}
+.rh span:nth-child(n+3),.rr b{text-align:right}
+.rr .bar{height:6px;border-radius:3px;background:rgba(255,255,255,.12);overflow:hidden}
+.rr .bar i{display:block;height:100%;width:0;background:#8B7BFF;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.rr b{font-weight:700}
+.rr.win{background:rgba(139,123,255,.22);box-shadow:inset 0 0 0 1px rgba(139,123,255,.6)}
+.rwin{margin-top:6px;font-weight:700;color:#A8F0C6;display:flex;gap:6px;align-items:center;opacity:0;transition:.3s}
+.rwin.show{opacity:1}
+.paybar{position:absolute;left:0;right:0;bottom:0;padding:14px 18px 32px;background:linear-gradient(to top,var(--cream) 72%,rgba(255,248,241,0));z-index:20}
+.paid{position:absolute;inset:0;background:var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 30px;opacity:0;pointer-events:none;transition:.45s;z-index:44}
+.paid.on{opacity:1;pointer-events:auto}
+.bigck{width:92px;height:92px;border-radius:46px;background:var(--ok);color:#fff;display:grid;place-items:center;box-shadow:0 0 0 12px var(--ok-l)}
+.bigck .i{width:46px;height:46px;stroke-width:2.6}
+.paid h2{font-size:28px;margin-top:24px;letter-spacing:-.02em}
+.paid .dl{margin-top:16px;width:100%;padding:6px 16px;text-align:left}
+.paid .dl div{display:flex;justify-content:space-between;padding:9px 0;font-size:13.5px;border-bottom:1px dashed var(--line)}
+.paid .dl div:last-child{border:0}
+.paid .dl b{font-weight:750}
+
+/* ---------- s7 wallet ---------- */
+.wcard{border-radius:24px;padding:18px;color:#fff;position:relative;overflow:hidden;background:radial-gradient(110% 90% at 100% 0%,#2E8C93 0%,transparent 55%),linear-gradient(150deg,#0F2347,#173B66)}
+.wcard small{opacity:.75;font-size:12px;font-weight:600}
+.wcard .bal{font-size:40px;font-weight:850;letter-spacing:-.02em;line-height:1.1;margin-top:2px}
+.wcard .ft{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.wcard .ft span{font-size:10.5px;font-weight:700;padding:4px 8px;border-radius:9px;background:rgba(255,255,255,.14)}
+.wcard .bonus{position:absolute;top:56px;right:16px;background:var(--gold-l);color:#6B4A0F;border-radius:12px;padding:5px 10px;font-weight:800;font-size:12px;opacity:0;transform:scale(.6);transition:.4s cubic-bezier(.3,1.5,.5,1)}
+.wcard .bonus.show{opacity:1;transform:none}
+.amts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.amt{background:#fff;border-radius:14px;padding:9px 6px;text-align:center;border:1.5px solid transparent;font-weight:750;font-size:15px;transition:.2s}
+.amt small{display:block;color:var(--ok);font-weight:700;font-size:10.5px}
+.amt.sel{border-color:var(--ink)}
+.trow{display:flex;gap:12px;align-items:center;padding:12px 14px;margin-top:10px;font-size:12px;line-height:1.3;color:var(--muted)}
+.trow b{display:block;font-size:13.5px;color:var(--ink)}
+.credit{border-radius:18px;padding:13px 14px;margin-top:10px;background:linear-gradient(135deg,#FFF7E4,#FBE4B4);border:1px solid #F0D597;position:relative;transition:box-shadow .4s}
+.credit.glow{box-shadow:0 0 0 4px rgba(239,162,58,.28)}
+.credit .amtc{font-size:24px;font-weight:850;color:#6B4A0F;letter-spacing:-.01em}
+.credit p{font-size:11.5px;color:#7A5A1E;line-height:1.35}
+.act{padding:4px 14px;margin-top:10px}
+.ar{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:12.5px}
+.ar:last-child{border:0}
+.ar .ai2{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;flex:none}
+.ar .m{margin-left:auto;font-weight:750;white-space:nowrap}
+.ar .m.pos{color:var(--ok)}
+.ar small{display:block;color:var(--muted);font-size:11px}
+.ar.new{animation:up .5s cubic-bezier(.2,.8,.2,1) both;background:linear-gradient(90deg,var(--ok-l),transparent);margin:0 -14px;padding:8px 14px}
+
+/* ---------- s8 member ---------- */
+.mwrap{perspective:1200px;height:214px;margin-top:4px}
+.mcard{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.3,.7,.2,1)}
+.mcard.flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:22px;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:16px 18px;overflow:hidden;color:#3A2A0C;background:linear-gradient(135deg,#F8E4AA 0%,#D8AC52 45%,#F2D48B 72%,#B48329 100%);box-shadow:0 18px 30px -18px rgba(90,60,10,.6)}
+.face .shine{position:absolute;inset:-50%;background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.5) 50%,transparent 58%);animation:shine 3.4s ease-in-out infinite;pointer-events:none}
+@keyframes shine{from{transform:translateX(-40%)}to{transform:translateX(40%)}}
+.face .lv{font-size:30px;font-weight:900;letter-spacing:.08em;margin-top:16px;position:relative}
+.face .nm{position:absolute;left:18px;bottom:16px;font-size:13px;font-weight:700;line-height:1.3}
+.face .nm small{display:block;font-size:11px;opacity:.75;font-weight:650;letter-spacing:.05em}
+.face .qr{position:absolute;right:16px;bottom:16px;width:92px;height:92px;background:#fff;border-radius:12px;padding:6px}
+.face .qr svg{width:100%;height:100%}
+.face .tp{display:flex;justify-content:space-between;align-items:center;font-size:11.5px;font-weight:750;position:relative}
+.face.back{transform:rotateY(180deg);color:#F6E7C1;background:linear-gradient(140deg,#2A2017,#5B4222)}
+.face.back h4{font-size:14px;margin-bottom:6px}
+.face.back li{list-style:none;font-size:12.5px;padding:3px 0;display:flex;gap:8px;align-items:center}
+.ringrow{display:flex;gap:14px;align-items:center;padding:12px 14px;margin-top:12px}
+.ring{width:74px;height:74px;position:relative;flex:none}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .rv{position:absolute;inset:0;display:grid;place-items:center;font-size:12px;font-weight:800;text-align:center;line-height:1.1}
+.ringrow b{font-size:15px}
+.ringrow p{font-size:12px;color:var(--muted);line-height:1.35}
+.bens{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ben{border-radius:16px;padding:10px 11px;font-size:12px;font-weight:650;display:flex;gap:8px;align-items:center;line-height:1.25}
+.ben .bi{width:30px;height:30px;border-radius:10px;background:var(--gold-l);color:#7A5512;display:grid;place-items:center;flex:none}
+.till{position:absolute;left:14px;right:14px;bottom:100px;opacity:0;background:#1E1D24;color:#fff;border-radius:20px;padding:12px 14px;z-index:42;transform:translateY(60%);transition:transform .55s cubic-bezier(.2,.9,.2,1),opacity .3s;box-shadow:0 18px 30px -12px rgba(0,0,0,.5)}
+.till.on{transform:none;opacity:1}
+.till small{font-size:10.5px;opacity:.6;text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.till b{display:block;font-size:15px;margin-top:2px}
+.till .ok2{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.till .ok2 span{font-size:11px;font-weight:700;padding:3px 8px;border-radius:8px;background:rgba(94,226,155,.16);color:#7EEBB1}
+
+/* ---------- s9 tracking ---------- */
+.map{height:330px;flex:none;position:relative;background:#ECE5D8;overflow:hidden}
+.map svg{position:absolute;inset:0;width:100%;height:100%}
+.trk{flex:1;margin-top:-28px;background:var(--cream);border-radius:26px 26px 0 0;position:relative;z-index:2;padding:16px 18px 110px;overflow:hidden}
+.eta{display:flex;align-items:center;gap:12px}
+.eta b{font-size:24px;letter-spacing:-.02em;display:block;line-height:1.1}
+.eta small{color:var(--muted);font-size:12px}
+.rider{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:650;text-align:right;line-height:1.25}
+.rider .rv{width:40px;height:40px;border-radius:20px;background:#FBE3D3;display:grid;place-items:center;color:var(--red-d)}
+.tl{list-style:none;margin:14px 0 4px;display:flex;justify-content:space-between;position:relative}
+.tl::before{content:"";position:absolute;left:24px;right:24px;top:11px;height:3px;background:var(--line);border-radius:2px}
+.tl .bar{position:absolute;left:24px;top:11px;height:3px;background:var(--ok);border-radius:2px;width:0;transition:width 1.2s}
+.tl li{position:relative;z-index:1;text-align:center;font-size:10.5px;font-weight:650;color:var(--muted);width:72px;line-height:1.2}
+.tl li i{display:grid;place-items:center;width:25px;height:25px;border-radius:13px;background:#fff;border:2px solid var(--line);margin:0 auto 4px;font-style:normal;color:#fff}
+.tl li.d i{background:var(--ok);border-color:var(--ok)}
+.tl li.d{color:var(--ink)}
+.tl li.n i{border-color:var(--ok);animation:pulseG 1.2s infinite}
+@keyframes pulseG{0%{box-shadow:0 0 0 0 rgba(23,148,90,.5)}100%{box-shadow:0 0 0 10px rgba(23,148,90,0)}}
+.earn{display:flex;gap:10px;margin-top:12px}
+.earn div{flex:1;border-radius:16px;padding:10px 12px;font-size:11.5px;color:var(--muted);font-weight:600}
+.earn b{display:block;font-size:17px;color:var(--ink)}
+.earn .g b{color:var(--gold)}
+.earn .k b{color:var(--ok)}
+.aisug{margin-top:12px;padding:12px 14px;border-radius:18px;background:var(--ai-l);border:1px solid #DCD3FF;opacity:0;transform:translateY(20px);transition:.5s cubic-bezier(.2,.9,.2,1)}
+.aisug.show{opacity:1;transform:none}
+.aisug p{font-size:13px;color:#30219A;font-weight:600;display:flex;gap:8px;line-height:1.4}
+.aisug .row{margin-top:10px}
+.aisug button{height:36px;border-radius:18px;padding:0 16px;font-weight:750;font-size:13px;transition:transform .15s}
+.aisug .y{background:var(--ai);color:#fff}
+.aisug .n2{background:#fff;color:var(--ai)}
+
+/* ---------- s10 another brand ---------- */
+#s10{background:#F4F6FB}
+.pzh{height:250px;flex:none;color:#fff;padding:88px 24px 0;position:relative;overflow:hidden;background:radial-gradient(100% 90% at 90% 0%,#5B86F0,transparent 60%),linear-gradient(160deg,#2948A8,#1B2F73)}
+.pzh .wm{font-size:26px;font-weight:900;letter-spacing:-.01em}
+.pzh p{opacity:.85;font-size:13.5px;margin-top:2px}
+.pzh .pz{position:absolute;right:-44px;bottom:-64px;width:220px;height:220px}
+.pzb{flex:1;margin-top:-28px;background:#F4F6FB;border-radius:28px 28px 0 0;position:relative;padding:22px 20px 40px}
+.pzb h2{font-size:21px;letter-spacing:-.02em}
+.pzb .sub{color:var(--muted);font-size:13px;margin:2px 0 14px}
+.btn-id{height:58px;border-radius:29px;width:100%;color:#fff;font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(90deg,var(--navy),var(--teal));box-shadow:0 12px 24px -12px rgba(16,38,74,.8);transition:transform .15s}
+.or{text-align:center;color:var(--muted);font-size:12px;margin:14px 0 8px}
+.pzb .field{background:#fff;color:#B3ABB6}
+.rd{display:flex;gap:12px;align-items:center;padding:10px 14px;margin-top:8px;font-size:12px;line-height:1.3;color:var(--muted)}
+.rd .ri{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;flex:none;background:#E8EEFC;color:#2948A8}
+.rd b{display:block;font-size:13.5px;color:var(--ink)}
+.rd .ck2{margin-left:auto;color:var(--ok)}
+.wel{margin-top:12px;border-radius:18px;padding:13px 14px;color:#fff;background:linear-gradient(120deg,var(--navy),var(--teal));display:flex;gap:12px;align-items:center}
+.wel b{display:block;font-size:14.5px}
+.wel small{opacity:.82;font-size:11.5px}
+/* late reveal: JS adds .rvl to a container, its .a2 children cascade in */
+.rvl{animation:up .5s cubic-bezier(.2,.8,.2,1) both}
+.rvl .a2,.rvl.a2{animation:up .45s cubic-bezier(.2,.8,.2,1) both;animation-delay:var(--d,0s)}
+
+/* ---------- story panel ---------- */
+.story{flex:1 1 520px;max-width:640px;min-width:300px;background:#fff;border:1px solid var(--line);border-radius:24px;padding:24px 26px 20px;position:relative;max-height:calc(868px*var(--s));overflow-y:auto;scrollbar-width:thin}
+.prog{position:absolute;left:0;top:0;height:3px;width:100%}
+.prog i{display:block;height:100%;width:0;background:var(--red)}
+.prog.run i{animation:prog linear forwards;animation-duration:var(--dur,8s)}
+@keyframes prog{to{width:100%}}
+.kick{font-size:12px;font-weight:750;letter-spacing:.07em;text-transform:uppercase;color:var(--red)}
+.kick.mid{color:var(--teal)}
+.story h2{font-size:27px;line-height:1.18;letter-spacing:-.02em;margin:6px 0 4px}
+.story h4{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:18px 0 8px}
+.sees li{list-style:none;position:relative;padding-left:20px;margin:7px 0;font-size:14.5px;line-height:1.45}
+.sees li::before{content:"";position:absolute;left:4px;top:8px;width:7px;height:7px;border-radius:4px;background:var(--red)}
+.tva{width:100%;border-collapse:separate;border-spacing:0;font-size:13.5px;border:1px solid var(--line);border-radius:14px;overflow:hidden;line-height:1.4}
+.tva th{background:#FAF6F1;text-align:left;padding:8px 12px;font-size:11.5px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.tva th+th{color:var(--ok)}
+.tva td{padding:9px 12px;border-top:1px solid var(--line);vertical-align:top}
+.tva td:first-child{color:var(--muted);width:46%}
+.tva td+td{font-weight:600;background:#FBFEFC}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-size:12.5px;font-weight:650;padding:5px 10px;border-radius:12px;background:#F4F0FF;color:#4330C9;border:1px solid #E0D9FF}
+.why{margin-top:18px;background:var(--cream);border:1px solid #F2E2CF;border-radius:16px;padding:12px 14px;font-size:14px;line-height:1.5}
+.why b{display:block;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:3px}
+.gloss{margin-top:12px;font-size:11.5px;color:var(--muted);line-height:1.5}
+.diag{display:grid;gap:8px}
+.lay{border:1px solid var(--line);border-radius:14px;padding:10px 12px;font-size:12.5px;background:#FCFAF8}
+.lay>b{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.lay .tags{display:flex;flex-wrap:wrap;gap:5px}
+.lay .tags span{padding:4px 9px;border-radius:10px;background:#fff;border:1px solid var(--line);font-weight:600;font-size:12px}
+.lay .tags span.hl{border-color:var(--red);color:var(--red)}
+.lay.core2{background:linear-gradient(135deg,#F1F4FF,#EAF7F7);border-color:#CFE2E6}
+.blk{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.blk span{background:#fff;border:1px solid #D6E3EA;border-radius:10px;padding:7px 6px;font-size:11.5px;font-weight:700;text-align:center;line-height:1.2}
+.blk span.hl{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;border-color:transparent}
+.arw{text-align:center;color:#B9AFA4;font-size:16px;line-height:1}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:860px){.story{flex:none;max-height:none;width:100%;max-width:560px;min-width:0}.blk{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+<defs>
+<linearGradient id="gWing" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4B860"/><stop offset=".55" stop-color="#C46A22"/><stop offset="1" stop-color="#8A3E12"/></linearGradient>
+<linearGradient id="gSpicy" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F2764A"/><stop offset=".55" stop-color="#C8321C"/><stop offset="1" stop-color="#8E1D10"/></linearGradient>
+<linearGradient id="gHoney" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE38E"/><stop offset=".55" stop-color="#E8A93A"/><stop offset="1" stop-color="#B5701C"/></linearGradient>
+<linearGradient id="gDrink" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7F294"/><stop offset="1" stop-color="#E0C238"/></linearGradient>
+<!-- food: one drumette, fill comes from the <use> -->
+<symbol id="dr" viewBox="0 0 100 100"><path d="M60 38 76 22" stroke="#F6E6CC" stroke-width="9" stroke-linecap="round"/><circle cx="78" cy="17" r="6.5" fill="#F6E6CC"/><circle cx="82.5" cy="24" r="6.5" fill="#F6E6CC"/><path d="M18 74C8 58 18 34 40 30c16-3 28 8 26 24-2 16-18 30-34 30-7 0-11-4-14-10z"/><path d="M28 56c2-10 10-16 19-17" stroke="#fff" stroke-opacity=".5" stroke-width="5" fill="none" stroke-linecap="round"/></symbol>
+<symbol id="f-wing" viewBox="0 0 100 100"><ellipse cx="50" cy="68" rx="45" ry="20" fill="#fff" opacity=".9"/><ellipse cx="50" cy="68" rx="36" ry="13" fill="#F4ECE0"/><use href="#dr" x="0" y="14" width="56" height="56" fill="url(#gWing)"/><use href="#dr" x="42" y="10" width="56" height="56" fill="url(#gWing)" transform="rotate(16 70 38)"/><use href="#dr" x="20" y="28" width="60" height="60" fill="url(#gWing)" transform="rotate(-8 50 58)"/><g fill="#FFF6E2"><ellipse cx="38" cy="60" rx="1.8" ry="1.1"/><ellipse cx="47" cy="66" rx="1.8" ry="1.1"/><ellipse cx="55" cy="57" rx="1.8" ry="1.1"/><ellipse cx="63" cy="64" rx="1.8" ry="1.1"/><ellipse cx="74" cy="42" rx="1.8" ry="1.1"/><ellipse cx="20" cy="44" rx="1.8" ry="1.1"/></g></symbol>
+<symbol id="f-wing-sp" viewBox="0 0 100 100"><ellipse cx="50" cy="68" rx="45" ry="20" fill="#fff" opacity=".9"/><ellipse cx="50" cy="68" rx="36" ry="13" fill="#F4ECE0"/><use href="#dr" x="0" y="14" width="56" height="56" fill="url(#gSpicy)"/><use href="#dr" x="42" y="10" width="56" height="56" fill="url(#gSpicy)" transform="rotate(16 70 38)"/><use href="#dr" x="20" y="28" width="60" height="60" fill="url(#gSpicy)" transform="rotate(-8 50 58)"/><g fill="#5A0E06"><circle cx="38" cy="60" r="1.3"/><circle cx="48" cy="65" r="1.3"/><circle cx="56" cy="57" r="1.3"/><circle cx="64" cy="64" r="1.3"/><circle cx="73" cy="42" r="1.3"/><circle cx="22" cy="45" r="1.3"/></g><path d="M80 74c6-2 10-8 10-14" stroke="#2E8B3A" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M70 82c8 0 16-8 18-18" stroke="#D3271A" stroke-width="5" fill="none" stroke-linecap="round"/></symbol>
+<symbol id="f-wing-hb" viewBox="0 0 100 100"><ellipse cx="50" cy="68" rx="45" ry="20" fill="#fff" opacity=".9"/><ellipse cx="50" cy="68" rx="36" ry="13" fill="#F4ECE0"/><use href="#dr" x="0" y="14" width="56" height="56" fill="url(#gHoney)"/><use href="#dr" x="42" y="10" width="56" height="56" fill="url(#gHoney)" transform="rotate(16 70 38)"/><use href="#dr" x="20" y="28" width="60" height="60" fill="url(#gHoney)" transform="rotate(-8 50 58)"/><path d="M26 54q7-6 13 0t13 0 13 0 12 0" stroke="#FFF6C4" stroke-width="3" fill="none" stroke-linecap="round" opacity=".95"/></symbol>
+<symbol id="f-drum" viewBox="0 0 100 100"><ellipse cx="50" cy="70" rx="45" ry="18" fill="#fff" opacity=".9"/><use href="#dr" x="-4" y="8" width="72" height="72" fill="url(#gWing)"/><use href="#dr" x="30" y="14" width="72" height="72" fill="url(#gWing)" transform="rotate(24 66 50)"/></symbol>
+<symbol id="f-half" viewBox="0 0 100 100"><ellipse cx="50" cy="68" rx="47" ry="21" fill="#fff" opacity=".9"/><use href="#dr" x="-4" y="16" width="52" height="52" fill="url(#gWing)"/><use href="#dr" x="16" y="32" width="52" height="52" fill="url(#gWing)"/><use href="#dr" x="40" y="12" width="52" height="52" fill="url(#gHoney)"/><use href="#dr" x="52" y="30" width="52" height="52" fill="url(#gHoney)"/></symbol>
+<symbol id="f-bowl" viewBox="0 0 100 100"><path d="M12 50h76c0 22-16 36-38 36S12 72 12 50z" fill="#2F2A33"/><path d="M12 50h76c0 4-1 7-2 10H14c-1-3-2-6-2-10z" fill="#4A434F"/><ellipse cx="50" cy="50" rx="38" ry="11" fill="#fff"/><path d="M26 48q6-8 14-3 6-6 13 0 7-6 14 1" fill="none" stroke="#7A3B16" stroke-width="7" stroke-linecap="round"/><path d="M30 44q8-4 14 0" stroke="#A5521F" stroke-width="4" fill="none" stroke-linecap="round"/><g fill="#4CA64C"><circle cx="40" cy="42" r="2.2"/><circle cx="58" cy="44" r="2.2"/><circle cx="66" cy="49" r="2"/><circle cx="34" cy="50" r="2"/></g><circle cx="70" cy="44" r="5.5" fill="#FFC940" stroke="#fff" stroke-width="2.5"/></symbol>
+<symbol id="f-noodle" viewBox="0 0 100 100"><ellipse cx="50" cy="60" rx="42" ry="22" fill="#fff"/><ellipse cx="50" cy="58" rx="34" ry="15" fill="#F2E7D8"/><g fill="none" stroke-linecap="round" stroke-width="3"><path d="M22 58q7-10 14 0t14 0 14 0 14 0" stroke="#9C6B3E"/><path d="M24 64q7-10 14 0t14 0 14 0 12 0" stroke="#B5844F"/><path d="M28 52q7-10 14 0t14 0 14 0" stroke="#8A5A31"/></g><g stroke-linecap="round" stroke-width="3.2"><path d="M34 54l8-4M58 62l9-3" stroke="#F08A2C"/><path d="M48 50l6 4M66 52l6 3M40 64l7 2" stroke="#3E9B47"/></g></symbol>
+<symbol id="f-slaw" viewBox="0 0 100 100"><path d="M18 52h64c0 18-14 30-32 30S18 70 18 52z" fill="#fff"/><ellipse cx="50" cy="52" rx="32" ry="10" fill="#F4F9EC"/><g stroke-linecap="round" stroke-width="3"><path d="M30 50l10-6M58 50l10-6" stroke="#9BCB6B"/><path d="M44 52l12-5" stroke="#C7E3A2"/><path d="M36 56l12-3M54 56l10-2" stroke="#E2504A"/></g><g fill="#D63A2F"><circle cx="42" cy="47" r="1.6"/><circle cx="60" cy="47" r="1.6"/><circle cx="52" cy="57" r="1.6"/></g></symbol>
+<symbol id="f-drink" viewBox="0 0 100 100"><path d="M60 10l-8 30" stroke="#E2504A" stroke-width="5" stroke-linecap="round"/><path d="M28 28h44l-6 60H34z" fill="#fff" opacity=".75"/><path d="M31 40h38l-4 46H35z" fill="url(#gDrink)"/><rect x="38" y="46" width="10" height="10" rx="2" fill="#fff" opacity=".7" transform="rotate(12 43 51)"/><rect x="52" y="56" width="10" height="10" rx="2" fill="#fff" opacity=".6" transform="rotate(-10 57 61)"/><circle cx="70" cy="30" r="11" fill="#F6E05E" stroke="#fff" stroke-width="2"/><path d="M70 21v18M61 30h18M64 24l12 12M76 24 64 36" stroke="#fff" stroke-width="1.4" opacity=".8"/></symbol>
+<symbol id="f-box" viewBox="0 0 100 100"><use href="#dr" x="14" y="2" width="44" height="44" fill="url(#gWing)"/><use href="#dr" x="40" y="0" width="44" height="44" fill="url(#gSpicy)"/><path d="M16 38h68l-6 50H22z" fill="#D0402E"/><path d="M16 38h68l-2 12H18z" fill="#B3301F"/><rect x="38" y="60" width="24" height="12" rx="6" fill="#fff" opacity=".9"/></symbol>
+<symbol id="f-dess" viewBox="0 0 100 100"><path d="M24 58h52l-8 28H32z" fill="#fff"/><path d="M22 58c0-24 14-36 28-36s28 12 28 36z" fill="#FFF7F2"/><path d="M30 50c4-10 12-16 20-16" stroke="#F1C2D9" stroke-width="5" fill="none" stroke-linecap="round"/><g fill="#C2414F"><circle cx="44" cy="30" r="5"/><circle cx="54" cy="28" r="4"/></g><path d="M40 58c6-8 18-10 24-2" stroke="#E46A8A" stroke-width="5" fill="none" stroke-linecap="round"/></symbol>
+<symbol id="f-combo" viewBox="0 0 100 100"><use href="#f-wing" x="-6" y="10" width="76" height="76"/><use href="#f-drink" x="46" y="8" width="56" height="56"/></symbol>
+<symbol id="f-pizza" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#E9B467"/><circle cx="50" cy="50" r="39" fill="#E0562E"/><circle cx="50" cy="50" r="36" fill="#F7CF68"/><g fill="#C8352A"><circle cx="38" cy="36" r="6"/><circle cx="62" cy="40" r="6"/><circle cx="46" cy="62" r="6"/><circle cx="66" cy="62" r="5"/><circle cx="30" cy="56" r="5"/></g><g fill="#3F8F3F"><circle cx="52" cy="30" r="2.4"/><circle cx="56" cy="54" r="2.4"/><circle cx="36" cy="46" r="2.4"/><circle cx="72" cy="50" r="2.4"/></g><path d="M50 50V4m0 46 40-23M50 50l40 23M50 50v46M50 50 10 73M50 50 10 27" stroke="#E9B467" stroke-width="1.6" opacity=".6"/></symbol>
+<!-- icons 24x24 -->
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><rect x="4" y="3.5" width="16" height="17" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
+<symbol id="i-spark" viewBox="0 0 24 24"><path d="M11 2.5l2.1 5.6 5.6 2.1-5.6 2.1L11 17.9l-2.1-5.6-5.6-2.1 5.6-2.1zM18.5 14.5l.9 2.3 2.3.9-2.3.9-.9 2.3-.9-2.3-2.3-.9 2.3-.9z"/></symbol>
+<symbol id="i-wallet" viewBox="0 0 24 24"><rect x="3" y="6.5" width="18" height="13" rx="3"/><path d="M3 10h18M16 14.5h2M6 6.5l9.3-2.7a1.6 1.6 0 0 1 2 1.3l.2 1.4"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c1.2-3.8 4.2-5.6 7.5-5.6s6.3 1.8 7.5 5.6"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+<symbol id="i-chev" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0"/></symbol>
+<symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+<symbol id="i-face" viewBox="0 0 24 24"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><path d="M9 9.5v1M15 9.5v1M12 9.5V13h-1"/><path d="M9 15.5c1.8 1.4 4.2 1.4 6 0"/></symbol>
+<symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3 10h18M7 15h4"/></symbol>
+<symbol id="i-qr" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><path d="M14 14h2v2h-2zM18 18h2v2h-2zM14 19h2M19 14h1"/></symbol>
+<symbol id="i-gift" viewBox="0 0 24 24"><rect x="3.5" y="8.5" width="17" height="4" rx="1"/><path d="M5 12.5V20h14v-7.5M12 8.5V20"/><path d="M12 8.5c-1.5-3.5-5.5-4-5.5-1.5S10 8.5 12 8.5c2 0 5.5 1 5.5-1.5s-4-2-5.5 1.5z"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.4 5 5.4.6-4 3.7 1.1 5.3L12 15.9l-4.9 2.7 1.1-5.3-4-3.7 5.4-.6z"/></symbol>
+<symbol id="i-scooter" viewBox="0 0 24 24"><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M8.5 17h7l-2-7H10M14 5.5h3l2.2 9"/><path d="M3.5 12.5H9"/></symbol>
+<symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></symbol>
+<symbol id="i-chili" viewBox="0 0 24 24"><path d="M15.5 8.5c-3 0-5 2-6.5 5S5.5 19 3.5 19.5c5 1.5 13-1 13.8-8 .2-1.6-.4-3-1.8-3z"/><path d="M15.5 8.5c.3-1.8 1.5-3 3-3.5"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3.5l7 2.8v5.2c0 4.4-3 7.8-7 9-4-1.2-7-4.6-7-9V6.3z"/><path d="M9 12l2 2 4-4"/></symbol>
+<symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 3L5 13.5h6L10 21l8-10.5h-6z"/></symbol>
+<symbol id="i-repeat" viewBox="0 0 24 24"><path d="M4 11V9a3 3 0 0 1 3-3h12l-3-3M20 13v2a3 3 0 0 1-3 3H5l3 3"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+<symbol id="i-crown" viewBox="0 0 24 24"><path d="M4 8l4 4 4-6 4 6 4-4-1.5 10h-13z"/></symbol>
+<symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3.5" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3"/></symbol>
+<symbol id="i-send" viewBox="0 0 24 24"><path d="M4 12l16-8-6 16-2.5-6.5z"/></symbol>
+<symbol id="i-rain" viewBox="0 0 24 24"><path d="M7 15a4 4 0 0 1-.5-8 5.5 5.5 0 0 1 10.6 1.5A3.3 3.3 0 0 1 17 15z"/><path d="M8 18l-1 2M12 18l-1 2M16 18l-1 2"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+<symbol id="i-tag" viewBox="0 0 24 24"><path d="M3.5 12.5V5A1.5 1.5 0 0 1 5 3.5h7.5l8 8-9 9z"/><circle cx="8" cy="8" r="1.5"/></symbol>
+<symbol id="i-store" viewBox="0 0 24 24"><path d="M4 9.5L5.5 4h13L20 9.5"/><path d="M4 9.5a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0M5.5 11.5V20h13v-8.5"/></symbol>
+<symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M14.5 9.2c-.6-.8-1.5-1.2-2.5-1.2-1.4 0-2.5.8-2.5 2s1.1 1.6 2.5 2 2.5.8 2.5 2-1.1 2-2.5 2c-1 0-1.9-.4-2.5-1.2M12 6.5V8M12 16v1.5"/></symbol>
+<symbol id="i-pct" viewBox="0 0 24 24"><path d="M18 6L6 18"/><circle cx="7.5" cy="7.5" r="2.3"/><circle cx="16.5" cy="16.5" r="2.3"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></symbol>
+<symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+<symbol id="i-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z"/></symbol>
+<symbol id="i-cake" viewBox="0 0 24 24"><path d="M4 20h16M5 20v-7h14v7M5 16c2 1.5 4 1.5 7 0s5-1.5 7 0M12 13V9M12 6.5V6"/></symbol>
+</defs>
+</svg>
+
+<header class="top">
+  <div class="logo"><svg class="i l f"><use href="#i-spark"/></svg></div>
+  <div>
+    <h1 data-en="Bonchon app · 2029 concept" data-zh="Bonchon App · 2029 概念设计">Bonchon app · 2029 concept</h1>
+    <p data-en="What customers will feel after the 3-year platform upgrade — a clickable demo" data-zh="三年系统升级完成后，客户会感受到什么 —— 可点击的概念演示">What customers will feel after the 3-year platform upgrade — a clickable demo</p>
+  </div>
+  <div class="ctrls">
+    <button class="btn" id="bBack"><svg class="i s"><use href="#i-left"/></svg><span data-en="Back" data-zh="上一步">Back</span></button>
+    <button class="btn" id="bNext"><span data-en="Next" data-zh="下一步">Next</span><svg class="i s"><use href="#i-right"/></svg></button>
+    <button class="btn pri" id="bPlay"><svg class="i s f"><use id="playUse" href="#i-play"/></svg><span id="playTxt">Play tour</span></button>
+    <div class="seg"><button id="lEn" class="on">EN</button><button id="lZh">中文</button></div>
+  </div>
+</header>
+<nav class="pills" id="pills"></nav>
+<main class="stage">
+<div class="phonebox" id="phonebox"><div class="phone" id="phone"><div class="screen" id="screen">
+<div class="island"></div>
+<div class="sbar" id="sbar"><span>18:42</span><span class="r">
+<svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+<svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.2c2.4 0 4.6.9 6.2 2.5l1.2-1.3A10.4 10.4 0 0 0 8 .4 10.4 10.4 0 0 0 .6 3.4l1.2 1.3A8.6 8.6 0 0 1 8 2.2zm0 3.6c1.4 0 2.7.5 3.7 1.4l1.2-1.3A7.2 7.2 0 0 0 8 4a7.2 7.2 0 0 0-4.9 1.9l1.2 1.3c1-.9 2.3-1.4 3.7-1.4zM8 9.4a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6z"/></svg>
+<svg width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.5" fill="none" stroke="currentColor" opacity=".45"/><rect x="2" y="2" width="17" height="9" rx="2" fill="currentColor"/><path d="M25 4.5v4c.8-.3 1.3-1.1 1.3-2s-.5-1.7-1.3-2z" fill="currentColor" opacity=".45"/></svg>
+</span></div>
+
+<!-- S1 sign-in + Minor ID -->
+<section class="scr" id="s1">
+  <div class="hero1">
+    <div class="wm a">Bonchon</div>
+    <p class="a" style="--d:.1s">Korean fried chicken, double-fried and hand-brushed.</p>
+    <svg class="big"><use href="#f-wing"/></svg>
+  </div>
+  <div class="form1">
+    <h2 class="a" style="--d:.15s">Welcome</h2>
+    <div class="sub a" style="--d:.2s">Sign in or join with your phone — about 10 seconds.</div>
+    <div class="field a" style="--d:.25s"><span class="cc">+66</span><span id="s1num"></span><span class="caret"></span></div>
+    <div class="otpw" id="s1otpw">
+      <div class="otp" id="s1otp"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="sms" id="s1sms"><svg class="i xs"><use href="#i-check"/></svg>Code filled in from SMS</div>
+    </div>
+    <button class="cta a" style="--d:.3s" id="s1send">Send code</button>
+    <div class="alt a" style="--d:.35s">or continue with<div class="row"><span>Apple</span><span>Google</span><span>LINE</span></div></div>
+  </div>
+  <div class="dim" id="s1dim"></div>
+  <div class="sheet" id="s1sheet"><div id="mid">
+    <div class="grab"></div>
+    <span class="newb"><svg class="i xs f"><use href="#i-spark"/></svg>NEW · MINOR ID</span>
+    <h2>One ID for all Minor Food brands</h2>
+    <div class="sub">Upgrade your Bonchon account in one tap. Nothing new to fill in.</div>
+    <div class="orbit" id="s1orbit">
+      <svg viewBox="0 0 350 196" preserveAspectRatio="none">
+        <line class="ln" pathLength="1" x1="175" y1="98" x2="175" y2="18" style="--d:.25s"/>
+        <line class="ln" pathLength="1" x1="175" y1="98" x2="292" y2="44" style="--d:.35s"/>
+        <line class="ln" pathLength="1" x1="175" y1="98" x2="312" y2="98" style="--d:.45s"/>
+        <line class="ln" pathLength="1" x1="175" y1="98" x2="290" y2="154" style="--d:.55s"/>
+        <line class="ln" pathLength="1" x1="175" y1="98" x2="175" y2="180" style="--d:.65s"/>
+        <line class="ln" pathLength="1" x1="175" y1="98" x2="66" y2="154" style="--d:.75s"/>
+        <line class="ln" pathLength="1" x1="175" y1="98" x2="42" y2="98" style="--d:.1s"/>
+        <line class="ln" pathLength="1" x1="175" y1="98" x2="62" y2="44" style="--d:.85s"/>
+      </svg>
+      <div class="core">Minor<br>ID</div>
+      <span class="chipb" style="left:50%;top:9.2%;--d:.35s">The Pizza Company</span>
+      <span class="chipb" style="left:83.4%;top:22.4%;--d:.45s">Swensen's</span>
+      <span class="chipb" style="left:89.1%;top:50%;--d:.55s">Sizzler</span>
+      <span class="chipb" style="left:82.9%;top:78.6%;--d:.65s">Dairy Queen</span>
+      <span class="chipb" style="left:50%;top:91.8%;--d:.75s">Burger King</span>
+      <span class="chipb" style="left:18.9%;top:78.6%;--d:.85s">The Coffee Club</span>
+      <span class="chipb me" style="left:12%;top:50%;--d:.15s">Bonchon</span>
+      <span class="chipb" style="left:17.7%;top:22.4%;--d:.95s">GAGA</span>
+    </div>
+    <div class="perks">
+      <div><span class="pi"><svg class="i s"><use href="#i-user"/></svg></span>One login, one wallet, one points balance</div>
+      <div><span class="pi"><svg class="i s"><use href="#i-crown"/></svg></span>Your member level follows you to every brand</div>
+      <div><span class="pi"><svg class="i s"><use href="#i-gift"/></svg></span>A welcome gift the first time you try a new brand</div>
+    </div>
+    <div class="consent"><span class="tog" id="s1tog"></span><span>Share my profile across Minor Food brands. I can change this any time (PDPA consent).</span></div>
+    <button class="btn-mid" id="s1up"><svg class="i s"><use href="#i-link"/></svg><span id="s1upt">Upgrade to Minor ID</span></button>
+    <button class="notnow" id="s1not">Not now — keep my Bonchon account</button>
+    <div class="fr">Franchised brands join when each franchisor agrees.</div>
+  </div></div>
+</section>
+
+<!-- S2 home -->
+<section class="scr" id="s2"><div class="body" id="s2body">
+  <div class="hdr a">
+    <div class="loc">Deliver to<b>Home · Sukhumvit 39 <svg class="i xs"><use href="#i-down"/></svg></b></div>
+    <span class="sp"></span>
+    <span class="ib"><svg class="i s"><use href="#i-bell"/></svg></span>
+    <span class="av"><span>P</span></span>
+  </div>
+  <h2 class="greet a" style="--d:.05s">Good evening, Ploy</h2>
+  <div class="ailine a" style="--d:.1s"><svg class="i s f"><use href="#i-spark"/></svg><span id="s2ai"></span></div>
+  <div class="mstrip a" style="--d:.15s">
+    <div><small>Minor ID · Gold</small><b class="g">1,240 pts</b></div>
+    <div><small>Wallet</small><b>฿1,250</b></div>
+    <div><small>Pay Later</small><b>฿5,000</b></div>
+  </div>
+  <div class="again card a" style="--d:.2s" id="s2again">
+    <div class="food bg-w" style="width:62px;height:62px"><svg><use href="#f-wing"/></svg></div>
+    <div><h4>Your Friday usual</h4><p>Soy Garlic Wings 6 pcs ×2 · Japchae</p><p><b style="color:var(--ink)">฿527</b> · last time 2 Oct</p></div>
+    <button class="sbtn"><svg class="i xs"><use href="#i-repeat"/></svg>Again</button>
+  </div>
+  <div class="sec a" style="--d:.25s"><h3><svg class="i s f" style="color:var(--ai)"><use href="#i-spark"/></svg>Picked for you</h3><a>See all</a></div>
+  <div class="hs a" style="--d:.3s">
+    <div class="pick card"><div class="food bg-h" style="width:124px;height:84px"><svg><use href="#f-wing-hb"/></svg></div><h5>Honey Butter Wings</h5><div class="rs">New · you love Soy Garlic</div><div class="pp">฿219 <span class="badge b-ai">New</span></div></div>
+    <div class="pick card"><div class="food bg-n" style="width:124px;height:84px"><svg><use href="#f-noodle"/></svg></div><h5>Japchae</h5><div class="rs">Goes well with wings</div><div class="pp">฿129</div></div>
+    <div class="pick card"><div class="food bg-d" style="width:124px;height:84px"><svg><use href="#f-drink"/></svg></div><h5>Iced Yuzu Soda</h5><div class="rs">Most ordered on rainy days</div><div class="pp">฿59</div></div>
+  </div>
+  <div class="sec a" style="--d:.35s"><h3>Categories</h3></div>
+  <div class="cats a" style="--d:.4s">
+    <div class="cat card"><div class="food bg-w"><svg><use href="#f-wing"/></svg></div>Wings</div>
+    <div class="cat card"><div class="food bg-x"><svg><use href="#f-combo"/></svg></div>Combos</div>
+    <div class="cat card"><div class="food bg-b"><svg><use href="#f-bowl"/></svg></div>Rice bowls</div>
+    <div class="cat card"><div class="food bg-n"><svg><use href="#f-noodle"/></svg></div>Noodles</div>
+    <div class="cat card"><div class="food bg-g"><svg><use href="#f-slaw"/></svg></div>Sides</div>
+    <div class="cat card"><div class="food bg-d"><svg><use href="#f-drink"/></svg></div>Drinks</div>
+    <div class="cat card"><div class="food bg-p"><svg><use href="#f-dess"/></svg></div>Desserts</div>
+    <div class="cat card"><div class="food bg-s"><svg><use href="#f-box"/></svg></div>Family boxes</div>
+  </div>
+</div>
+<button class="askai a" style="--d:.6s" id="s2ask"><svg class="i s f"><use href="#i-spark"/></svg>Ask AI: “Dinner for 4 under ฿1,000”</button>
+</section>
+
+<!-- S3 menu -->
+<section class="scr" id="s3"><div class="body" id="s3body">
+  <div class="topbar a"><span class="ib"><svg class="i s"><use href="#i-back"/></svg></span><h3>Menu</h3><span class="ib"><svg class="i s"><use href="#i-search"/></svg></span></div>
+  <div class="tabs a" style="--d:.05s"><span class="on">Wings</span><span>Combos</span><span>Rice bowls</span><span>Noodles</span><span>Sides</span><span>Drinks</span><span>Desserts</span></div>
+  <div class="filters a" style="--d:.1s">
+    <span class="fchip" id="s3ns"><svg class="i xs"><use href="#i-chili"/></svg>Not spicy</span>
+    <span class="fchip">Under ฿200</span><span class="fchip">For sharing</span><span class="fchip"><svg class="i xs"><use href="#i-star"/></svg>Top rated</span>
+  </div>
+  <div class="gnote a" style="--d:.15s"><svg class="i xs"><use href="#i-crown"/></svg>Gold member price shown · 10% off food</div>
+  <div class="item card a" style="--d:.2s;cursor:pointer" id="s3sg">
+    <div class="food bg-w"><svg><use href="#f-wing"/></svg></div>
+    <div class="tx"><h4>Soy Garlic Wings · 6 pcs</h4><p>Double-fried, hand-brushed soy garlic glaze</p><div class="pr"><s>฿199</s><b>฿179</b><span class="badge b-red">Buy 1 get 1</span></div></div>
+    <button class="add" id="s3add"><svg class="i s"><use href="#i-plus"/></svg></button>
+  </div>
+  <div class="item card a" style="--d:.25s" id="s3spicy">
+    <div class="food bg-s"><svg><use href="#f-wing-sp"/></svg></div>
+    <div class="tx"><h4>Spicy Wings · 6 pcs</h4><p>Korean red pepper glaze</p><div class="pr"><s>฿199</s><b>฿179</b><span class="badge b-hot"><svg class="i xs"><use href="#i-chili"/></svg>Spicy</span></div></div>
+    <button class="add"><svg class="i s"><use href="#i-plus"/></svg></button>
+  </div>
+  <div class="item card a" style="--d:.3s">
+    <div class="food bg-h"><svg><use href="#f-wing-hb"/></svg></div>
+    <div class="tx"><h4>Honey Butter Wings · 6 pcs</h4><p>Sweet honey butter, a little salty</p><div class="pr"><s>฿219</s><b>฿197</b><span class="badge b-ai">New</span></div></div>
+    <button class="add"><svg class="i s"><use href="#i-plus"/></svg></button>
+  </div>
+  <div class="item card a" style="--d:.35s">
+    <div class="food bg-w"><svg><use href="#f-half"/></svg></div>
+    <div class="tx"><h4>Half &amp; Half · 16 pcs</h4><p>Pick 2 glazes, for 3–4 people</p><div class="pr"><s>฿559</s><b>฿503</b><span class="badge b-ok">Sharing</span></div></div>
+    <button class="add"><svg class="i s"><use href="#i-plus"/></svg></button>
+  </div>
+  <div class="item card a" style="--d:.4s">
+    <div class="food bg-w"><svg><use href="#f-drum"/></svg></div>
+    <div class="tx"><h4>Drumsticks · 4 pcs</h4><p>Big and juicy, any glaze</p><div class="pr"><s>฿229</s><b>฿206</b></div></div>
+    <button class="add"><svg class="i s"><use href="#i-plus"/></svg></button>
+  </div>
+</div>
+<div class="minicart" id="s3mini"><span class="n" id="s3n">1</span><div><b id="s3mt">฿199</b><small id="s3ms">Add 1 more — it's free</small></div><span class="sp"></span><b>View cart</b><svg class="i s"><use href="#i-chev"/></svg></div>
+</section>
+
+<!-- S3b dish page: manual order -->
+<section class="scr" id="s3b"><div class="body" id="s3bbody" style="padding:0 0 160px">
+  <div class="dhero"><svg class="dimg"><use href="#f-wing"/></svg></div>
+  <div class="dcard">
+    <div class="row a" style="gap:6px"><span class="badge b-red">Buy 1 get 1</span><span class="badge b-gold">Best seller</span></div>
+    <h2 class="dt a" style="--d:.05s">Soy Garlic Wings</h2>
+    <div class="dmeta a" style="--d:.08s"><svg class="i xs f" style="color:#EFA23A"><use href="#i-star"/></svg>4.8 (2.1k reviews) · Not spicy · Ready in 12 min</div>
+    <p class="dd a" style="--d:.1s">Double-fried, hand-brushed soy garlic glaze. Crispy outside, juicy inside.</p>
+    <div class="dprice a" style="--d:.12s"><b>฿199</b><span class="gp"><svg class="i xs"><use href="#i-crown"/></svg>Gold price ฿179</span></div>
+    <div class="opt a" style="--d:.15s"><div class="oh"><b>Size</b><span class="req" id="s3br1">Required</span></div>
+      <div class="seg3" id="s3bsz"><span data-p="199">6 pcs<small>฿199</small></span><span data-p="319">10 pcs<small>฿319</small></span><span data-p="599">20 pcs<small>฿599</small></span></div></div>
+    <div class="opt a" style="--d:.2s"><div class="oh"><b>Glaze</b><span class="req" id="s3br2">Required · pick 1</span></div>
+      <div class="gl" id="s3bgl"><span data-g="0"><i></i>Soy Garlic</span><span data-g="0"><i></i>Spicy</span><span data-g="0"><i></i>Half &amp; Half</span><span data-g="20"><i></i>Honey Butter<small>+฿20</small></span></div></div>
+    <div class="opt a" style="--d:.25s"><div class="oh"><b>Extras</b><span class="opt2">Optional</span></div>
+      <div id="s3bex"><div class="ex" data-x="0"><span class="cb"></span>Sauce on the side<em>Free</em></div>
+      <div class="ex" data-x="10"><span class="cb"></span>Extra soy garlic sauce<em>+฿10</em></div>
+      <div class="ex" data-x="15"><span class="cb"></span>Pickled radish<em>+฿15</em></div></div></div>
+    <div class="opt a" style="--d:.3s"><div class="oh"><b>Note for the kitchen</b><span class="opt2">Optional</span></div>
+      <div class="note" id="s3bnw"><span id="s3bnote"><span class="ph">e.g. extra crispy</span></span><span class="caret"></span></div></div>
+  </div>
+</div>
+<div class="dtop"><span class="ib"><svg class="i s"><use href="#i-back"/></svg></span><span class="dtt">Soy Garlic Wings</span><span class="ib"><svg class="i s"><use href="#i-heart"/></svg></span><span class="ib cartb" id="s3bcartic"><svg class="i s"><use href="#i-bag"/></svg><span class="cnt" id="s3bcnt">2</span></span></div>
+<div class="dbar">
+  <div class="bogo" id="s3bbogo"><svg class="i xs"><use href="#i-gift"/></svg>Buy 1 get 1 — the 2nd box is free in your cart</div>
+  <div class="row" style="gap:0"><div class="qty"><button id="s3bm">−</button><b id="s3bq">1</b><button id="s3bp">+</button></div><button class="cta" id="s3badd" style="flex:1">Add to cart · <span id="s3bamt">฿199</span></button></div>
+</div>
+<div class="dim" id="s3bdim"></div>
+<div class="sheet" id="s3bsheet"><div class="cm">
+  <div class="grab" style="background:#DDD5CC"></div>
+  <div class="row"><span class="ck2b"><svg class="i s"><use href="#i-check"/></svg></span><div><b>Added: 2 × Soy Garlic Wings</b><small>Buy 1 get 1 — one box is free</small></div></div>
+  <h4>Complete your meal</h4>
+  <div class="cmi"><div class="food bg-n"><svg><use href="#f-noodle"/></svg></div><div class="tx"><b>Japchae</b><small class="ai">Your usual with wings</small></div><span class="pp">฿129</span><button class="add" id="s3bj"><svg class="i s"><use href="#i-plus"/></svg></button></div>
+  <div class="cmi"><div class="food bg-g"><svg><use href="#f-slaw"/></svg></div><div class="tx"><b>Kimchi Coleslaw</b><small>Fresh and crunchy</small></div><span class="pp">฿59</span><button class="add"><svg class="i s"><use href="#i-plus"/></svg></button></div>
+  <div class="cmi"><div class="food bg-d"><svg><use href="#f-drink"/></svg></div><div class="tx"><b>Iced Yuzu Soda</b><small>Most ordered on rainy days</small></div><span class="pp">฿59</span><button class="add"><svg class="i s"><use href="#i-plus"/></svg></button></div>
+  <button class="cta dark" id="s3bcart">View cart · <span id="s3bcn">2 items</span> · <span id="s3bct">฿398</span></button>
+  <button class="aihint" id="s3bai"><svg class="i s f"><use href="#i-spark"/></svg>Ordering for a group? Ask AI to finish it</button>
+</div></div>
+</section>
+
+<!-- S4 AI chat -->
+<section class="scr" id="s4"><div class="body" id="s4body" style="padding-bottom:170px">
+  <div class="aihd a"><div class="orb"><svg class="i f"><use href="#i-spark"/></svg></div><div><h3>Bonchon AI</h3><p>Knows your taste, your budget and today's deals</p></div></div>
+  <div class="chat" id="s4chat">
+    <div class="bub ai a" style="--d:.1s">Hi Ploy! You have 2 × Soy Garlic Wings and Japchae in your cart. What else do you need?</div>
+    <div class="bub me hide" id="s4me">Dinner for 4. One of us doesn't eat spicy. Under ฿1,000.</div>
+    <div class="bub ai hide" id="s4dots" style="padding:0"><span class="dots"><i></i><i></i><i></i></span></div>
+    <div class="steps hide" id="s4steps">
+      <span class="a2" style="--d:0s"><svg class="i xs"><use href="#i-check"/></svg>Menu</span>
+      <span class="a2" style="--d:.2s"><svg class="i xs"><use href="#i-check"/></svg>Your deals</span>
+      <span class="a2" style="--d:.4s"><svg class="i xs"><use href="#i-check"/></svg>Stock at Sukhumvit 39</span>
+      <span class="a2" style="--d:.6s"><svg class="i xs"><use href="#i-check"/></svg>Your past orders</span>
+    </div>
+    <div class="bub ai hide" id="s4reply">Here's a Friday feast for 4 — <b>฿968</b> after your deals. I kept your 3 items and added 8 more.</div>
+    <div class="basket card hide" id="s4basket">
+      <div class="bl a2" style="--d:.05s"><span class="q">2×</span><div class="food bg-w"><svg><use href="#f-wing"/></svg></div><div class="nm">Soy Garlic Wings · 6 pcs<small class="ic">In your cart · Buy 1 get 1</small></div><span class="p">฿398</span></div>
+      <div class="bl a2" style="--d:.15s"><span class="q">1×</span><div class="food bg-s"><svg><use href="#f-wing-sp"/></svg></div><div class="nm">Spicy Wings · 6 pcs<small>Added · for the spice lovers</small></div><span class="p">฿199</span></div>
+      <div class="bl a2" style="--d:.25s"><span class="q">2×</span><div class="food bg-b"><svg><use href="#f-bowl"/></svg></div><div class="nm">Bulgogi Rice Bowl<small>Added · not spicy</small></div><span class="p">฿338</span></div>
+      <div class="bl a2" style="--d:.35s"><span class="q">1×</span><div class="food bg-n"><svg><use href="#f-noodle"/></svg></div><div class="nm">Japchae<small class="ic">In your cart</small></div><span class="p">฿129</span></div>
+      <div class="bl a2" style="--d:.45s"><span class="q">1×</span><div class="food bg-g"><svg><use href="#f-slaw"/></svg></div><div class="nm">Kimchi Coleslaw<small>Added</small></div><span class="p">฿59</span></div>
+      <div class="bl a2" style="--d:.55s"><span class="q">4×</span><div class="food bg-d"><svg><use href="#f-drink"/></svg></div><div class="nm">Iced Yuzu Soda<small>Added</small></div><span class="p">฿236</span></div>
+      <ul class="ck hide" id="s4ck">
+        <li class="a2" style="--d:0s"><span class="c"><svg class="i xs"><use href="#i-check"/></svg></span>Enough for 4 · 12 wings and 2 bowls are not spicy</li>
+        <li class="a2" style="--d:.15s"><span class="c"><svg class="i xs"><use href="#i-check"/></svg></span>Gold price + Buy 1 get 1 + Friday ฿100 coupon</li>
+        <li class="a2" style="--d:.3s"><span class="c"><svg class="i xs"><use href="#i-check"/></svg></span>฿968 · ฿32 under budget · you save ฿391</li>
+        <li class="a2" style="--d:.45s"><span class="c"><svg class="i xs"><use href="#i-check"/></svg></span>Ready in about 25 minutes</li>
+      </ul>
+      <button class="cta" style="height:46px;font-size:14.5px;margin-top:10px" id="s4add">Add 8 items · total ฿968</button>
+    </div>
+    <div class="qrep hide" id="s4q"><span>Make it ฿800</span><span>Add a dessert</span><span>No soda</span></div>
+  </div>
+</div>
+<div class="composer" id="s4comp"><span class="t" id="s4in"><span class="ph">Ask for anything…</span></span><svg class="i s" style="color:var(--muted)"><use href="#i-mic"/></svg><span class="snd"><svg class="i s"><use href="#i-send"/></svg></span></div>
+</section>
+
+<!-- S5 cart + stacked deals -->
+<section class="scr" id="s5"><div class="body" id="s5body" style="padding-bottom:200px">
+  <div class="topbar a"><span class="ib"><svg class="i s"><use href="#i-back"/></svg></span><h3>Your cart</h3><span class="ib"><svg class="i s"><use href="#i-x"/></svg></span></div>
+  <div class="cl card a" style="--d:.05s">
+    <div class="bl"><span class="q">2×</span><div class="food bg-w"><svg><use href="#f-wing"/></svg></div><div class="nm">Soy Garlic Wings · 6 pcs</div><span class="p">฿398</span></div>
+    <div class="bl"><span class="q">1×</span><div class="food bg-s"><svg><use href="#f-wing-sp"/></svg></div><div class="nm">Spicy Wings · 6 pcs</div><span class="p">฿199</span></div>
+    <div class="bl"><span class="q">2×</span><div class="food bg-b"><svg><use href="#f-bowl"/></svg></div><div class="nm">Bulgogi Rice Bowl</div><span class="p">฿338</span></div>
+    <div class="bl"><span class="q">1×</span><div class="food bg-n"><svg><use href="#f-noodle"/></svg></div><div class="nm">Japchae</div><span class="p">฿129</span></div>
+    <div class="bl"><span class="q">1×</span><div class="food bg-g"><svg><use href="#f-slaw"/></svg></div><div class="nm">Kimchi Coleslaw</div><span class="p">฿59</span></div>
+    <div class="bl"><span class="q">4×</span><div class="food bg-d"><svg><use href="#f-drink"/></svg></div><div class="nm">Iced Yuzu Soda</div><span class="p">฿236</span></div>
+  </div>
+  <div class="dlv card a" style="--d:.1s"><span class="ib" style="background:var(--ok-l);color:var(--ok)"><svg class="i s"><use href="#i-scooter"/></svg></span><div><b>Delivery to Home · about 25 min</b>Free delivery — Gold benefit (3 left this month)</div></div>
+  <div class="deals card a" style="--d:.15s">
+    <h4><svg class="i s f" style="color:var(--ai)"><use href="#i-spark"/></svg>Best deal mix, found for you</h4>
+    <div class="find" id="s5find"><span class="spin"></span><span>Checking the 4 deals you can use…</span></div>
+    <div class="dr sub"><span class="di" style="background:#F4F0EA"><svg class="i s"><use href="#i-bag"/></svg></span>Subtotal · 11 items<span class="amt">฿1,359</span></div>
+    <div class="dr hid" id="s5d1"><span class="di b-red"><svg class="i s"><use href="#i-gift"/></svg></span>Buy 1 get 1 · Soy Garlic Wings<span class="amt">−฿199</span></div>
+    <div class="dr hid" id="s5d2"><span class="di b-gold"><svg class="i s"><use href="#i-crown"/></svg></span>Gold member price · 10% off food<span class="amt">−฿92</span></div>
+    <div class="dr hid" id="s5d3"><span class="di b-ai"><svg class="i s"><use href="#i-tag"/></svg></span>Friday Family coupon · ฿100 off orders over ฿1,000<span class="amt">−฿100</span></div>
+    <div class="dr hid unused" id="s5d4"><span class="di" style="background:#F1EEF2"><svg class="i s"><use href="#i-tag"/></svg></span><span>Free Kimchi Coleslaw coupon — not used, ฿100 off is better. Kept for next time.</span><span class="amt">฿59</span></div>
+  </div>
+</div>
+<div class="totbar">
+  <div class="tot"><span>Total</span><b id="s5tot">฿1,359</b></div>
+  <div class="svd"><span class="ok" id="s5saved"></span><span class="pt" id="s5pts"></span></div>
+  <button class="cta" id="s5pay">Continue to pay</button>
+</div>
+</section>
+
+<!-- S6 pay -->
+<section class="scr" id="s6"><div class="body" id="s6body" style="padding-bottom:130px">
+  <div class="topbar a"><span class="ib"><svg class="i s"><use href="#i-back"/></svg></span><h3>Pay ฿968</h3><span class="ib"><svg class="i s"><use href="#i-shield"/></svg></span></div>
+  <div class="popt sel a" style="--d:.05s"><span class="pi" style="background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff"><svg class="i"><use href="#i-wallet"/></svg></span><div class="tx"><b>Minor Wallet <span class="badge b-ok pop" style="--d:.9s">Best for you</span></b><small>Balance ฿1,250 · no fee · 2× points</small></div><span class="radio"></span></div>
+  <div class="popt a" style="--d:.1s"><span class="pi" style="background:#FBE7C0;color:#7A5512"><svg class="i"><use href="#i-clock"/></svg></span><div class="tx"><b>Minor Pay Later</b><small>฿5,000 available · pay by 25 Nov · 0% if paid in full</small></div><span class="radio"></span></div>
+  <div class="popt a" style="--d:.15s"><span class="pi" style="background:#EEF0F6;color:#33405E"><svg class="i"><use href="#i-card"/></svg></span><div class="tx"><b>Card •••• 4242</b><small>Saved card · one tap</small></div><span class="radio"></span></div>
+  <div class="popt a" style="--d:.2s"><span class="pi" style="background:#E5F1FB;color:#1F5C99"><svg class="i"><use href="#i-qr"/></svg></span><div class="tx"><b>PromptPay QR</b><small>Pay inside the app, no app switching</small></div><span class="radio"></span></div>
+  <div class="route a" style="--d:.3s">
+    <h4><svg class="i s"><use href="#i-bolt"/></svg>Behind the screen · smart payment routing</h4>
+    <div class="note">For card and QR payments the platform picks the best partner every time. Wallet payments have no partner fee. Sample numbers.</div>
+    <div class="rh"><span>Partner</span><span>Score now</span><span>Fee</span><span>Success</span></div>
+    <div class="rr" id="s6r1"><span>Partner A</span><span class="bar"><i data-w="70"></i></span><b>1.6%</b><b>98.1%</b></div>
+    <div class="rr" id="s6r2"><span>Partner B</span><span class="bar"><i data-w="96"></i></span><b>1.2%</b><b>99.3%</b></div>
+    <div class="rr" id="s6r3"><span>Partner C</span><span class="bar"><i data-w="62"></i></span><b>1.4%</b><b>97.6%</b></div>
+    <div class="rwin" id="s6win"><svg class="i xs"><use href="#i-check"/></svg>Partner B right now: lowest fee, highest success</div>
+  </div>
+</div>
+<div class="paybar"><button class="cta dark" id="s6pay"><svg class="i s"><use href="#i-face"/></svg>Pay ฿968 with Face ID</button></div>
+<div class="paid" id="s6done">
+  <div class="bigck"><svg class="i"><use href="#i-check"/></svg></div>
+  <h2>Paid ฿968</h2>
+  <p class="muted">Order B-2047 · ready in about 25 min</p>
+  <div class="dl card">
+    <div><span>Paid with</span><b>Minor Wallet</b></div>
+    <div><span>Wallet left</span><b>฿282</b></div>
+    <div><span>You saved</span><b style="color:var(--ok)">฿391</b></div>
+    <div><span>Points</span><b style="color:var(--gold)">+194 (2× with wallet)</b></div>
+  </div>
+</div>
+</section>
+
+<!-- S7 wallet + Pay Later -->
+<section class="scr" id="s7"><div class="body" id="s7body">
+  <div class="topbar a"><span class="ib"><svg class="i s"><use href="#i-back"/></svg></span><h3>Minor Wallet</h3><span class="ib"><svg class="i s"><use href="#i-qr"/></svg></span></div>
+  <div class="wcard a" style="--d:.05s">
+    <small>Balance · works in all Minor Food brands</small>
+    <div class="bal" id="s7bal">฿282</div>
+    <div class="ft"><span>No fee</span><span>2× points</span><span>8 brands</span></div>
+    <span class="bonus" id="s7bonus">+฿50 bonus</span>
+  </div>
+  <div class="amts a" style="--d:.1s">
+    <div class="amt">฿500<small>+฿20 bonus</small></div>
+    <div class="amt" id="s7a">฿1,000<small>+฿50 bonus</small></div>
+    <div class="amt">฿2,000<small>+฿150 bonus</small></div>
+  </div>
+  <button class="cta a" style="--d:.15s;margin-top:10px;height:48px" id="s7top">Top up ฿1,000</button>
+  <div class="trow card a" style="--d:.2s"><span class="ib" style="background:var(--ok-l);color:var(--ok)"><svg class="i s"><use href="#i-repeat"/></svg></span><div style="flex:1"><b>Auto top-up</b>When below ฿200, add ฿500</div><span class="tog" id="s7tog"></span></div>
+  <div class="credit a" style="--d:.25s" id="s7credit">
+    <div class="row"><b style="font-size:13.5px;color:#6B4A0F">Minor Pay Later</b><span class="sp"></span><span class="badge b-gold">Pre-approved</span></div>
+    <div class="amtc">฿5,000</div>
+    <p>Thank you for 3 years with us. Pay by the 25th of next month — 0% interest if paid in full. Provided with a licensed lending partner.</p>
+  </div>
+  <div class="act card a" style="--d:.3s" id="s7act">
+    <div class="ar"><span class="ai2 b-red"><svg class="i s"><use href="#i-bag"/></svg></span><div>Bonchon · Friday feast<small>Today 18:44</small></div><span class="m">−฿968</span></div>
+    <div class="ar"><span class="ai2" style="background:#EAF1FF;color:#2948A8"><svg class="i s"><use href="#i-store"/></svg></span><div>The Coffee Club<small>5 Oct</small></div><span class="m">−฿145</span></div>
+    <div class="ar"><span class="ai2 b-ok"><svg class="i s"><use href="#i-coin"/></svg></span><div>Cash back · Swensen's<small>1 Oct</small></div><span class="m pos">+฿25</span></div>
+  </div>
+</div></section>
+
+<!-- S8 member card -->
+<section class="scr" id="s8"><div class="body" id="s8body">
+  <div class="topbar a"><span class="ib"><svg class="i s"><use href="#i-back"/></svg></span><h3>Member</h3><span class="ib"><svg class="i s"><use href="#i-gift"/></svg></span></div>
+  <div class="mwrap a" style="--d:.05s"><div class="mcard" id="s8card">
+    <div class="face"><div class="shine"></div>
+      <div class="tp"><span>BONCHON</span><span>MINOR ID</span></div>
+      <div class="lv">GOLD</div>
+      <div class="nm"><small>MEMBER</small>Ploy Srisuk<br><small>NO. 8812 4567</small></div>
+      <div class="qr" id="s8qr"></div>
+    </div>
+    <div class="face back">
+      <h4>Your Gold benefits</h4>
+      <ul>
+        <li><svg class="i xs"><use href="#i-check"/></svg>Member price · 10% off food</li>
+        <li><svg class="i xs"><use href="#i-check"/></svg>Free delivery · 4× a month</li>
+        <li><svg class="i xs"><use href="#i-check"/></svg>Birthday wings · 6 pcs</li>
+        <li><svg class="i xs"><use href="#i-check"/></svg>Priority pick-up lane</li>
+        <li><svg class="i xs"><use href="#i-check"/></svg>2× points with Minor Wallet</li>
+      </ul>
+    </div>
+  </div></div>
+  <div class="ringrow card a" style="--d:.1s">
+    <div class="ring"><svg viewBox="0 0 74 74"><circle cx="37" cy="37" r="31" fill="none" stroke="#F2E9DA" stroke-width="8"/><circle id="s8arc" cx="37" cy="37" r="31" fill="none" stroke="url(#gHoney)" stroke-width="8" stroke-linecap="round" stroke-dasharray="194.8" stroke-dashoffset="194.8" style="transition:stroke-dashoffset 1.4s cubic-bezier(.2,.8,.2,1)"/></svg><div class="rv"><span><b id="s8pts">1,240</b><br><span class="muted" style="font-weight:600">/ 2,000</span></span></div></div>
+    <div><b>566 points to Platinum</b><p>About 3 more orders like tonight’s. Platinum adds free delivery on every order.</p></div>
+  </div>
+  <div class="sec a" style="--d:.15s"><h3>Gold benefits</h3><a>All levels</a></div>
+  <div class="bens a" style="--d:.2s">
+    <div class="ben card"><span class="bi"><svg class="i s"><use href="#i-pct"/></svg></span>Member price · 10% off food</div>
+    <div class="ben card"><span class="bi"><svg class="i s"><use href="#i-scooter"/></svg></span>Free delivery · 4× a month</div>
+    <div class="ben card"><span class="bi"><svg class="i s"><use href="#i-cake"/></svg></span>Birthday wings · 6 pcs</div>
+    <div class="ben card"><span class="bi"><svg class="i s"><use href="#i-bolt"/></svg></span>Priority pick-up lane</div>
+    <div class="ben card"><span class="bi"><svg class="i s"><use href="#i-wallet"/></svg></span>2× points with Minor Wallet</div>
+    <div class="ben card"><span class="bi"><svg class="i s"><use href="#i-link"/></svg></span>Points work in all Minor ID brands</div>
+  </div>
+</div>
+<div class="till" id="s8till"><small>Store till · Bonchon Siam</small><b>Welcome back, Ploy · Gold</b><div class="ok2"><span>Gold price applied</span><span>Points added</span><span>2 seconds</span></div></div>
+</section>
+
+<!-- S9 tracking -->
+<section class="scr" id="s9">
+  <div class="map">
+    <svg viewBox="0 0 390 330" preserveAspectRatio="xMidYMid slice">
+      <rect width="390" height="330" fill="#ECE5D8"/>
+      <path d="M0 286c80-14 120 14 200-4s130-30 190-16v64H0z" fill="#CFE3EE"/>
+      <rect x="236" y="70" width="104" height="80" rx="14" fill="#D5E8C6"/>
+      <g stroke="#fff" stroke-width="14" fill="none" stroke-linecap="round"><path d="M-10 120h410M60-10v270M200-10v280M-10 200h410M310 120v130"/></g>
+      <g stroke="#fff" stroke-width="6" fill="none" opacity=".85"><path d="M-10 60h410M130-10v270M-10 165h270M260-10v130"/></g>
+      <path id="s9route" d="M60 72v48h140v80h110v40" fill="none" stroke="#D0402E" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 9"/>
+      <g transform="translate(60 72)"><circle r="16" fill="#fff"/><circle r="12" fill="#D0402E"/><use href="#i-store" x="-7" y="-7" width="14" height="14" stroke="#fff" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      <g transform="translate(310 240)"><circle r="16" fill="#fff"/><circle r="12" fill="#10264A"/><use href="#i-home" x="-7" y="-7" width="14" height="14" stroke="#fff" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      <g id="s9rider" transform="translate(200 160)"><circle r="20" fill="#D0402E" opacity=".18"/><circle r="13" fill="#fff" stroke="#D0402E" stroke-width="2.5"/><use href="#i-scooter" x="-8" y="-8" width="16" height="16" stroke="#D0402E" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+    </svg>
+  </div>
+  <div class="trk">
+    <div class="eta a"><div><small>Arriving at about</small><b id="s9eta">19:15 · 12 min</b></div>
+      <div class="rider"><div>Somchai<br><span class="muted" style="font-weight:500">Rider · 4.9</span></div><span class="rv"><svg class="i"><use href="#i-scooter"/></svg></span></div></div>
+    <ul class="tl a" style="--d:.05s"><li class="bar" id="s9bar"></li>
+      <li class="d"><i><svg class="i xs"><use href="#i-check"/></svg></i>Confirmed<br>18:44</li>
+      <li class="d"><i><svg class="i xs"><use href="#i-check"/></svg></i>Cooking<br>18:47</li>
+      <li class="d"><i><svg class="i xs"><use href="#i-check"/></svg></i>Picked up<br>19:02</li>
+      <li class="n"><i></i>Arriving<br>19:15</li>
+    </ul>
+    <div class="earn a" style="--d:.1s">
+      <div class="card g">Points earned<b>+194 → 1,434</b></div>
+      <div class="card k">You saved<b>฿391</b></div>
+    </div>
+    <div class="aisug" id="s9ai">
+      <p><svg class="i s f" style="color:var(--ai)"><use href="#i-spark"/></svg><span>Save this as “Friday feast”? Next rainy Friday I'll have it ready in one tap.</span></p>
+      <div class="row"><button class="y" id="s9save">Save it</button><button class="n2">No thanks</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- S10 another brand app, same Minor ID -->
+<section class="scr" id="s10">
+  <div class="pzh">
+    <div class="wm a">The Pizza Company</div>
+    <p class="a" style="--d:.05s">Another Minor Food app</p>
+    <svg class="pz"><use href="#f-pizza"/></svg>
+  </div>
+  <div class="pzb">
+    <div class="pzv" id="s10sign">
+      <h2 class="a" style="--d:.1s">Sign in</h2>
+      <div class="sub a" style="--d:.12s">Have a Minor ID? No new account needed.</div>
+      <button class="btn-id a" style="--d:.15s" id="s10mid"><svg class="i s"><use href="#i-link"/></svg>Continue as Ploy with Minor ID</button>
+      <div class="or a" style="--d:.2s">or use another phone number</div>
+      <div class="field a" style="--d:.22s"><span class="cc">+66</span><span>Phone number</span></div>
+    </div>
+    <div class="pzv hide" id="s10home">
+      <h2>Welcome, Ploy</h2>
+      <div class="sub">Everything is ready — it came with your Minor ID.</div>
+      <div class="rd card a2" style="--d:0s"><span class="ri"><svg class="i s"><use href="#i-pin"/></svg></span><div><b>Home · Sukhumvit 39</b>Address carried over</div><svg class="i s ck2"><use href="#i-check"/></svg></div>
+      <div class="rd card a2" style="--d:.12s"><span class="ri"><svg class="i s"><use href="#i-wallet"/></svg></span><div><b>Minor Wallet · ฿1,332</b>Same balance in every brand</div><svg class="i s ck2"><use href="#i-check"/></svg></div>
+      <div class="rd card a2" style="--d:.24s"><span class="ri"><svg class="i s"><use href="#i-card"/></svg></span><div><b>Card •••• 4242</b>Saved and ready</div><svg class="i s ck2"><use href="#i-check"/></svg></div>
+      <div class="rd card a2" style="--d:.36s"><span class="ri"><svg class="i s"><use href="#i-crown"/></svg></span><div><b>1,434 Minor ID points</b>Earn and use them here too</div><svg class="i s ck2"><use href="#i-check"/></svg></div>
+      <div class="wel a2" style="--d:.5s"><svg class="i l"><use href="#i-gift"/></svg><div><b>Welcome gift: free garlic bread</b><small>On your first Pizza Company order with Minor ID</small></div></div>
+    </div>
+  </div>
+</section>
+
+<nav class="nav" id="nav">
+  <button data-go="1" data-k="home"><svg class="i"><use href="#i-home"/></svg>Home</button>
+  <button data-go="2" data-k="menu"><svg class="i"><use href="#i-menu"/></svg>Menu</button>
+  <button data-go="4" data-k="ai"><span class="aib"><svg class="i f"><use href="#i-spark"/></svg></span>Ask AI</button>
+  <button data-go="7" data-k="wallet"><svg class="i"><use href="#i-wallet"/></svg>Wallet</button>
+  <button data-go="8" data-k="me"><svg class="i"><use href="#i-user"/></svg>Me</button>
+</nav>
+<div class="toast" id="toast"><svg class="i s"><use id="toastU" href="#i-check"/></svg><span id="toastT"></span></div>
+<div class="fid" id="fid"><div class="box"><div><svg class="i"><use id="fidU" href="#i-face"/></svg><span id="fidT">Face ID</span></div></div></div>
+<div class="homebar"></div>
+</div></div></div>
+
+<aside class="story" id="story">
+  <div class="prog" id="prog"><i></i></div>
+  <div class="kick" id="kick"></div>
+  <h2 id="stitle"></h2>
+  <h4 data-en="What the customer sees" data-zh="客户看到什么">What the customer sees</h4>
+  <ul class="sees" id="ssees"></ul>
+  <div id="sTvaW">
+    <h4 data-en="Today vs. after the upgrade" data-zh="现在 vs. 升级后">Today vs. after the upgrade</h4>
+    <table class="tva"><thead><tr><th data-en="Today" data-zh="现在">Today</th><th data-en="After the upgrade (2029)" data-zh="升级后（2029）">After the upgrade (2029)</th></tr></thead><tbody id="stva"></tbody></table>
+  </div>
+  <div id="sDiagW" class="hide">
+    <h4 data-en="How it fits: one platform, many brands" data-zh="整体架构：一个平台，多个品牌">How it fits: one platform, many brands</h4>
+    <div class="diag" id="sdiag"></div>
+  </div>
+  <div id="sBuiltW"><h4 data-en="Built on — blocks from the 3-year plan" data-zh="依托 —— 三年计划中的平台模块">Built on — blocks from the 3-year plan</h4>
+  <div class="chips" id="schips"></div></div>
+  <div class="why"><b data-en="Why it matters" data-zh="为什么重要">Why it matters</b><span id="swhy"></span></div>
+  <div class="gloss" id="sgloss"></div>
+</aside>
+</main>
+<footer class="foot" id="foot"></footer>
+
+<script>
+"use strict";
+const BLOCKS=[
+ {en:"Customer ID & profile",zh:"客户 ID 与档案"},
+ {en:"Membership & CRM",zh:"会员与 CRM"},
+ {en:"Orders & menu",zh:"订单与菜单"},
+ {en:"Campaign & coupon",zh:"营销与优惠券"},
+ {en:"Payment & wallet",zh:"支付与钱包"},
+ {en:"Data platform",zh:"数据平台"},
+ {en:"AI operating brain",zh:"AI 运营大脑"},
+ {en:"Back office",zh:"后台管理"}
+];
+const GLOSS={
+ AI:{en:"Artificial Intelligence",zh:"Artificial Intelligence，人工智能"},
+ ID:{en:"Identity",zh:"Identity，身份"},
+ OTP:{en:"One-Time Password",zh:"One-Time Password，一次性验证码"},
+ PDPA:{en:"Personal Data Protection Act (Thailand)",zh:"Personal Data Protection Act，泰国个人数据保护法"},
+ CRM:{en:"Customer Relationship Management",zh:"Customer Relationship Management，客户关系管理"},
+ BOGO:{en:"Buy One Get One (free)",zh:"Buy One Get One，买一送一"},
+ QR:{en:"Quick Response (code)",zh:"Quick Response，二维码"},
+ POS:{en:"Point of Sale (store till)",zh:"Point of Sale，门店收银系统"}
+};
+const UI={play:{en:"Play tour",zh:"自动播放"},pause:{en:"Pause",zh:"暂停"},gloss:{en:"Abbreviations: ",zh:"缩写："}};
+const FOOT={
+ en:"Concept demo for internal discussion. Menu, prices, people, partners and all numbers are samples. Wallet, Pay Later credit and cross-brand data sharing need partner, legal (including PDPA — Personal Data Protection Act) and franchisor agreement.",
+ zh:"仅供内部讨论的概念演示。菜单、价格、人物、合作方和所有数字均为示例。钱包、先享后付额度和跨品牌数据共享，需要合作方、法务（包括 PDPA —— Personal Data Protection Act，个人数据保护法）及特许方同意。"
+};
+const DIAG={
+ top:{en:"Brand apps and channels",zh:"品牌 App 与渠道"},
+ brands:["Bonchon","The Pizza Company","Swensen's","Sizzler","Dairy Queen","Burger King","The Coffee Club","GAGA"],
+ chans:{en:["Web","Kiosk","LINE","Delivery partners"],zh:["网页","自助点餐机","LINE","外卖平台"]},
+ mid:{en:"8 shared building blocks",zh:"8 个共享平台模块"},
+ bot1:{en:"Any POS till and kitchen system — through adapters",zh:"任何 POS 收银与厨房系统 —— 通过适配器接入"},
+ bot2:{en:"Partners: payment, lending, delivery",zh:"合作方：支付、借贷、配送"}
+};
+const STEPS=[
+{pill:{en:"Sign in & Minor ID",zh:"登录与 Minor ID"},mid:1,dur:11000,nav:null,light:1,
+ kick:{en:"Sign in",zh:"登录"},
+ title:{en:"Sign in once — then choose Minor ID",zh:"一次登录，然后选择升级 Minor ID"},
+ sees:{en:["Phone number and an OTP (One-Time Password) that fills in by itself. No forms.","Right after sign-in, one clear offer: upgrade to Minor ID — one account for all 8 Minor Food brands.","The customer decides. PDPA (Personal Data Protection Act) consent is in plain words and can be changed any time. “Not now” is always there."],
+  zh:["手机号 + 自动填入的 OTP（One-Time Password，一次性验证码），不用填表。","登录后马上看到一个清楚的邀请：升级为 Minor ID —— 一个账号通用 Minor Food 旗下 8 个品牌。","由客户自己决定。PDPA（Personal Data Protection Act，个人数据保护法）授权用简单的话说明，随时可改；“暂不升级”永远可选。"]},
+ tva:{en:[["Each brand has its own account, points and login.","One Minor ID for all brands; points, wallet and address go with the customer."],["We cannot see that a Bonchon fan also buys at Swensen's.","With consent, one customer view across brands for better offers."]],
+  zh:[["每个品牌各自的账号、积分和登录。","一个 Minor ID 通用所有品牌；积分、钱包、地址跟着客户走。"],["看不到 Bonchon 的客户也常去 Swensen's。","在客户同意下，形成跨品牌的统一客户视图，优惠更精准。"]]},
+ built:[0,1,5],
+ why:{en:"Minor ID is the key to “one Minor Food”: every new member becomes a customer of all our brands, not just one.",zh:"Minor ID 是 “one Minor Food” 的钥匙：每一个新会员都成为我们所有品牌的客户，而不只是一个品牌的。"}},
+{pill:{en:"Home",zh:"首页"},dur:9000,nav:"home",
+ kick:{en:"Home",zh:"首页"},
+ title:{en:"A home screen that knows the customer",zh:"懂客户的首页"},
+ sees:{en:["Greeting, weather and time of day change what we show first.","Member level, points, wallet and credit — all in one line.","“Your Friday usual” brings back the last order in one tap.","AI (Artificial Intelligence) picks that give a reason, plus 8 simple categories."],
+  zh:["问候语、天气和时段决定首页先展示什么。","会员等级、积分、钱包和信用额度，一行看清。","“周五老样子”一键重下上次的订单。","AI（Artificial Intelligence，人工智能）推荐并说明理由，外加 8 个清晰分类。"]},
+ tva:{en:[["Same home page for everyone.","Each customer sees their own page, based on time, weather and habits."],["To reorder, find each item again.","One tap to reorder; the app remembers the usual."]],
+  zh:[["所有人看到同一个首页。","每个客户看到自己的首页，随时段、天气和习惯变化。"],["重新下单要一个个找菜。","一键再来一单，App 记得老样子。"]]},
+ built:[5,6,1],
+ why:{en:"Faster choice means more orders and bigger baskets. A personal home page brings people back more often.",zh:"选得快 = 下单多、客单价高；个性化首页让客户更常回来。"}},
+{pill:{en:"Browse",zh:"浏览菜单"},dur:6000,nav:"menu",
+ kick:{en:"Manual order — browse",zh:"手动点餐 —— 浏览菜单"},
+ title:{en:"A menu that is easy to choose from",zh:"好选的菜单"},
+ sees:{en:["Clear categories and one-tap filters: not spicy, under ฿200, for sharing.","Member price shown on the menu itself — no surprise at checkout.","Deal labels (BOGO — Buy One Get One, New) come from one campaign engine. Tap a dish to open it and choose options."],
+  zh:["清晰分类 + 一键筛选：不辣、200 泰铢以下、适合分享。","菜单上直接显示会员价，结账时没有意外。","优惠标签（BOGO — Buy One Get One 买一送一、新品）来自统一的营销引擎。点开菜品就能选择选项。"]},
+ tva:{en:[["Menu and prices set up again for each channel.","One menu service feeds app, web, kiosk and delivery partners."],["Member price only seen at the till.","Same member price and rules everywhere."]],
+  zh:[["每个渠道各自配置菜单和价格。","一个菜单服务同时供给 App、网页、自助点餐机和外卖平台。"],["会员价只有在收银时才看到。","会员价和规则在所有渠道一致。"]]},
+ built:[2,3,1],
+ why:{en:"One menu and one price engine mean fewer mistakes and faster launches: a new item can go live in every channel on the same day.",zh:"统一菜单和价格引擎 = 更少出错、上新更快：新品可以同一天在所有渠道上线。"}},
+{pill:{en:"Manual order",zh:"手动点餐"},dur:10500,nav:null,
+ kick:{en:"Manual order — choose and add",zh:"手动点餐 —— 选菜、定制、加入购物车"},
+ title:{en:"Tap, choose, add — in seconds",zh:"点一点、选一选、加进购物车 —— 几秒完成"},
+ sees:{en:["A clear dish page: photo, rating, member price and today's deal.","Simple choices: size, glaze, extras and a note for the kitchen. Required choices are marked, and the price updates as you choose.","After adding, “Complete your meal” suggests sides and drinks — her usual Japchae comes first.","Manual or AI, everything goes into one cart with one set of deal rules."],
+  zh:["清晰的菜品页：图片、评分、会员价和今日优惠。","选项简单：份量、口味、加料，还可以给厨房留备注。必选项有标记，价格随选择实时变化。","加入购物车后，“搭配推荐”推荐小食和饮料 —— 她常点的韩式杂菜（Japchae）排第一。","不管手动还是 AI 点餐，都进同一个购物车，用同一套优惠规则。"]},
+ tva:{en:[["Options differ by channel; some cannot be chosen in the app.","One menu model: the same options in app, web, kiosk and store."],["Upsell is the same list for everyone.","“Complete your meal” is based on this order and her habits."],["Notes for the kitchen get lost.","The note goes straight to the kitchen screen."]],
+  zh:[["各渠道选项不一样，有些在 App 里选不了。","统一的菜单模型：App、网页、自助点餐机和门店选项一致。"],["加购推荐对所有人都一样。","“搭配推荐”根据这一单和她的习惯生成。"],["给厨房的备注经常丢失。","备注直接显示在厨房屏幕上。"]]},
+ built:[2,3,6],
+ why:{en:"Many customers will still order by tapping. A fast, clear dish page cuts drop-off, and smart add-ons grow the basket.",zh:"很多客户还是会手动点餐。清晰、快速的菜品页能减少中途放弃，聪明的搭配推荐能提高客单价。"}},
+{pill:{en:"AI order",zh:"AI 点餐"},dur:10500,nav:"ai",
+ kick:{en:"AI order",zh:"AI 点餐"},
+ title:{en:"Or just say what you need",zh:"或者，直接说出你的需求"},
+ sees:{en:["The customer types or says a need, not a dish name.","The AI (Artificial Intelligence) keeps what is already in the cart and completes the meal for the group, the “no spicy” rule and the budget.","Before it answers, it checks the menu, live stock at the nearest store and the customer's deals."],
+  zh:["客户说出需求，而不是菜名（打字或语音都行）。","AI（Artificial Intelligence，人工智能）保留购物车里已有的菜，再按人数、“不吃辣”和预算补齐一整餐。","回答前先核对菜单、最近门店的实时库存和客户可用的优惠。"]},
+ tva:{en:[["Customer scrolls and guesses.","AI suggests a full meal in seconds."],["Only one way to order.","Tap or ask — both share one cart, and customers can mix them."]],
+  zh:[["客户来回翻、靠猜。","AI 几秒内给出一整餐方案。"],["只有一种点餐方式。","手动点或直接问 AI —— 共用一个购物车，可以混着用。"]]},
+ built:[6,2,3],
+ why:{en:"Group orders are our biggest baskets. Making them easy grows sales per order and cuts drop-off.",zh:"多人订单客单价最高。让它变简单，能提升单均销售，减少中途放弃。"}},
+{pill:{en:"Cart & deals",zh:"购物车与优惠"},dur:9000,nav:null,
+ kick:{en:"Cart",zh:"购物车"},
+ title:{en:"Deals that stack the right way",zh:"优惠自动叠加，取最优"},
+ sees:{en:["Member price, BOGO (Buy One Get One) and a coupon are combined for the customer.","The app picks the best mix and says why; a coupon not used is kept for next time.","Savings and points are shown before paying."],
+  zh:["会员价、BOGO（Buy One Get One，买一送一）和优惠券自动叠加。","系统选出最优组合并说明原因；没用上的券留到下次。","付款前就显示省了多少、能拿多少积分。"]},
+ tva:{en:[["Customer must pick one coupon; rules differ by channel.","One rules engine; same result in app, web and store."],["Hard to control the cost of stacked deals.","Margin limits set centrally for each campaign."]],
+  zh:[["客户只能自己挑一张券；各渠道规则不同。","统一规则引擎；App、网页、门店结果一致。"],["优惠叠加的成本难以控制。","每个活动的毛利底线由总部统一设定。"]]},
+ built:[3,1,2],
+ why:{en:"Customers feel they always get the best deal, and we keep control of margin.",zh:"客户感觉永远拿到最优价，我们也守住了毛利。"}},
+{pill:{en:"Pay",zh:"支付"},dur:9500,nav:null,
+ kick:{en:"Payment",zh:"支付"},
+ title:{en:"Faster payment, lower cost",zh:"支付更快，成本更低"},
+ sees:{en:["Minor Wallet comes first when it is best for the customer: no fee, double points.","Pay Later, a saved card and PromptPay QR (Quick Response) code all work inside the app.","Face ID confirms in about one second."],
+  zh:["对客户最划算时优先推荐 Minor 钱包：无手续费，双倍积分。","先享后付、已绑定的卡、PromptPay 二维码（QR — Quick Response）都在 App 内完成。","Face ID 大约一秒确认。"]},
+ tva:{en:[["One payment partner per channel, fixed fee.","Several partners; each card or QR payment goes to the cheapest route that works."],["A failed payment is a lost order.","Automatic retry on the next partner."]],
+  zh:[["每个渠道一个支付合作方，费率固定。","多个合作方；每笔卡或二维码支付自动走最便宜且可用的通道。"],["支付失败 = 丢单。","自动切换到下一个合作方重试。"]]},
+ built:[4,5],
+ why:{en:"Every 0.1% of payment fee we save on app sales goes straight to profit. Partner names, fees and success rates here are samples (to verify).",zh:"App 销售的支付费率每省 0.1%，都直接变成利润。图中合作方、费率和成功率均为示例（待核实）。"}},
+{pill:{en:"Wallet & credit",zh:"钱包与额度"},dur:8500,nav:"wallet",
+ kick:{en:"Minor Wallet",zh:"Minor 钱包"},
+ title:{en:"Minor Wallet and Pay Later",zh:"Minor 钱包与先享后付"},
+ sees:{en:["Top up with a bonus; the balance works in every Minor Food brand.","Auto top-up keeps the customer ready to order.","Loyal customers get pre-approved credit — e.g. ฿5,000 after 3 years — provided with a licensed lending partner."],
+  zh:["充值有赠送；余额在所有 Minor Food 品牌通用。","自动充值，客户随时可以下单。","忠实老客户获得预授信额度 —— 例如 3 年老客户 5,000 泰铢 —— 由持牌借贷合作方提供。"]},
+ tva:{en:[["Gift cards and vouchers differ by brand.","One wallet for all brands."],["Every order pays a payment fee.","Wallet spend has no partner fee, and cash comes in earlier."]],
+  zh:[["礼品卡和代金券各品牌各自为政。","一个钱包通用所有品牌。"],["每一单都要付支付手续费。","钱包消费没有合作方手续费，资金也更早到账。"]]},
+ built:[4,0,1],
+ why:{en:"Money in the wallet brings customers back and lowers payment cost. The wallet and credit need a licence or a licensed partner — subject to legal review (to verify).",zh:"钱包里的余额会把客户带回来，也降低支付成本。钱包和信用额度需要牌照或持牌合作方 —— 需法务评估（待核实）。"}},
+{pill:{en:"Member card",zh:"会员卡"},dur:9000,nav:"me",
+ kick:{en:"Membership",zh:"会员"},
+ title:{en:"Member card and benefits",zh:"会员卡与会员权益"},
+ sees:{en:["A digital member card with a QR (Quick Response) code for the counter.","Clear progress to the next level, and benefits in plain words.","In the store, one scan: member price and points in about two seconds."],
+  zh:["数字会员卡，柜台出示 QR（Quick Response）二维码即可。","清楚显示升级进度，权益用简单的话说明。","门店扫一次码：约 2 秒内享会员价并累计积分。"]},
+ tva:{en:[["Store and app benefits are different.","Same member, same benefits, in every channel."],["The till needs manual codes.","Any POS (Point of Sale) till reads Minor ID through an adapter."]],
+  zh:[["门店和 App 的权益不一样。","同一个会员，在所有渠道享受同样权益。"],["收银时要手动输入代码。","任何 POS（Point of Sale，门店收银系统）都能通过适配器识别 Minor ID。"]]},
+ built:[1,7,0],
+ why:{en:"The same benefits everywhere build trust. Members visit more often and spend more.",zh:"处处一致的权益建立信任；会员来得更勤、花得更多。"}},
+{pill:{en:"Tracking",zh:"订单追踪"},dur:9000,nav:"home",
+ kick:{en:"After the order",zh:"下单之后"},
+ title:{en:"Live tracking, and a reason to come back",zh:"实时追踪，并给下一次一个理由"},
+ sees:{en:["Live order and rider tracking with honest times.","Points and savings confirmed.","The AI (Artificial Intelligence) offers to save the order as a favourite for next time."],
+  zh:["订单和骑手实时追踪，时间真实可信。","积分和节省金额同步确认。","AI（Artificial Intelligence，人工智能）提议把这单存为常用，下次一键下单。"]},
+ tva:{en:[["Status updates are late or missing.","Store, kitchen and rider status in real time."],["After the order, silence.","A smart next step builds the habit."]],
+  zh:[["订单状态更新慢或没有。","门店、厨房、骑手状态实时同步。"],["下单之后就没有下文。","聪明的下一步，养成习惯。"]]},
+ built:[2,5,6],
+ why:{en:"Fewer “where is my order?” calls, and more repeat orders.",zh:"更少“我的订单在哪？”的来电，更多复购。"}},
+{pill:{en:"All brands",zh:"所有品牌"},mid:1,dur:9000,nav:null,light:1,diag:1,
+ kick:{en:"One Minor Food",zh:"One Minor Food"},
+ title:{en:"One Minor ID, every brand",zh:"一个 Minor ID，所有品牌"},
+ sees:{en:["Ploy opens another Minor Food app — no new account.","Address, wallet, card and points are already there.","A welcome gift turns a Bonchon fan into a Pizza Company customer."],
+  zh:["Ploy 打开另一个 Minor Food 品牌 App —— 无需新注册。","地址、钱包、卡、积分都已就绪。","一份欢迎礼，让 Bonchon 的粉丝变成 The Pizza Company 的客户。"]},
+ built:[0,1,2,3,4,5,6,7],
+ why:{en:"Build once, use in every brand: a new brand app becomes mostly set-up, not a new build.",zh:"建一次，所有品牌都能用：新品牌 App 主要是配置，而不是重新开发。"}}
+];
+
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const TIMES=['18:41','18:42','18:42','18:42','18:43','18:44','18:44','18:46','18:48','19:03','19:20'],N=STEPS.length,scr=$$('.scr'),screenEl=$('#screen');
+let cur=0,lang='en',timers=[],gen=0,playing=false,autoT=0,toastTimer=0,S=1;
+
+/* ---------- helpers ---------- */
+function later(ms,fn){timers.push(setTimeout(fn,ms));}
+function clearTimers(){timers.forEach(clearTimeout);timers=[];}
+function typeText(el,txt,speed,cb){const g=gen;let i=0;el.textContent='';(function t(){if(g!==gen)return;el.textContent=txt.slice(0,++i);if(i<txt.length)timers.push(setTimeout(t,speed));else if(cb)cb();})();}
+const baht=n=>'฿'+Math.round(n).toLocaleString('en-US');
+function countTo(el,from,to,ms,f){const g=gen,t0=performance.now();f=f||baht;(function s(now){if(g!==gen)return;let p=Math.min(1,(now-t0)/ms);p=1-Math.pow(1-p,3);el.textContent=f(from+(to-from)*p);if(p<1)requestAnimationFrame(s);})(t0);}
+function toast(msg,kind,icon){const t=$('#toast');t.className='toast'+(kind?' '+kind:'');$('#toastT').textContent=msg;$('#toastU').setAttribute('href','#'+(icon||'i-check'));void t.offsetWidth;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2300);}
+function tap(el){if(!el)return;const r=el.getBoundingClientRect(),R=screenEl.getBoundingClientRect(),d=document.createElement('span');d.className='rip';d.style.left=((r.left+r.width/2-R.left)/S)+'px';d.style.top=((r.top+r.height/2-R.top)/S)+'px';screenEl.appendChild(d);setTimeout(()=>d.remove(),700);el.classList.add('press');setTimeout(()=>el.classList.remove('press'),180);}
+function faceID(cb){const f=$('#fid');f.className='fid on scan';$('#fidU').setAttribute('href','#i-face');$('#fidT').textContent='Face ID';later(900,()=>{f.className='fid on ok';$('#fidU').setAttribute('href','#i-check');$('#fidT').textContent='Done';});later(1400,()=>{f.className='fid';if(cb)cb();});}
+function scrollEnd(el){el.scrollTo({top:el.scrollHeight,behavior:'smooth'});}
+function scrollTo2(el,y){el.scrollTo({top:y,behavior:'smooth'});}
+function show(e){e.classList.remove('hide');e.classList.remove('rvl');void e.offsetWidth;e.classList.add('rvl');}
+function reveal(d){d.classList.remove('hid');d.classList.add('in');}
+function makeQR(){const n=25,c=4;let seed=88124567;const rnd=()=>{seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff;};const inF=(x,y)=>(x<8&&y<8)||(x>=n-8&&y<8)||(x<8&&y>=n-8);let r='';for(let y=0;y<n;y++)for(let x=0;x<n;x++){if(!inF(x,y)&&rnd()<.48)r+=`<rect x="${x*c}" y="${y*c}" width="${c}" height="${c}"/>`;}const f=(x,y)=>`<rect x="${x*c}" y="${y*c}" width="${7*c}" height="${7*c}" fill="#1D1A20"/><rect x="${(x+1)*c}" y="${(y+1)*c}" width="${5*c}" height="${5*c}" fill="#fff"/><rect x="${(x+2)*c}" y="${(y+2)*c}" width="${3*c}" height="${3*c}" fill="#1D1A20"/>`;$('#s8qr').innerHTML=`<svg viewBox="0 0 ${n*c} ${n*c}" shape-rendering="crispEdges"><g fill="#1D1A20">${r}</g>${f(0,0)}${f(n-7,0)}${f(0,n-7)}</svg>`;}
+function moveRider(a,b,ms){const g=gen,p=$('#s9route'),L=p.getTotalLength(),rd=$('#s9rider'),t0=performance.now();(function s(now){if(g!==gen)return;const k=Math.min(1,(now-t0)/ms),pt=p.getPointAtLength(L*(a+(b-a)*k));rd.setAttribute('transform',`translate(${pt.x.toFixed(1)} ${pt.y.toFixed(1)})`);if(k<1)requestAnimationFrame(s);})(t0);}
+function upgrade(){const up=$('#s1up');if(up.classList.contains('done'))return;tap(up);up.classList.add('done');$('#s1upt').textContent='Minor ID active';$('#s1orbit').classList.add('linked');toast('Minor ID active · 8 brands linked','mid','i-link');}
+function s10signin(){const sign=$('#s10sign'),home=$('#s10home');if(sign.classList.contains('hide'))return;tap($('#s10mid'));later(300,()=>{toast('Signed in with Minor ID — no new account','mid','i-link');sign.classList.add('hide');show(home);});}
+
+/* ---------- scene scripts ---------- */
+function sc1(){
+ const num=$('#s1num'),otpw=$('#s1otpw'),otp=$$('#s1otp i'),sms=$('#s1sms'),send=$('#s1send'),dim=$('#s1dim'),sh=$('#s1sheet'),tog=$('#s1tog');
+ num.textContent='';otpw.classList.remove('show');otp.forEach(o=>{o.textContent='';o.classList.remove('f');});sms.classList.remove('show');send.textContent='Send code';
+ dim.classList.remove('on');sh.classList.remove('up','go');tog.classList.remove('on');$('#s1up').classList.remove('done');$('#s1upt').textContent='Upgrade to Minor ID';$('#s1orbit').classList.remove('linked');
+ later(500,()=>typeText(num,'81 234 5678',75));
+ later(1500,()=>tap(send));
+ later(1700,()=>{otpw.classList.add('show');send.textContent='Verifying…';});
+ '482916'.split('').forEach((ch,k)=>later(2100+k*120,()=>{otp[k].textContent=ch;otp[k].classList.add('f');}));
+ later(2900,()=>sms.classList.add('show'));
+ later(3500,()=>{dim.classList.add('on');sh.classList.add('up');});
+ later(3900,()=>sh.classList.add('go'));
+ later(5800,()=>{tap(tog);tog.classList.add('on');});
+ later(7000,upgrade);
+}
+function sc2(){
+ const ai=$('#s2ai'),body=$('#s2body'),ag=$('#s2again'),ask=$('#s2ask');
+ ai.textContent='';ag.classList.remove('pulse');ask.classList.remove('pulseV');
+ later(700,()=>typeText(ai,"It's raining in Sukhumvit. Your Friday usual can be at your door in about 25 min — order it again?",22));
+ later(3600,()=>ag.classList.add('pulse'));
+ later(5400,()=>scrollTo2(body,400));
+ later(7000,()=>{scrollTo2(body,0);ask.classList.add('pulseV');});
+}
+let qa=0;
+function sc3(){
+ const ns=$('#s3ns'),sp=$('#s3spicy'),mini=$('#s3mini'),sg=$('#s3sg');
+ qa=0;ns.classList.remove('on');sp.classList.remove('gone');mini.classList.remove('show');sg.classList.remove('pulse');$('#s3n').textContent='1';$('#s3mt').textContent='฿199';$('#s3ms').textContent="Add 1 more — it's free";
+ later(1600,()=>{tap(ns);ns.classList.add('on');});
+ later(1900,()=>{sp.classList.add('gone');toast('1 spicy item hidden','','i-chili');});
+ later(3300,()=>{sg.classList.add('pulse');toast('Tap a dish to choose options','','i-menu');});
+ later(5100,()=>{if(playing)tap(sg);});
+}
+function quickAdd(e){e.stopPropagation();tap(e.currentTarget);qa=Math.min(qa+1,2);$('#s3mini').classList.add('show');$('#s3n').textContent=qa;$('#s3mt').textContent=baht(199*qa);$('#s3ms').textContent=qa<2?"Add 1 more — it's free":'Buy 1 get 1 applied in cart';}
+/* manual order: dish page */
+const PLUS='<svg class="i s"><use href="#i-plus"/></svg>',CHECK='<svg class="i s"><use href="#i-check"/></svg>';
+const D3={p:199,g:0,x:0,q:1};
+function d3amt(){$('#s3bamt').textContent=baht((D3.p+D3.g+D3.x)*D3.q);$('#s3bbogo').classList.toggle('show',D3.q>=2&&D3.p===199&&D3.g===0);}
+function d3size(el){$$('#s3bsz span').forEach(x=>x.classList.toggle('sel',x===el));D3.p=+el.dataset.p;const r=$('#s3br1');r.classList.add('ok');r.textContent='✓ Done';d3amt();}
+function d3glaze(el){$$('#s3bgl span').forEach(x=>x.classList.toggle('sel',x===el));D3.g=+el.dataset.g;const r=$('#s3br2');r.classList.add('ok');r.textContent='✓ Done';d3amt();}
+function d3extra(el){el.classList.toggle('sel');D3.x=$$('#s3bex .ex.sel').reduce((t,x)=>t+ +x.dataset.x,0);d3amt();}
+function d3qty(d){D3.q=Math.max(1,Math.min(9,D3.q+d));$('#s3bq').textContent=D3.q;d3amt();}
+function fly(from,to,cb){const R=screenEl.getBoundingClientRect(),a=from.getBoundingClientRect(),b=to.getBoundingClientRect(),d=document.createElement('div');d.className='food bg-w fly';d.innerHTML='<svg><use href="#f-wing"/></svg>';d.style.left=((a.left+a.width/2-R.left)/S-30)+'px';d.style.top=((a.top+a.height/2-R.top)/S-30)+'px';screenEl.appendChild(d);requestAnimationFrame(()=>requestAnimationFrame(()=>{d.style.left=((b.left+b.width/2-R.left)/S-30)+'px';d.style.top=((b.top+b.height/2-R.top)/S-30)+'px';d.style.transform='scale(.3)';d.style.opacity='.5';}));later(760,()=>{d.remove();if(cb)cb();});}
+function d3add(){const add=$('#s3badd'),c=$('#s3bcnt');if($('#s3bsheet').classList.contains('up'))return;tap(add);fly(add,$('#s3bcartic'),()=>{c.textContent=D3.q;c.classList.add('show');});later(950,()=>{$('#s3bdim').classList.add('on');$('#s3bsheet').classList.add('up');});}
+function d3japchae(){const j=$('#s3bj');if(j.classList.contains('done'))return;tap(j);j.classList.add('done');j.innerHTML=CHECK;$('#s3bcn').textContent=(D3.q+1)+' items';$('#s3bct').textContent=baht((D3.p+D3.g+D3.x)*D3.q+129);}
+function sc3b(){
+ const body=$('#s3bbody'),nw=$('#s3bnw'),note=$('#s3bnote'),j=$('#s3bj');
+ Object.assign(D3,{p:199,g:0,x:0,q:1});
+ $$('#s3bsz span,#s3bgl span,#s3bex .ex').forEach(e=>e.classList.remove('sel'));
+ $('#s3br1').classList.remove('ok');$('#s3br1').textContent='Required';$('#s3br2').classList.remove('ok');$('#s3br2').textContent='Required · pick 1';
+ note.innerHTML='<span class="ph">e.g. extra crispy</span>';nw.classList.remove('typing');$('#s3bq').textContent='1';d3amt();
+ $('#s3bcnt').classList.remove('show');$('#s3bdim').classList.remove('on');$('#s3bsheet').classList.remove('up');$('#s3b').classList.remove('scrolled');
+ j.classList.remove('done');j.innerHTML=PLUS;$('#s3bcn').textContent='2 items';$('#s3bct').textContent='฿398';$('#s3bai').classList.remove('pulseV');
+ later(1100,()=>{const e=$('#s3bsz span');tap(e);d3size(e);});
+ later(1700,()=>scrollTo2(body,170));
+ later(2400,()=>{const e=$('#s3bgl span');tap(e);d3glaze(e);});
+ later(3100,()=>{const e=$('#s3bex .ex');tap(e);d3extra(e);});
+ later(3700,()=>{scrollEnd(body);nw.classList.add('typing');later(300,()=>typeText(note,'Extra crispy, please',45));});
+ later(5200,()=>{nw.classList.remove('typing');tap($('#s3bp'));d3qty(1);});
+ later(6300,d3add);
+ later(8200,d3japchae);
+ later(9100,()=>$('#s3bai').classList.add('pulseV'));
+}
+function sc4(){
+ const inp=$('#s4in'),me=$('#s4me'),dots=$('#s4dots'),steps=$('#s4steps'),rep=$('#s4reply'),bk=$('#s4basket'),ck=$('#s4ck'),q=$('#s4q'),body=$('#s4body'),add=$('#s4add');
+ [me,dots,steps,rep,bk,ck,q].forEach(e=>{e.classList.add('hide');e.classList.remove('rvl');});add.classList.remove('pulse');
+ const ph='<span class="ph">Ask for anything…</span>';inp.innerHTML=ph;
+ later(700,()=>typeText(inp,"Dinner for 4. One of us doesn't eat spicy. Under ฿1,000.",32));
+ later(2800,()=>{tap($('#s4comp .snd'));inp.innerHTML=ph;show(me);});
+ later(3200,()=>{show(dots);scrollEnd(body);});
+ later(3700,()=>{show(steps);scrollEnd(body);});
+ later(4900,()=>{dots.classList.add('hide');show(rep);scrollEnd(body);});
+ later(5400,()=>{show(bk);scrollEnd(body);});
+ later(6500,()=>{show(ck);scrollEnd(body);});
+ later(7400,()=>{show(q);scrollEnd(body);add.classList.add('pulse');});
+ later(8900,()=>{tap(add);toast('8 items added · cart ready','ok','i-bag');});
+}
+function sc5(){
+ const ds=['#s5d1','#s5d2','#s5d3','#s5d4'].map(x=>$(x)),find=$('#s5find'),tot=$('#s5tot'),sv=$('#s5saved'),pt=$('#s5pts'),body=$('#s5body'),pay=$('#s5pay');
+ ds.forEach(d=>{d.classList.add('hid');d.classList.remove('in');});find.classList.remove('hide');tot.textContent='฿1,359';sv.textContent='';pt.textContent='';pay.classList.remove('pulse');
+ later(1000,()=>scrollTo2(body,250));
+ later(2000,()=>{reveal(ds[0]);countTo(tot,1359,1160,600);});
+ later(2800,()=>{reveal(ds[1]);countTo(tot,1160,1068,600);});
+ later(3600,()=>{reveal(ds[2]);countTo(tot,1068,968,600);});
+ later(4400,()=>{reveal(ds[3]);find.classList.add('hide');scrollEnd(body);});
+ later(5200,()=>{sv.textContent='You saved ฿391';pt.textContent='+97 points · ×2 with wallet';});
+ later(6200,()=>pay.classList.add('pulse'));
+ later(7700,()=>tap(pay));
+}
+function sc6(){
+ const rs=['#s6r1','#s6r2','#s6r3'].map(x=>$(x)),win=$('#s6win'),pay=$('#s6pay'),done=$('#s6done'),body=$('#s6body');
+ rs.forEach(r=>{r.classList.remove('win');r.querySelector('.bar i').style.width='0';});win.classList.remove('show');done.classList.remove('on');pay.classList.remove('pulse');
+ later(1300,()=>scrollEnd(body));
+ later(1700,()=>rs.forEach((r,k)=>later(k*180,()=>{const i=r.querySelector('.bar i');i.style.width=i.dataset.w+'%';})));
+ later(3300,()=>{rs[1].classList.add('win');win.classList.add('show');});
+ later(4400,()=>{scrollTo2(body,0);pay.classList.add('pulse');});
+ later(5200,()=>{tap(pay);faceID(()=>done.classList.add('on'));});
+}
+function sc7(){
+ const bal=$('#s7bal'),bonus=$('#s7bonus'),a=$('#s7a'),top=$('#s7top'),tog=$('#s7tog'),cr=$('#s7credit'),act=$('#s7act');
+ bal.textContent='฿282';bonus.classList.remove('show');a.classList.remove('sel');tog.classList.remove('on');cr.classList.remove('glow');act.querySelectorAll('.ar.new').forEach(e=>e.remove());
+ later(1100,()=>{tap(a);a.classList.add('sel');});
+ later(2000,()=>{tap(top);faceID(()=>{countTo(bal,282,1332,1100);bonus.classList.add('show');const r=document.createElement('div');r.className='ar new';r.innerHTML='<span class="ai2 b-ok"><svg class="i s"><use href="#i-plus"/></svg></span><div>Top-up ฿1,000 + ฿50 bonus<small>Just now · via Partner B</small></div><span class="m pos">+฿1,050</span>';act.prepend(r);toast('Wallet topped up · +฿50 bonus','ok','i-wallet');});});
+ later(5000,()=>{tap(tog);tog.classList.add('on');toast('Auto top-up on · below ฿200 add ฿500','','i-repeat');});
+ later(6400,()=>{cr.classList.add('glow');scrollEnd($('#s7body'));});
+}
+function sc8(){
+ const card=$('#s8card'),arc=$('#s8arc'),pts=$('#s8pts'),till=$('#s8till'),C=194.8;
+ card.classList.remove('flip');till.classList.remove('on');arc.style.transition='none';arc.style.strokeDashoffset=C*(1-1240/2000);pts.textContent='1,240';arc.getBoundingClientRect();arc.style.transition='stroke-dashoffset 1.4s cubic-bezier(.2,.8,.2,1)';
+ later(900,()=>{arc.style.strokeDashoffset=C*(1-1434/2000);countTo(pts,1240,1434,1400,n=>Math.round(n).toLocaleString('en-US'));});
+ later(3000,()=>card.classList.add('flip'));
+ later(5000,()=>card.classList.remove('flip'));
+ later(6000,()=>{tap($('#s8qr'));till.classList.add('on');});
+ later(8400,()=>till.classList.remove('on'));
+}
+function sc9(){
+ const ai=$('#s9ai'),bar=$('#s9bar'),save=$('#s9save');
+ ai.classList.remove('show');save.textContent='Save it';bar.style.transition='none';bar.style.width='200px';void bar.offsetWidth;bar.style.transition='';
+ moveRider(.42,.86,7000);
+ later(400,()=>{bar.style.width='262px';});
+ later(3200,()=>ai.classList.add('show'));
+ later(5600,()=>{tap(save);save.textContent='Saved ✓';toast('Saved as “Friday feast”','ai','i-spark');});
+}
+function sc10(){
+ const sign=$('#s10sign'),home=$('#s10home'),btn=$('#s10mid');
+ sign.classList.remove('hide');home.classList.add('hide');home.classList.remove('rvl');btn.classList.remove('pulse');
+ later(1500,()=>btn.classList.add('pulse'));
+ later(3000,s10signin);
+}
+const SC=[sc1,sc2,sc3,sc3b,sc4,sc5,sc6,sc7,sc8,sc9,sc10];
+
+/* ---------- story panel ---------- */
+function renderDiag(){const L=lang,b=DIAG.brands.map(x=>`<span${x==='Bonchon'||x==='The Pizza Company'?' class="hl"':''}>${esc(x)}</span>`).join(''),ch=DIAG.chans[L].map(x=>`<span>${esc(x)}</span>`).join(''),bl=BLOCKS.map((x,i)=>`<span${i===0?' class="hl"':''}>${esc(x[L])}</span>`).join('');
+ $('#sdiag').innerHTML=`<div class="lay"><b>${esc(DIAG.top[L])}</b><div class="tags">${b}${ch}</div></div><div class="arw">↓</div><div class="lay core2"><b>${esc(DIAG.mid[L])}</b><div class="blk">${bl}</div></div><div class="arw">↓</div><div class="duo"><div class="lay">${esc(DIAG.bot1[L])}</div><div class="lay">${esc(DIAG.bot2[L])}</div></div>`;}
+function renderStory(){const st=STEPS[cur],L=lang;
+ $('#kick').textContent=(L==='en'?'Step '+(cur+1)+' · ':'第 '+(cur+1)+' 步 · ')+st.kick[L];$('#kick').classList.toggle('mid',!!st.mid);
+ $('#stitle').textContent=st.title[L];
+ $('#ssees').innerHTML=st.sees[L].map(x=>`<li>${esc(x)}</li>`).join('');
+ $('#sTvaW').classList.toggle('hide',!st.tva);if(st.tva)$('#stva').innerHTML=st.tva[L].map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td></tr>`).join('');
+ $('#sDiagW').classList.toggle('hide',!st.diag);if(st.diag)renderDiag();$('#sBuiltW').classList.toggle('hide',!!st.diag);
+ $('#schips').innerHTML=st.built.map(i=>`<span>${esc(BLOCKS[i][L])}</span>`).join('');
+ $('#swhy').textContent=st.why[L];
+ const g=$('#sgloss');g.textContent='';const txt=$('#story').innerText;
+ const found=Object.keys(GLOSS).filter(k=>new RegExp('(^|[^A-Za-z])'+k+'([^A-Za-z]|$)').test(txt));
+ g.textContent=found.length?UI.gloss[L]+found.map(k=>k+' = '+GLOSS[k][L]).join(' · '):'';
+ $('#story').scrollTop=0;}
+function renderPills(){$('#pills').innerHTML=STEPS.map((s,i)=>`<button class="pill${s.mid?' mid':''}${i===cur?' on':''}" data-i="${i}"><b>${i+1}</b>${esc(s.pill[lang])}</button>`).join('');}
+function setPlayUI(){$('#playTxt').textContent=(playing?UI.pause:UI.play)[lang];$('#playUse').setAttribute('href',playing?'#i-pause':'#i-play');$('#bPlay').classList.toggle('on',playing);}
+function applyLang(){document.documentElement.lang=lang==='zh'?'zh-CN':'en';$$('[data-en]').forEach(e=>e.textContent=e.dataset[lang]);$('#lEn').classList.toggle('on',lang==='en');$('#lZh').classList.toggle('on',lang==='zh');$('#foot').textContent=FOOT[lang];setPlayUI();renderPills();renderStory();}
+
+/* ---------- navigation ---------- */
+function go(i){
+ i=Math.max(0,Math.min(N-1,i));cur=i;gen++;clearTimers();clearTimeout(autoT);
+ scr.forEach(s=>s.classList.remove('on','play'));
+ const s=scr[i],st=STEPS[i];s.classList.add('on');void s.offsetWidth;s.classList.add('play');
+ $('#sbar').classList.toggle('light',!!st.light);$('#sbar span').textContent=TIMES[i];
+ $('#nav').classList.toggle('off',!st.nav);$$('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.k===st.nav));
+ $('#toast').classList.remove('show');$('#fid').className='fid';$$('.rip,.fly').forEach(r=>r.remove());
+ s.querySelectorAll('.body').forEach(b=>b.scrollTop=0);
+ renderPills();renderStory();
+ const pg=$('#prog');pg.classList.remove('run');void pg.offsetWidth;
+ if(playing){pg.style.setProperty('--dur',st.dur+'ms');pg.classList.add('run');autoT=setTimeout(()=>{if(cur<N-1)go(cur+1);else stop();},st.dur);}
+ SC[i]();
+ const p=$('#pills .pill.on');if(p){const P=$('#pills');P.scrollTo({left:p.offsetLeft-P.clientWidth/2+p.offsetWidth/2,behavior:'smooth'});}
+}
+function play(){playing=true;setPlayUI();go(cur>=N-1?0:cur);}
+function stop(){playing=false;clearTimeout(autoT);setPlayUI();$('#prog').classList.remove('run');}
+function fit(){const w=innerWidth,h=innerHeight;let s;if(w<=860)s=Math.min(1,(w-32)/414);else{const top=$('.stage').getBoundingClientRect().top+scrollY+4;s=Math.max(.5,Math.min(1,(h-top-18)/868));}S=s;document.documentElement.style.setProperty('--s',s.toFixed(4));}
+
+$('#bNext').onclick=()=>go(cur+1);
+$('#bBack').onclick=()=>go(cur-1);
+$('#bPlay').onclick=()=>playing?stop():play();
+$('#lEn').onclick=()=>{lang='en';applyLang();};
+$('#lZh').onclick=()=>{lang='zh';applyLang();};
+$('#pills').onclick=e=>{const b=e.target.closest('.pill');if(b)go(+b.dataset.i);};
+$$('#nav button').forEach(b=>b.onclick=()=>go(+b.dataset.go));
+$('#s1up').onclick=upgrade;
+$('#s1not').onclick=()=>{$('#s1dim').classList.remove('on');$('#s1sheet').classList.remove('up');toast('OK — upgrade any time in Me','','i-user');};
+$('#s2ask').onclick=()=>go(4);
+$('#s2again .sbtn').onclick=()=>toast('Your Friday usual is in the cart','ok','i-bag');
+$('#s3ns').onclick=()=>{const on=$('#s3ns').classList.toggle('on');$('#s3spicy').classList.toggle('gone',on);};
+$('#s3mini').onclick=()=>go(5);
+$('#s3sg').onclick=()=>go(3);
+$('#s3add').onclick=quickAdd;
+$$('#s3bsz span').forEach(e=>e.onclick=()=>{tap(e);d3size(e);});
+$$('#s3bgl span').forEach(e=>e.onclick=()=>{tap(e);d3glaze(e);});
+$$('#s3bex .ex').forEach(e=>e.onclick=()=>{tap(e);d3extra(e);});
+$('#s3bp').onclick=()=>{tap($('#s3bp'));d3qty(1);};
+$('#s3bm').onclick=()=>{tap($('#s3bm'));d3qty(-1);};
+$('#s3badd').onclick=d3add;
+$('#s3bj').onclick=d3japchae;
+$('#s3bcart').onclick=()=>go(5);
+$('#s3bai').onclick=()=>go(4);
+$('#s3bbody').addEventListener('scroll',e=>$('#s3b').classList.toggle('scrolled',e.target.scrollTop>200));
+$('#s4add').onclick=()=>go(5);
+$('#s5pay').onclick=()=>go(6);
+$('#s6pay').onclick=()=>{tap($('#s6pay'));faceID(()=>$('#s6done').classList.add('on'));};
+$('#s6done').onclick=()=>go(9);
+$('#s8card').onclick=()=>$('#s8card').classList.toggle('flip');
+$('#s9save').onclick=()=>{$('#s9save').textContent='Saved ✓';toast('Saved as “Friday feast”','ai','i-spark');};
+$('#s10mid').onclick=s10signin;
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(cur+1);else if(e.key==='ArrowLeft')go(cur-1);else if(e.key===' '){e.preventDefault();playing?stop():play();}});
+addEventListener('resize',fit);
+
+makeQR();applyLang();fit();addEventListener('load',fit);
+{const h=parseInt(location.hash.slice(1),10);go(isNaN(h)?0:h-1);}
+</script>
+</body>
+</html>

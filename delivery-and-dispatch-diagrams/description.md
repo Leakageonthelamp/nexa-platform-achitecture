@@ -1,0 +1,49 @@
+# Delivery & Dispatch
+
+Delivery & Dispatch is the trip and the rider. One Go app covers dispatch and the rider workforce. One port talks to every fleet: our own riders, the shared pool, ZEEK, and Grab Express. Swapping a provider later is a new package behind that port. One ledger records rider earnings. A payout is real money, so it leaves as a command to Payment, which calls TrueMoney.
+
+Dispatch starts when the kitchen accepts, not when the order is placed. A shopper can ask for a quote while they wait. The quote uses straight-line distance, and Google Maps only when the distance is above a threshold. It does not call the fleet. FAAS brands have no kitchen accept, so `partner-bff` starts the delivery on `CreateDelivery`.
+
+Riders use `brand_id = mfg`, because one pool serves every brand. The delivery itself stays on the order's brand.
+
+| | |
+| --- | --- |
+| **Owns** | The delivery, the quote, the fee, the provider job, the rider, the roster, and the earnings ledger. |
+| **Does not own** | The store zone (Brand & Store), the order (Cart & Order), or a real-money payout (Payment). |
+| **How it is called** | `customer-bff` calls `Quote`. Order calls `GetQuote` at `PlaceOrder` and stores that fee. `admin-bff` assigns, cancels, redispatches, and approves a rider. Fleet webhooks arrive as `delivery.requested` through `partner-adapter`. |
+| **Kafka** | Publishes `delivery.events` and `payment.requested` (payout). Consumes `order.events`, `delivery.requested`, `store.changed`, and `payment.events`. |
+
+## Diagrams
+
+**Overview** — `delivery-overview.drawio`
+
+Quote, dispatch, tracking, and rider pay. A solid line is another domain asking. A dashed line is Kafka. Not a replacement for the SHLD. The rulebook is [`overview-guideline.md`](../overview-guideline.md).
+
+**SHLD** — `delivery-dispatch-shld.drawio`
+
+Quote, dispatch, tracking, and rider pay: the kitchen accepts, a rider is sent, the trip is delivered, and the rider is paid.
+
+**HLD** — `delivery-dispatch-hld.drawio`
+
+One page: quote and create, the seven delivery states, the fleet port, and the rider workforce under the same schema.
+
+**LLD** — `delivery-dispatch-lld.drawio`
+
+| Page | Flow |
+| --- | --- |
+| 1 | Quote and GetQuote |
+| 2 | Kitchen accepted → dispatch |
+| 3 | Provider update |
+| 4 | No-rider sweeper |
+| 5 | Scheduled dispatch |
+| 6 | Cancel |
+| 7 | Ops |
+| 8 | FAAS create |
+| 9 | Store sync |
+| 10 | Rider sync |
+| 11 | Roster |
+| 12 | Earnings |
+| 13 | Payout |
+| 14 | Workforce admin |
+| 15 | End to end |
+| 16 | Payout reconcile |
