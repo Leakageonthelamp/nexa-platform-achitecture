@@ -1,0 +1,977 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="NEXA diagram generator" version="24.0.0" type="device">
+ <diagram id="p1" name="1 All 12 topics">
+  <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="840" math="0" shadow="0">
+   <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+    <mxCell id="title" value="NEXA &amp;#8211; Twelve Kafka topics: five commands, seven facts, nothing else" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=22;fontColor=#0F172A;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;fontStyle=1;" vertex="1" parent="1">
+     <mxGeometry x="24" y="12" width="1652" height="32" as="geometry"/>
+    </mxCell>
+    <mxCell id="subtitle" value="NEXA - first draft, 2026-10-24 &amp;#183; design phase, nothing is fixed &amp;#183; maps to: docs/kafka-topics.md; docs/architecture.md section 4 (topics), P-06, P-42" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#64748B;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="1">
+     <mxGeometry x="24" y="46" width="1652" height="22" as="geometry"/>
+    </mxCell>
+    <mxCell id="legend" value="&lt;b&gt;Legend&lt;/b&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;align=left;spacingLeft=10;spacingTop=4;fontSize=11;fontStyle=1;fontColor=#475569;strokeColor=#CBD5E1;fillColor=#FFFFFF;strokeWidth=1.5;" vertex="1" parent="1">
+     <mxGeometry x="24" y="720" width="880" height="104" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw0" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FEF9C3;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="10" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t0" value="NEXA service (Go, Bun)" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="34" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw1" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#2563EB;fillColor=#EFF6FF;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="186" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t1" value="Edge or outside party" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="210" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw2" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#EA580C;fillColor=#FFF7ED;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="358" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t2" value="Sync call (gRPC)" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="382" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw3" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#7C3AED;fillColor=#F5F3FF;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="530" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t3" value="Kafka command topic" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="554" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw4" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#059669;fillColor=#ECFDF5;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="702" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t4" value="Kafka fact topic" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="726" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw5" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#64748B;fillColor=#F8FAFC;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="10" y="53" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t5" value="Data store" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="34" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw6" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#DC2626;fillColor=#FEF2F2;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="186" y="53" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t6" value="Failure or stop" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="210" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw7" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#94A3B8;fillColor=#F8FAFC;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;dashed=1;dashPattern=6 3;" vertex="1" parent="legend">
+     <mxGeometry x="358" y="53" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t7" value="Dashed: new or proposed" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="382" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw8" value="" style="shape=line;strokeWidth=2;strokeColor=#EA580C;html=1;" vertex="1" parent="legend">
+     <mxGeometry x="530" y="55" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t8" value="gRPC, a caller waits" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="554" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw9" value="" style="shape=line;strokeWidth=2;strokeColor=#2563EB;html=1;" vertex="1" parent="legend">
+     <mxGeometry x="702" y="55" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t9" value="HTTPS" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="726" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw10" value="" style="shape=line;strokeWidth=2;strokeColor=#7C3AED;html=1;dashed=1;dashPattern=6 4;" vertex="1" parent="legend">
+     <mxGeometry x="10" y="80" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t10" value="Kafka command" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="34" y="76" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw11" value="" style="shape=line;strokeWidth=2;strokeColor=#059669;html=1;dashed=1;dashPattern=6 4;" vertex="1" parent="legend">
+     <mxGeometry x="186" y="80" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t11" value="Kafka fact" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="210" y="76" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw12" value="" style="shape=line;strokeWidth=2;strokeColor=#64748B;html=1;dashed=1;dashPattern=2 4;" vertex="1" parent="legend">
+     <mxGeometry x="358" y="80" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t12" value="Log write, best effort" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="382" y="76" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="questions" value="&lt;b&gt;Open questions and assumptions&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#475569&quot;&gt;&amp;#8226; P-42: the list of 12 may grow, only through the three-answers rule; candidates are not topics&lt;br&gt;&amp;#8226; O-36: who creates a topic and its Schema Registry subject (DevOps or the domain team)&lt;br&gt;&amp;#8226; A topic needs a named producer and consumer outside the owner; no personal data rides on it (principle 8)&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#CBD5E1;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;dashed=1;dashPattern=4 3;fillColor=#FFFBEB;strokeColor=#D97706;" vertex="1" parent="1">
+     <mxGeometry x="928" y="720" width="748" height="104" as="geometry"/>
+    </mxCell>
+    <mxCell id="h1" value="&lt;b&gt;Commands&lt;/b&gt; (purple): one per domain, named domain.requested. A command asks the owner to do something; the owner consumes it." style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=13;fontColor=#6D28D9;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="1">
+     <mxGeometry x="24" y="84" width="1650" height="24" as="geometry"/>
+    </mxCell>
+    <mxCell id="c0" value="&lt;b&gt;catalog.requested&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;owner: Catalog&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;key: brand_id:store_id:sku_id&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;7 days, 6 partitions&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;carries: POS sold-out webhook&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#7C3AED;fillColor=#F5F3FF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="24" y="116" width="316" height="150" as="geometry"/>
+    </mxCell>
+    <mxCell id="c1" value="&lt;b&gt;order.requested&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;owner: Order&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;key: brand_id:order_id&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;7 days, 12 partitions&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;carries: create, replace, cancel, POS status&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#7C3AED;fillColor=#F5F3FF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="356" y="116" width="316" height="150" as="geometry"/>
+    </mxCell>
+    <mxCell id="c2" value="&lt;b&gt;payment.requested&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;owner: Payment&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;key: brand_id:transaction_id&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;7 days, 12 partitions&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;carries: capture, void, webhook, payout&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#7C3AED;fillColor=#F5F3FF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="688" y="116" width="316" height="150" as="geometry"/>
+    </mxCell>
+    <mxCell id="c3" value="&lt;b&gt;delivery.requested&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;owner: Delivery&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;key: brand_id:delivery_id (rider: mfg:rider_ref)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;7 days, 12 partitions&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;carries: provider_update, rider_sync, roster_sync&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#7C3AED;fillColor=#F5F3FF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="1020" y="116" width="316" height="150" as="geometry"/>
+    </mxCell>
+    <mxCell id="c4" value="&lt;b&gt;notification.requested&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;owner: Notification&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;key: brand_id:notification_id&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;7 days, 6 partitions&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;carries: send, broadcast, receipt&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#7C3AED;fillColor=#F5F3FF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="1352" y="116" width="316" height="150" as="geometry"/>
+    </mxCell>
+    <mxCell id="h2" value="&lt;b&gt;Facts&lt;/b&gt; (green): what already happened. The owner publishes; everyone else reacts. Compacted state keeps the latest value; lifecycle keeps 7 days." style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=13;fontColor=#047857;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="1">
+     <mxGeometry x="24" y="300" width="1650" height="24" as="geometry"/>
+    </mxCell>
+    <mxCell id="f0" value="&lt;b&gt;brand.changed&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;owner: Brand &amp;amp; Store&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;key: brand_id&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;compacted, 6 partitions&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;carries: latest brand&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=12;fontColor=#0F172A;strokeColor=#059669;fillColor=#ECFDF5;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="24" y="332" width="224" height="230" as="geometry"/>
+    </mxCell>
+    <mxCell id="f1" value="&lt;b&gt;store.changed&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;owner: Brand &amp;amp; Store&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;key: brand_id:store_id&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;compacted, 6 partitions&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;carries: hours, status, zone, group_id&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=12;fontColor=#0F172A;strokeColor=#059669;fillColor=#ECFDF5;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="260" y="332" width="224" height="230" as="geometry"/>
+    </mxCell>
+    <mxCell id="f2" value="&lt;b&gt;catalog.menu.published&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;owner: Catalog&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;key: brand_id:menu_id:channel&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;compacted, 6 partitions&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;carries: thin: version and effective_at&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=12;fontColor=#0F172A;strokeColor=#059669;fillColor=#ECFDF5;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="496" y="332" width="224" height="230" as="geometry"/>
+    </mxCell>
+    <mxCell id="f3" value="&lt;b&gt;catalog.availability.changed&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;owner: Catalog&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;key: brand_id:store_id:sku_id&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;compacted, 6 partitions&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;carries: sold out or back&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=12;fontColor=#0F172A;strokeColor=#059669;fillColor=#ECFDF5;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="732" y="332" width="224" height="230" as="geometry"/>
+    </mxCell>
+    <mxCell id="f4" value="&lt;b&gt;order.events&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;owner: Order&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;key: brand_id:order_id&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;7 days, 12 partitions&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;carries: placed, accepted, rejected, ready, completed, cancelled&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=12;fontColor=#0F172A;strokeColor=#059669;fillColor=#ECFDF5;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="968" y="332" width="224" height="230" as="geometry"/>
+    </mxCell>
+    <mxCell id="f5" value="&lt;b&gt;payment.events&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;owner: Payment&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;key: brand_id:transaction_id&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;7 days, 12 partitions&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;carries: authorized, captured, failed, voided, refunded, paid_out, payout_failed&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=12;fontColor=#0F172A;strokeColor=#059669;fillColor=#ECFDF5;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="1204" y="332" width="224" height="230" as="geometry"/>
+    </mxCell>
+    <mxCell id="f6" value="&lt;b&gt;delivery.events&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;owner: Delivery&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;key: brand_id:delivery_id&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;7 days, 12 partitions&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;carries: dispatched, rider_assigned, picked_up, delivered, failed, cancelled&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=12;fontColor=#0F172A;strokeColor=#059669;fillColor=#ECFDF5;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="1440" y="332" width="224" height="230" as="geometry"/>
+    </mxCell>
+    <mxCell id="n1" value="Not topics: &lt;b&gt;&amp;lt;service&amp;gt;.dlq&lt;/b&gt; (one per consuming service, operations only). A wallet spend, a charge, a refund, OTP and every read are gRPC because someone is waiting (D-09). Candidates such as customer.changed, order.payload.captured and audit.events are not registered and are never drawn as topics (page 6)." style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#475569;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="1">
+     <mxGeometry x="24" y="600" width="1650" height="80" as="geometry"/>
+    </mxCell>
+   </root>
+  </mxGraphModel>
+ </diagram>
+ <diagram id="p2" name="2 Brand, store and catalog topics">
+  <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="924" math="0" shadow="0">
+   <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+    <mxCell id="p0" value="&lt;b&gt;Producers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Brand &amp;amp; Store&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="24" y="104" width="440" height="112" as="geometry"/>
+    </mxCell>
+    <mxCell id="t0" value="&lt;b&gt;brand.changed&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#047857&quot;&gt;fact, compacted, key brand_id&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#047857&quot;&gt;latest brand: status, features&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#059669;fillColor=#ECFDF5;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="560" y="104" width="520" height="112" as="geometry"/>
+    </mxCell>
+    <mxCell id="c0" value="&lt;b&gt;Consumers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Catalog&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="1250" y="104" width="426" height="112" as="geometry"/>
+    </mxCell>
+    <mxCell id="e.p0.t0" value="publish" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#047857;strokeColor=#059669;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="p0" target="t0">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="e.t0.c0" value="consume" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#047857;strokeColor=#059669;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="t0" target="c0">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="p1" value="&lt;b&gt;Producers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Brand &amp;amp; Store&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="24" y="238" width="440" height="112" as="geometry"/>
+    </mxCell>
+    <mxCell id="t1" value="&lt;b&gt;store.changed&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#047857&quot;&gt;fact, compacted, key brand_id:store_id&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#047857&quot;&gt;hours, status, zone, group_id; open-now is derived&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#059669;fillColor=#ECFDF5;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="560" y="238" width="520" height="112" as="geometry"/>
+    </mxCell>
+    <mxCell id="c1" value="&lt;b&gt;Consumers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Catalog&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Delivery (syncs the store to the fleet provider)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Order does not consume it: ResolveStore is live&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="1250" y="238" width="426" height="112" as="geometry"/>
+    </mxCell>
+    <mxCell id="e.p1.t1" value="publish" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#047857;strokeColor=#059669;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="p1" target="t1">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="e.t1.c1" value="consume" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#047857;strokeColor=#059669;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="t1" target="c1">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="p2" value="&lt;b&gt;Producers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;partner-adapter (POS sold-out webhook)&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="24" y="372" width="440" height="112" as="geometry"/>
+    </mxCell>
+    <mxCell id="t2" value="&lt;b&gt;catalog.requested&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;command, key brand_id:store_id:sku_id&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;7 days&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#7C3AED;fillColor=#F5F3FF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="560" y="372" width="520" height="112" as="geometry"/>
+    </mxCell>
+    <mxCell id="c2" value="&lt;b&gt;Consumers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Catalog&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="1250" y="372" width="426" height="112" as="geometry"/>
+    </mxCell>
+    <mxCell id="e.p2.t2" value="publish" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#6D28D9;strokeColor=#7C3AED;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="p2" target="t2">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="e.t2.c2" value="consume" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#6D28D9;strokeColor=#7C3AED;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="t2" target="c2">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="p3" value="&lt;b&gt;Producers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Catalog&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="24" y="506" width="440" height="112" as="geometry"/>
+    </mxCell>
+    <mxCell id="t3" value="&lt;b&gt;catalog.menu.published&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#047857&quot;&gt;fact, compacted, thin, key brand_id:menu_id:channel&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#047857&quot;&gt;version and effective_at only; the reader calls GetMenu(version)&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#059669;fillColor=#ECFDF5;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="560" y="506" width="520" height="112" as="geometry"/>
+    </mxCell>
+    <mxCell id="c3" value="&lt;b&gt;Consumers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;partner-adapter&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Catalog cache&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="1250" y="506" width="426" height="112" as="geometry"/>
+    </mxCell>
+    <mxCell id="e.p3.t3" value="publish" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#047857;strokeColor=#059669;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="p3" target="t3">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="e.t3.c3" value="consume" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#047857;strokeColor=#059669;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="t3" target="c3">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="p4" value="&lt;b&gt;Producers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Catalog&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="24" y="640" width="440" height="112" as="geometry"/>
+    </mxCell>
+    <mxCell id="t4" value="&lt;b&gt;catalog.availability.changed&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#047857&quot;&gt;fact, compacted, key brand_id:store_id:sku_id&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#047857&quot;&gt;sold out is its own topic because its rate differs&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#059669;fillColor=#ECFDF5;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="560" y="640" width="520" height="112" as="geometry"/>
+    </mxCell>
+    <mxCell id="c4" value="&lt;b&gt;Consumers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;partner-adapter&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Catalog cache&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="1250" y="640" width="426" height="112" as="geometry"/>
+    </mxCell>
+    <mxCell id="e.p4.t4" value="publish" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#047857;strokeColor=#059669;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="p4" target="t4">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="e.t4.c4" value="consume" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#047857;strokeColor=#059669;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="t4" target="c4">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="title" value="NEXA &amp;#8211; Who writes and who reads: brand, store and catalog topics" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=22;fontColor=#0F172A;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;fontStyle=1;" vertex="1" parent="1">
+     <mxGeometry x="24" y="12" width="1652" height="32" as="geometry"/>
+    </mxCell>
+    <mxCell id="subtitle" value="NEXA - first draft, 2026-10-24 &amp;#183; design phase, nothing is fixed &amp;#183; maps to: docs/kafka-topics.md; docs/architecture.md section 4 (topics), P-06, P-42 (Registry)" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#64748B;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="1">
+     <mxGeometry x="24" y="46" width="1652" height="22" as="geometry"/>
+    </mxCell>
+    <mxCell id="legend" value="&lt;b&gt;Legend&lt;/b&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;align=left;spacingLeft=10;spacingTop=4;fontSize=11;fontStyle=1;fontColor=#475569;strokeColor=#CBD5E1;fillColor=#FFFFFF;strokeWidth=1.5;" vertex="1" parent="1">
+     <mxGeometry x="24" y="804" width="880" height="104" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw0" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FEF9C3;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="10" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t0" value="NEXA service (Go, Bun)" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="34" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw1" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#2563EB;fillColor=#EFF6FF;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="186" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t1" value="Edge or outside party" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="210" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw2" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#EA580C;fillColor=#FFF7ED;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="358" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t2" value="Sync call (gRPC)" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="382" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw3" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#7C3AED;fillColor=#F5F3FF;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="530" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t3" value="Kafka command topic" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="554" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw4" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#059669;fillColor=#ECFDF5;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="702" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t4" value="Kafka fact topic" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="726" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw5" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#64748B;fillColor=#F8FAFC;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="10" y="53" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t5" value="Data store" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="34" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw6" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#DC2626;fillColor=#FEF2F2;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="186" y="53" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t6" value="Failure or stop" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="210" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw7" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#94A3B8;fillColor=#F8FAFC;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;dashed=1;dashPattern=6 3;" vertex="1" parent="legend">
+     <mxGeometry x="358" y="53" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t7" value="Dashed: new or proposed" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="382" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw8" value="" style="shape=line;strokeWidth=2;strokeColor=#EA580C;html=1;" vertex="1" parent="legend">
+     <mxGeometry x="530" y="55" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t8" value="gRPC, a caller waits" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="554" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw9" value="" style="shape=line;strokeWidth=2;strokeColor=#2563EB;html=1;" vertex="1" parent="legend">
+     <mxGeometry x="702" y="55" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t9" value="HTTPS" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="726" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw10" value="" style="shape=line;strokeWidth=2;strokeColor=#7C3AED;html=1;dashed=1;dashPattern=6 4;" vertex="1" parent="legend">
+     <mxGeometry x="10" y="80" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t10" value="Kafka command" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="34" y="76" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw11" value="" style="shape=line;strokeWidth=2;strokeColor=#059669;html=1;dashed=1;dashPattern=6 4;" vertex="1" parent="legend">
+     <mxGeometry x="186" y="80" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t11" value="Kafka fact" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="210" y="76" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw12" value="" style="shape=line;strokeWidth=2;strokeColor=#64748B;html=1;dashed=1;dashPattern=2 4;" vertex="1" parent="legend">
+     <mxGeometry x="358" y="80" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t12" value="Log write, best effort" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="382" y="76" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="questions" value="&lt;b&gt;Open questions and assumptions&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#475569&quot;&gt;&amp;#8226; P-42: the list of 12 may grow, only through the three-answers rule; candidates are not topics&lt;br&gt;&amp;#8226; O-36: who creates a topic and its Schema Registry subject (DevOps or the domain team)&lt;br&gt;&amp;#8226; A topic needs a named producer and consumer outside the owner; no personal data rides on it (principle 8)&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#CBD5E1;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;dashed=1;dashPattern=4 3;fillColor=#FFFBEB;strokeColor=#D97706;" vertex="1" parent="1">
+     <mxGeometry x="928" y="804" width="748" height="104" as="geometry"/>
+    </mxCell>
+   </root>
+  </mxGraphModel>
+ </diagram>
+ <diagram id="p3" name="3 Order and payment topics">
+  <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="850" math="0" shadow="0">
+   <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+    <mxCell id="p0" value="&lt;b&gt;Producers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;partner-adapter (aggregator create, replace, cancel;&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;POS status from the vendor mapper)&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="24" y="104" width="440" height="112" as="geometry"/>
+    </mxCell>
+    <mxCell id="t0" value="&lt;b&gt;order.requested&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;command, key brand_id:order_id, 12 partitions&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;one oneof: create, replace, cancel, POS status&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#7C3AED;fillColor=#F5F3FF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="560" y="104" width="520" height="112" as="geometry"/>
+    </mxCell>
+    <mxCell id="c0" value="&lt;b&gt;Consumers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Order&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="1250" y="104" width="426" height="112" as="geometry"/>
+    </mxCell>
+    <mxCell id="e.p0.t0" value="publish" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#6D28D9;strokeColor=#7C3AED;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="p0" target="t0">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="e.t0.c0" value="consume" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#6D28D9;strokeColor=#7C3AED;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="t0" target="c0">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="p1" value="&lt;b&gt;Producers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Order&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="24" y="238" width="440" height="152" as="geometry"/>
+    </mxCell>
+    <mxCell id="t1" value="&lt;b&gt;order.events&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#047857&quot;&gt;lifecycle, key brand_id:order_id, 7 days&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#047857&quot;&gt;placed, accepted, rejected, ready, completed, cancelled&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#059669;fillColor=#ECFDF5;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="560" y="238" width="520" height="152" as="geometry"/>
+    </mxCell>
+    <mxCell id="c1" value="&lt;b&gt;Consumers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Delivery (acts on accepted and cancelled)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Notification&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Loyalty&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Voucher&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;partner-adapter&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="1250" y="238" width="426" height="152" as="geometry"/>
+    </mxCell>
+    <mxCell id="e.p1.t1" value="publish" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#047857;strokeColor=#059669;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="p1" target="t1">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="e.t1.c1" value="consume" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#047857;strokeColor=#059669;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="t1" target="c1">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="p2" value="&lt;b&gt;Producers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Order (capture, void)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;webhook-adapter (verified gateway webhook)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Delivery (payout)&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="24" y="412" width="440" height="112" as="geometry"/>
+    </mxCell>
+    <mxCell id="t2" value="&lt;b&gt;payment.requested&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;command, key brand_id:transaction_id, 12 partitions&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;capture, void, webhook, payout; charge and refund are gRPC&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#7C3AED;fillColor=#F5F3FF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="560" y="412" width="520" height="112" as="geometry"/>
+    </mxCell>
+    <mxCell id="c2" value="&lt;b&gt;Consumers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Payment&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="1250" y="412" width="426" height="112" as="geometry"/>
+    </mxCell>
+    <mxCell id="e.p2.t2" value="publish" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#6D28D9;strokeColor=#7C3AED;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="p2" target="t2">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="e.t2.c2" value="consume" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#6D28D9;strokeColor=#7C3AED;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="t2" target="c2">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="p3" value="&lt;b&gt;Producers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Payment&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="24" y="546" width="440" height="132" as="geometry"/>
+    </mxCell>
+    <mxCell id="t3" value="&lt;b&gt;payment.events&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#047857&quot;&gt;lifecycle, key brand_id:transaction_id, 7 days&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#047857&quot;&gt;authorized, captured, failed, voided, refunded, paid_out, payout_failed&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#059669;fillColor=#ECFDF5;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="560" y="546" width="520" height="132" as="geometry"/>
+    </mxCell>
+    <mxCell id="c3" value="&lt;b&gt;Consumers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Order&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Wallet (captured with purpose=top_up only)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Notification (refunded only)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Delivery (paid_out, payout_failed only)&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="1250" y="546" width="426" height="132" as="geometry"/>
+    </mxCell>
+    <mxCell id="e.p3.t3" value="publish" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#047857;strokeColor=#059669;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="p3" target="t3">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="e.t3.c3" value="consume" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#047857;strokeColor=#059669;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="t3" target="c3">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="title" value="NEXA &amp;#8211; Who writes and who reads: order and payment topics" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=22;fontColor=#0F172A;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;fontStyle=1;" vertex="1" parent="1">
+     <mxGeometry x="24" y="12" width="1652" height="32" as="geometry"/>
+    </mxCell>
+    <mxCell id="subtitle" value="NEXA - first draft, 2026-10-24 &amp;#183; design phase, nothing is fixed &amp;#183; maps to: docs/kafka-topics.md; docs/architecture.md section 4 (topics), P-06, P-42 (Registry)" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#64748B;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="1">
+     <mxGeometry x="24" y="46" width="1652" height="22" as="geometry"/>
+    </mxCell>
+    <mxCell id="legend" value="&lt;b&gt;Legend&lt;/b&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;align=left;spacingLeft=10;spacingTop=4;fontSize=11;fontStyle=1;fontColor=#475569;strokeColor=#CBD5E1;fillColor=#FFFFFF;strokeWidth=1.5;" vertex="1" parent="1">
+     <mxGeometry x="24" y="730" width="880" height="104" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw0" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FEF9C3;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="10" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t0" value="NEXA service (Go, Bun)" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="34" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw1" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#2563EB;fillColor=#EFF6FF;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="186" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t1" value="Edge or outside party" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="210" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw2" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#EA580C;fillColor=#FFF7ED;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="358" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t2" value="Sync call (gRPC)" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="382" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw3" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#7C3AED;fillColor=#F5F3FF;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="530" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t3" value="Kafka command topic" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="554" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw4" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#059669;fillColor=#ECFDF5;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="702" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t4" value="Kafka fact topic" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="726" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw5" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#64748B;fillColor=#F8FAFC;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="10" y="53" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t5" value="Data store" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="34" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw6" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#DC2626;fillColor=#FEF2F2;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="186" y="53" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t6" value="Failure or stop" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="210" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw7" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#94A3B8;fillColor=#F8FAFC;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;dashed=1;dashPattern=6 3;" vertex="1" parent="legend">
+     <mxGeometry x="358" y="53" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t7" value="Dashed: new or proposed" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="382" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw8" value="" style="shape=line;strokeWidth=2;strokeColor=#EA580C;html=1;" vertex="1" parent="legend">
+     <mxGeometry x="530" y="55" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t8" value="gRPC, a caller waits" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="554" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw9" value="" style="shape=line;strokeWidth=2;strokeColor=#2563EB;html=1;" vertex="1" parent="legend">
+     <mxGeometry x="702" y="55" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t9" value="HTTPS" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="726" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw10" value="" style="shape=line;strokeWidth=2;strokeColor=#7C3AED;html=1;dashed=1;dashPattern=6 4;" vertex="1" parent="legend">
+     <mxGeometry x="10" y="80" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t10" value="Kafka command" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="34" y="76" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw11" value="" style="shape=line;strokeWidth=2;strokeColor=#059669;html=1;dashed=1;dashPattern=6 4;" vertex="1" parent="legend">
+     <mxGeometry x="186" y="80" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t11" value="Kafka fact" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="210" y="76" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw12" value="" style="shape=line;strokeWidth=2;strokeColor=#64748B;html=1;dashed=1;dashPattern=2 4;" vertex="1" parent="legend">
+     <mxGeometry x="358" y="80" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t12" value="Log write, best effort" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="382" y="76" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="questions" value="&lt;b&gt;Open questions and assumptions&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#475569&quot;&gt;&amp;#8226; P-42: the list of 12 may grow, only through the three-answers rule; candidates are not topics&lt;br&gt;&amp;#8226; O-36: who creates a topic and its Schema Registry subject (DevOps or the domain team)&lt;br&gt;&amp;#8226; A topic needs a named producer and consumer outside the owner; no personal data rides on it (principle 8)&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#CBD5E1;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;dashed=1;dashPattern=4 3;fillColor=#FFFBEB;strokeColor=#D97706;" vertex="1" parent="1">
+     <mxGeometry x="928" y="730" width="748" height="104" as="geometry"/>
+    </mxCell>
+   </root>
+  </mxGraphModel>
+ </diagram>
+ <diagram id="p4" name="4 Delivery and notification topics">
+  <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="716" math="0" shadow="0">
+   <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+    <mxCell id="p0" value="&lt;b&gt;Producers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;partner-adapter (verified provider webhook)&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="24" y="104" width="440" height="132" as="geometry"/>
+    </mxCell>
+    <mxCell id="t0" value="&lt;b&gt;delivery.requested&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;command, 12 partitions&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;provider_update: key brand_id:delivery_id&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;rider_sync, roster_sync: key mfg:rider_ref, thin pointers&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#7C3AED;fillColor=#F5F3FF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="560" y="104" width="520" height="132" as="geometry"/>
+    </mxCell>
+    <mxCell id="c0" value="&lt;b&gt;Consumers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Delivery&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="1250" y="104" width="426" height="132" as="geometry"/>
+    </mxCell>
+    <mxCell id="e.p0.t0" value="publish" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#6D28D9;strokeColor=#7C3AED;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="p0" target="t0">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="e.t0.c0" value="consume" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#6D28D9;strokeColor=#7C3AED;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="t0" target="c0">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="p1" value="&lt;b&gt;Producers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Delivery&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="24" y="258" width="440" height="132" as="geometry"/>
+    </mxCell>
+    <mxCell id="t1" value="&lt;b&gt;delivery.events&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#047857&quot;&gt;lifecycle, key brand_id:delivery_id, 7 days&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#047857&quot;&gt;dispatched, rider_assigned, picked_up, delivered, failed, cancelled&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#059669;fillColor=#ECFDF5;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="560" y="258" width="520" height="132" as="geometry"/>
+    </mxCell>
+    <mxCell id="c1" value="&lt;b&gt;Consumers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Order (delivered, failed, cancelled)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Notification&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;partner-adapter (FAAS brand callback)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Payment (Statement invoices a FAAS brand)&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="1250" y="258" width="426" height="132" as="geometry"/>
+    </mxCell>
+    <mxCell id="e.p1.t1" value="publish" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#047857;strokeColor=#059669;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="p1" target="t1">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="e.t1.c1" value="consume" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#047857;strokeColor=#059669;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="t1" target="c1">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="p2" value="&lt;b&gt;Producers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Voucher &amp;amp; Campaign (broadcast, send)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Loyalty&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Wallet&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;webhook-adapter (receipt after signature check)&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="24" y="412" width="440" height="132" as="geometry"/>
+    </mxCell>
+    <mxCell id="t2" value="&lt;b&gt;notification.requested&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;command, key brand_id:notification_id, 6 partitions&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;send, broadcast (thin: an S3 key), receipt&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#6D28D9&quot;&gt;never a phone, email or LINE id&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#7C3AED;fillColor=#F5F3FF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="560" y="412" width="520" height="132" as="geometry"/>
+    </mxCell>
+    <mxCell id="c2" value="&lt;b&gt;Consumers&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#854D0E&quot;&gt;Notification&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="1250" y="412" width="426" height="132" as="geometry"/>
+    </mxCell>
+    <mxCell id="e.p2.t2" value="publish" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#6D28D9;strokeColor=#7C3AED;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="p2" target="t2">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="e.t2.c2" value="consume" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#6D28D9;strokeColor=#7C3AED;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="t2" target="c2">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="title" value="NEXA &amp;#8211; Who writes and who reads: delivery and notification topics" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=22;fontColor=#0F172A;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;fontStyle=1;" vertex="1" parent="1">
+     <mxGeometry x="24" y="12" width="1652" height="32" as="geometry"/>
+    </mxCell>
+    <mxCell id="subtitle" value="NEXA - first draft, 2026-10-24 &amp;#183; design phase, nothing is fixed &amp;#183; maps to: docs/kafka-topics.md; docs/architecture.md section 4 (topics), P-06, P-42 (Registry)" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#64748B;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="1">
+     <mxGeometry x="24" y="46" width="1652" height="22" as="geometry"/>
+    </mxCell>
+    <mxCell id="legend" value="&lt;b&gt;Legend&lt;/b&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;align=left;spacingLeft=10;spacingTop=4;fontSize=11;fontStyle=1;fontColor=#475569;strokeColor=#CBD5E1;fillColor=#FFFFFF;strokeWidth=1.5;" vertex="1" parent="1">
+     <mxGeometry x="24" y="596" width="880" height="104" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw0" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FEF9C3;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="10" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t0" value="NEXA service (Go, Bun)" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="34" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw1" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#2563EB;fillColor=#EFF6FF;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="186" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t1" value="Edge or outside party" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="210" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw2" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#EA580C;fillColor=#FFF7ED;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="358" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t2" value="Sync call (gRPC)" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="382" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw3" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#7C3AED;fillColor=#F5F3FF;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="530" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t3" value="Kafka command topic" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="554" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw4" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#059669;fillColor=#ECFDF5;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="702" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t4" value="Kafka fact topic" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="726" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw5" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#64748B;fillColor=#F8FAFC;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="10" y="53" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t5" value="Data store" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="34" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw6" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#DC2626;fillColor=#FEF2F2;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="186" y="53" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t6" value="Failure or stop" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="210" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw7" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#94A3B8;fillColor=#F8FAFC;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;dashed=1;dashPattern=6 3;" vertex="1" parent="legend">
+     <mxGeometry x="358" y="53" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t7" value="Dashed: new or proposed" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="382" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw8" value="" style="shape=line;strokeWidth=2;strokeColor=#EA580C;html=1;" vertex="1" parent="legend">
+     <mxGeometry x="530" y="55" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t8" value="gRPC, a caller waits" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="554" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw9" value="" style="shape=line;strokeWidth=2;strokeColor=#2563EB;html=1;" vertex="1" parent="legend">
+     <mxGeometry x="702" y="55" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t9" value="HTTPS" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="726" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw10" value="" style="shape=line;strokeWidth=2;strokeColor=#7C3AED;html=1;dashed=1;dashPattern=6 4;" vertex="1" parent="legend">
+     <mxGeometry x="10" y="80" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t10" value="Kafka command" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="34" y="76" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw11" value="" style="shape=line;strokeWidth=2;strokeColor=#059669;html=1;dashed=1;dashPattern=6 4;" vertex="1" parent="legend">
+     <mxGeometry x="186" y="80" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t11" value="Kafka fact" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="210" y="76" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw12" value="" style="shape=line;strokeWidth=2;strokeColor=#64748B;html=1;dashed=1;dashPattern=2 4;" vertex="1" parent="legend">
+     <mxGeometry x="358" y="80" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t12" value="Log write, best effort" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="382" y="76" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="questions" value="&lt;b&gt;Open questions and assumptions&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#475569&quot;&gt;&amp;#8226; P-42: the list of 12 may grow, only through the three-answers rule; candidates are not topics&lt;br&gt;&amp;#8226; O-36: who creates a topic and its Schema Registry subject (DevOps or the domain team)&lt;br&gt;&amp;#8226; A topic needs a named producer and consumer outside the owner; no personal data rides on it (principle 8)&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#CBD5E1;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;dashed=1;dashPattern=4 3;fillColor=#FFFBEB;strokeColor=#D97706;" vertex="1" parent="1">
+     <mxGeometry x="928" y="596" width="748" height="104" as="geometry"/>
+    </mxCell>
+   </root>
+  </mxGraphModel>
+ </diagram>
+ <diagram id="p5" name="5 One record, from commit to Ack">
+  <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1060" math="0" shadow="0">
+   <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+    <mxCell id="title" value="NEXA &amp;#8211; Every record has the same envelope and the same delivery path" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=22;fontColor=#0F172A;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;fontStyle=1;" vertex="1" parent="1">
+     <mxGeometry x="24" y="12" width="1652" height="32" as="geometry"/>
+    </mxCell>
+    <mxCell id="subtitle" value="NEXA - first draft, 2026-10-24 &amp;#183; design phase, nothing is fixed &amp;#183; maps to: docs/kafka-topics.md; docs/architecture.md section 4 (topics), P-06, P-42 (Rules 5, 6, 7; Envelope)" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#64748B;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="1">
+     <mxGeometry x="24" y="46" width="1652" height="22" as="geometry"/>
+    </mxCell>
+    <mxCell id="legend" value="&lt;b&gt;Legend&lt;/b&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;align=left;spacingLeft=10;spacingTop=4;fontSize=11;fontStyle=1;fontColor=#475569;strokeColor=#CBD5E1;fillColor=#FFFFFF;strokeWidth=1.5;" vertex="1" parent="1">
+     <mxGeometry x="24" y="940" width="880" height="104" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw0" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FEF9C3;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="10" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t0" value="NEXA service (Go, Bun)" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="34" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw1" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#2563EB;fillColor=#EFF6FF;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="186" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t1" value="Edge or outside party" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="210" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw2" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#EA580C;fillColor=#FFF7ED;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="358" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t2" value="Sync call (gRPC)" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="382" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw3" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#7C3AED;fillColor=#F5F3FF;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="530" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t3" value="Kafka command topic" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="554" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw4" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#059669;fillColor=#ECFDF5;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="702" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t4" value="Kafka fact topic" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="726" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw5" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#64748B;fillColor=#F8FAFC;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="10" y="53" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t5" value="Data store" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="34" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw6" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#DC2626;fillColor=#FEF2F2;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="186" y="53" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t6" value="Failure or stop" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="210" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw7" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#94A3B8;fillColor=#F8FAFC;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;dashed=1;dashPattern=6 3;" vertex="1" parent="legend">
+     <mxGeometry x="358" y="53" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t7" value="Dashed: new or proposed" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="382" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw8" value="" style="shape=line;strokeWidth=2;strokeColor=#EA580C;html=1;" vertex="1" parent="legend">
+     <mxGeometry x="530" y="55" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t8" value="gRPC, a caller waits" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="554" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw9" value="" style="shape=line;strokeWidth=2;strokeColor=#2563EB;html=1;" vertex="1" parent="legend">
+     <mxGeometry x="702" y="55" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t9" value="HTTPS" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="726" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw10" value="" style="shape=line;strokeWidth=2;strokeColor=#7C3AED;html=1;dashed=1;dashPattern=6 4;" vertex="1" parent="legend">
+     <mxGeometry x="10" y="80" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t10" value="Kafka command" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="34" y="76" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw11" value="" style="shape=line;strokeWidth=2;strokeColor=#059669;html=1;dashed=1;dashPattern=6 4;" vertex="1" parent="legend">
+     <mxGeometry x="186" y="80" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t11" value="Kafka fact" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="210" y="76" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw12" value="" style="shape=line;strokeWidth=2;strokeColor=#64748B;html=1;dashed=1;dashPattern=2 4;" vertex="1" parent="legend">
+     <mxGeometry x="358" y="80" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t12" value="Log write, best effort" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="382" y="76" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="questions" value="&lt;b&gt;Open questions and assumptions&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#475569&quot;&gt;&amp;#8226; P-06: facts dedupe on version, commands on event_id&lt;br&gt;&amp;#8226; Three retries and the &lt;service&gt;.dlq are the documented design; backoff timings are not set&lt;br&gt;&amp;#8226; O-36: who creates topics and subjects&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#CBD5E1;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;dashed=1;dashPattern=4 3;fillColor=#FFFBEB;strokeColor=#D97706;" vertex="1" parent="1">
+     <mxGeometry x="928" y="940" width="748" height="104" as="geometry"/>
+    </mxCell>
+    <mxCell id="app" value="&lt;b style=&quot;background-color:#0F172A;color:#FFFFFF;border-radius:9px;padding:0px 6px;&quot;&gt;1&lt;/b&gt;&amp;nbsp;&lt;b&gt;Producer: domain app&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#854D0E&quot;&gt;one Postgres transaction:&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#854D0E&quot;&gt;state change + outbox row&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=12;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="24" y="130" width="300" height="120" as="geometry"/>
+    </mxCell>
+    <mxCell id="relay" value="&lt;b style=&quot;background-color:#0F172A;color:#FFFFFF;border-radius:9px;padding:0px 6px;&quot;&gt;2&lt;/b&gt;&amp;nbsp;&lt;b&gt;Outbox relay&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#854D0E&quot;&gt;same app, mode worker&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#854D0E&quot;&gt;no Debezium, no Connect cluster&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=12;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="394" y="130" width="300" height="120" as="geometry"/>
+    </mxCell>
+    <mxCell id="topic" value="&lt;b style=&quot;background-color:#0F172A;color:#FFFFFF;border-radius:9px;padding:0px 6px;&quot;&gt;3&lt;/b&gt;&amp;nbsp;&lt;b&gt;Kafka topic&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;Confluent Cloud, Schema Registry,&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;Protobuf, BACKWARD compatible&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=12;fontColor=#0F172A;strokeColor=#059669;fillColor=#ECFDF5;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="764" y="130" width="360" height="120" as="geometry"/>
+    </mxCell>
+    <mxCell id="cons" value="&lt;b style=&quot;background-color:#0F172A;color:#FFFFFF;border-radius:9px;padding:0px 6px;&quot;&gt;4&lt;/b&gt;&amp;nbsp;&lt;b&gt;Consumer: domain app&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#854D0E&quot;&gt;run mode consumer&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=12;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FFFFFF;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="1194" y="130" width="300" height="120" as="geometry"/>
+    </mxCell>
+    <mxCell id="e.app.relay" value="outbox row" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#475569;strokeColor=#94A3B8;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;" edge="1" parent="1" source="app" target="relay">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="e.relay.topic" value="produce" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#047857;strokeColor=#059669;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="relay" target="topic">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="e.topic.cons" value="consume" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#047857;strokeColor=#059669;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="topic" target="cons">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="dd" value="&lt;b style=&quot;background-color:#0F172A;color:#FFFFFF;border-radius:9px;padding:0px 6px;&quot;&gt;5&lt;/b&gt;&amp;nbsp;&lt;b&gt;Dedupe&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#C2410C&quot;&gt;event_id for a command,&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#C2410C&quot;&gt;version for a fact&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=12;fontColor=#0F172A;strokeColor=#EA580C;fillColor=#FFF7ED;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="1194" y="330" width="300" height="100" as="geometry"/>
+    </mxCell>
+    <mxCell id="ap" value="&lt;b style=&quot;background-color:#0F172A;color:#FFFFFF;border-radius:9px;padding:0px 6px;&quot;&gt;6&lt;/b&gt;&amp;nbsp;&lt;b&gt;Apply&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#C2410C&quot;&gt;only when the version is newer&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=12;fontColor=#0F172A;strokeColor=#EA580C;fillColor=#FFF7ED;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="1194" y="510" width="300" height="100" as="geometry"/>
+    </mxCell>
+    <mxCell id="ack" value="&lt;b style=&quot;background-color:#0F172A;color:#FFFFFF;border-radius:9px;padding:0px 6px;&quot;&gt;7&lt;/b&gt;&amp;nbsp;&lt;b&gt;Ack&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#047857&quot;&gt;no work for this variant is also an Ack&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=12;fontColor=#0F172A;strokeColor=#059669;fillColor=#ECFDF5;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="1194" y="690" width="300" height="80" as="geometry"/>
+    </mxCell>
+    <mxCell id="e.cons.dd" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#C2410C;strokeColor=#EA580C;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=0.5000;exitY=1.0000;exitDx=0;exitDy=0;entryX=0.5000;entryY=0.0000;entryDx=0;entryDy=0;jettySize=auto;" edge="1" parent="1" source="cons" target="dd">
+     <mxGeometry relative="1" as="geometry">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="e.dd.ap" value="new" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#C2410C;strokeColor=#EA580C;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=0.5000;exitY=1.0000;exitDx=0;exitDy=0;entryX=0.5000;entryY=0.0000;entryDx=0;entryDy=0;jettySize=auto;" edge="1" parent="1" source="dd" target="ap">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="e.ap.ack" value="done" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#C2410C;strokeColor=#EA580C;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=0.5000;exitY=1.0000;exitDx=0;exitDy=0;entryX=0.5000;entryY=0.0000;entryDx=0;entryDy=0;jettySize=auto;" edge="1" parent="1" source="ap" target="ack">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="retry" value="&lt;b&gt;Retry inside the app&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#B91C1C&quot;&gt;three tries with backoff&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#B91C1C&quot;&gt;no per-topic retry topic&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=12;fontColor=#0F172A;strokeColor=#DC2626;fillColor=#FEF2F2;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="764" y="510" width="360" height="100" as="geometry"/>
+    </mxCell>
+    <mxCell id="dlq" value="&lt;b&gt;&amp;lt;service&amp;gt;.dlq&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#B91C1C&quot;&gt;one per consuming service; operations only&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=12;fontColor=#0F172A;strokeColor=#DC2626;fillColor=#FEF2F2;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="764" y="690" width="360" height="80" as="geometry"/>
+    </mxCell>
+    <mxCell id="e.ap.retry" value="apply fails" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#B91C1C;strokeColor=#DC2626;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=0.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=1.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="ap" target="retry">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="e.retry.dlq" value="still failing" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#B91C1C;strokeColor=#DC2626;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=0.5000;exitY=1.0000;exitDx=0;exitDy=0;entryX=0.5000;entryY=0.0000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="retry" target="dlq">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="env" value="&lt;b&gt;Envelope (same on every topic)&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#475569&quot;&gt;key: brand_id:aggregate id&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#475569&quot;&gt;(rider variants: mfg:rider_ref)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#475569&quot;&gt;&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#475569&quot;&gt;headers: event_id, event_type, brand_id,&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#475569&quot;&gt;occurred_at, version, traceparent&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#475569&quot;&gt;&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#475569&quot;&gt;value: Protobuf, one oneof per topic&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot; color=&quot;#475569&quot;&gt;no personal data on the bus (principle 8)&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=13;fontColor=#0F172A;strokeColor=#CBD5E1;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="24" y="330" width="640" height="230" as="geometry"/>
+    </mxCell>
+    <mxCell id="n1" value="A duplicate delivery changes nothing: the consumer sees the same event_id or version, does nothing, then Acks. Partitions: rule 9 says 6, except order.* and payment.* with 12; the registry also gives the delivery topics 12 (text to reconcile)." style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#475569;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="1">
+     <mxGeometry x="24" y="600" width="700" height="80" as="geometry"/>
+    </mxCell>
+   </root>
+  </mxGraphModel>
+ </diagram>
+ <diagram id="p6" name="6 Is it a topic? The growth rule">
+  <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1180" math="0" shadow="0">
+   <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+    <mxCell id="title" value="NEXA &amp;#8211; Before adding a thirteenth topic, ask four questions in this order" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=22;fontColor=#0F172A;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;fontStyle=1;" vertex="1" parent="1">
+     <mxGeometry x="24" y="12" width="1652" height="32" as="geometry"/>
+    </mxCell>
+    <mxCell id="subtitle" value="NEXA - first draft, 2026-10-24 &amp;#183; design phase, nothing is fixed &amp;#183; maps to: docs/kafka-topics.md; docs/architecture.md section 4 (topics), P-06, P-42 (Growth policy; Candidates, not registered)" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#64748B;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="1">
+     <mxGeometry x="24" y="46" width="1652" height="22" as="geometry"/>
+    </mxCell>
+    <mxCell id="legend" value="&lt;b&gt;Legend&lt;/b&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=2;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;align=left;spacingLeft=10;spacingTop=4;fontSize=11;fontStyle=1;fontColor=#475569;strokeColor=#CBD5E1;fillColor=#FFFFFF;strokeWidth=1.5;" vertex="1" parent="1">
+     <mxGeometry x="24" y="1060" width="880" height="104" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw0" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#EAB308;fillColor=#FEF9C3;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="10" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t0" value="NEXA service (Go, Bun)" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="34" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw1" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#2563EB;fillColor=#EFF6FF;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="186" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t1" value="Edge or outside party" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="210" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw2" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#EA580C;fillColor=#FFF7ED;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="358" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t2" value="Sync call (gRPC)" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="382" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw3" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#7C3AED;fillColor=#F5F3FF;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="530" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t3" value="Kafka command topic" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="554" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw4" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#059669;fillColor=#ECFDF5;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="702" y="28" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t4" value="Kafka fact topic" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="726" y="26" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw5" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#64748B;fillColor=#F8FAFC;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="10" y="53" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t5" value="Data store" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="34" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw6" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#DC2626;fillColor=#FEF2F2;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="legend">
+     <mxGeometry x="186" y="53" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t6" value="Failure or stop" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="210" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw7" value="" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#94A3B8;fillColor=#F8FAFC;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;dashed=1;dashPattern=6 3;" vertex="1" parent="legend">
+     <mxGeometry x="358" y="53" width="20" height="12" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t7" value="Dashed: new or proposed" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="382" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw8" value="" style="shape=line;strokeWidth=2;strokeColor=#EA580C;html=1;" vertex="1" parent="legend">
+     <mxGeometry x="530" y="55" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t8" value="gRPC, a caller waits" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="554" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw9" value="" style="shape=line;strokeWidth=2;strokeColor=#2563EB;html=1;" vertex="1" parent="legend">
+     <mxGeometry x="702" y="55" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t9" value="HTTPS" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="726" y="51" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw10" value="" style="shape=line;strokeWidth=2;strokeColor=#7C3AED;html=1;dashed=1;dashPattern=6 4;" vertex="1" parent="legend">
+     <mxGeometry x="10" y="80" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t10" value="Kafka command" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="34" y="76" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw11" value="" style="shape=line;strokeWidth=2;strokeColor=#059669;html=1;dashed=1;dashPattern=6 4;" vertex="1" parent="legend">
+     <mxGeometry x="186" y="80" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t11" value="Kafka fact" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="210" y="76" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.sw12" value="" style="shape=line;strokeWidth=2;strokeColor=#64748B;html=1;dashed=1;dashPattern=2 4;" vertex="1" parent="legend">
+     <mxGeometry x="358" y="80" width="22" height="8" as="geometry"/>
+    </mxCell>
+    <mxCell id="lg.t12" value="Log write, best effort" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#334155;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="legend">
+     <mxGeometry x="382" y="76" width="144" height="20" as="geometry"/>
+    </mxCell>
+    <mxCell id="questions" value="&lt;b&gt;Open questions and assumptions&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#475569&quot;&gt;&amp;#8226; P-42: the list of 12 may grow, only through the three-answers rule; candidates are not topics&lt;br&gt;&amp;#8226; O-36: who creates a topic and its Schema Registry subject (DevOps or the domain team)&lt;br&gt;&amp;#8226; A topic needs a named producer and consumer outside the owner; no personal data rides on it (principle 8)&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=0;fontSize=11;fontColor=#0F172A;strokeColor=#CBD5E1;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;dashed=1;dashPattern=4 3;fillColor=#FFFBEB;strokeColor=#D97706;" vertex="1" parent="1">
+     <mxGeometry x="928" y="1060" width="748" height="104" as="geometry"/>
+    </mxCell>
+    <mxCell id="k1" value="&lt;b&gt;1. Is someone waiting?&lt;/b&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rhombus;fontSize=12;fontColor=#0F172A;strokeColor=#EA580C;fillColor=#FFF7ED;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="24" y="120" width="460" height="140" as="geometry"/>
+    </mxCell>
+    <mxCell id="ak1" value="&lt;b&gt;gRPC, not a topic&lt;/b&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=12;fontColor=#0F172A;strokeColor=#EA580C;fillColor=#FFF7ED;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="600" y="150" width="360" height="80" as="geometry"/>
+    </mxCell>
+    <mxCell id="e.k1.ak1" value="yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#475569;strokeColor=#94A3B8;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;" edge="1" parent="1" source="k1" target="ak1">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="k2" value="&lt;b&gt;2. Can an existing topic carry it as one more oneof variant?&lt;/b&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rhombus;fontSize=12;fontColor=#0F172A;strokeColor=#EA580C;fillColor=#FFF7ED;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="24" y="320" width="460" height="140" as="geometry"/>
+    </mxCell>
+    <mxCell id="ak2" value="&lt;b&gt;Add the variant&lt;/b&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=12;fontColor=#0F172A;strokeColor=#059669;fillColor=#ECFDF5;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="600" y="350" width="360" height="80" as="geometry"/>
+    </mxCell>
+    <mxCell id="e.k2.ak2" value="yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#475569;strokeColor=#94A3B8;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;" edge="1" parent="1" source="k2" target="ak2">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="k3" value="&lt;b&gt;3. Is it only this service's own background work?&lt;/b&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rhombus;fontSize=12;fontColor=#0F172A;strokeColor=#EA580C;fillColor=#FFF7ED;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="24" y="520" width="460" height="140" as="geometry"/>
+    </mxCell>
+    <mxCell id="ak3" value="&lt;b&gt;Outbox table and a worker in the same app&lt;/b&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=12;fontColor=#0F172A;strokeColor=#059669;fillColor=#ECFDF5;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="600" y="550" width="360" height="80" as="geometry"/>
+    </mxCell>
+    <mxCell id="e.k3.ak3" value="yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#475569;strokeColor=#94A3B8;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;" edge="1" parent="1" source="k3" target="ak3">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="k4" value="&lt;b&gt;4. Crosses a boundary, with a named outside consumer?&lt;/b&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rhombus;fontSize=12;fontColor=#0F172A;strokeColor=#EA580C;fillColor=#FFF7ED;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="24" y="720" width="460" height="140" as="geometry"/>
+    </mxCell>
+    <mxCell id="ak4" value="&lt;b&gt;Write a proposal&lt;/b&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=12;fontColor=#0F172A;strokeColor=#7C3AED;fillColor=#F5F3FF;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="600" y="750" width="360" height="80" as="geometry"/>
+    </mxCell>
+    <mxCell id="e.k4.ak4" value="yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#475569;strokeColor=#94A3B8;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;jettySize=auto;" edge="1" parent="1" source="k4" target="ak4">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="e.k1.k2" value="no" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#475569;strokeColor=#94A3B8;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=0.5000;exitY=1.0000;exitDx=0;exitDy=0;entryX=0.5000;entryY=0.0000;entryDx=0;entryDy=0;jettySize=auto;" edge="1" parent="1" source="k1" target="k2">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="e.k2.k3" value="no" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#475569;strokeColor=#94A3B8;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=0.5000;exitY=1.0000;exitDx=0;exitDy=0;entryX=0.5000;entryY=0.0000;entryDx=0;entryDy=0;jettySize=auto;" edge="1" parent="1" source="k2" target="k3">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="e.k3.k4" value="no" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#475569;strokeColor=#94A3B8;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=0.5000;exitY=1.0000;exitDx=0;exitDy=0;entryX=0.5000;entryY=0.0000;entryDx=0;entryDy=0;jettySize=auto;" edge="1" parent="1" source="k3" target="k4">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="nt" value="&lt;b&gt;Not a topic&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#B91C1C&quot;&gt;no named consumer, so it is not built&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=12;fontColor=#0F172A;strokeColor=#DC2626;fillColor=#FEF2F2;strokeWidth=1.5;align=center;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="600" y="920" width="360" height="80" as="geometry"/>
+    </mxCell>
+    <mxCell id="e.k4.nt" value="no" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;fontFamily=Helvetica;fontSize=11;fontColor=#B91C1C;strokeColor=#DC2626;strokeWidth=2;endArrow=block;endFill=1;endSize=6;labelBackgroundColor=#FFFFFF;exitX=0.5000;exitY=1.0000;exitDx=0;exitDy=0;entryX=0.5000;entryY=0.0000;entryDx=0;entryDy=0;jettySize=auto;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="k4" target="nt">
+     <mxGeometry relative="1" as="geometry" x="0.0000">
+      <Array as="points">
+       <mxPoint x="254" y="880"/>
+       <mxPoint x="780" y="880"/>
+      </Array>
+     </mxGeometry>
+    </mxCell>
+    <mxCell id="prop" value="&lt;b&gt;A proposal must contain&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#475569&quot;&gt;owner and kind (.requested, .changed, .published, .events)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#475569&quot;&gt;key, retention, partitions (sized with the scale assumptions)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#475569&quot;&gt;producers and consumers, by name&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#475569&quot;&gt;the Protobuf value&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#475569&quot;&gt;one line saying no personal data rides on it&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#475569&quot;&gt;&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#475569&quot;&gt;It changes, in order: the registry, the topics table in architecture.md section 3, the decision register, then the diagram.&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#475569&quot;&gt;O-36: DevOps creates the topic and subject; who asks is open.&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=12;fontColor=#0F172A;strokeColor=#CBD5E1;fillColor=#FFFFFF;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;" vertex="1" parent="1">
+     <mxGeometry x="1040" y="120" width="636" height="220" as="geometry"/>
+    </mxCell>
+    <mxCell id="cand" value="&lt;b&gt;Candidates, not registered: never draw them as topics&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#B91C1C&quot;&gt;customer.changed (Identity): needs a second domain that reacts within seconds&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#B91C1C&quot;&gt;order.payload.captured (payload log): only if O-30 needs completeness and a Postgres capture row is rejected&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#B91C1C&quot;&gt;audit.events: when a SIEM or fraud consumer is chosen&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#B91C1C&quot;&gt;loyalty.events, wallet.events: nobody reacts today (D-11)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#B91C1C&quot;&gt;&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#B91C1C&quot;&gt;Considered and covered: a topic per POS vendor (order.requested pos_status), a reconciliation topic (Order's table and CSC queue), brand feature switches (brand.changed).&lt;/font&gt;" style="html=1;whiteSpace=wrap;fontFamily=Helvetica;rounded=1;arcSize=10;fontSize=12;fontColor=#0F172A;strokeColor=#DC2626;fillColor=#FEF2F2;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;spacingTop=2;spacingBottom=2;dashed=1;dashPattern=6 3;" vertex="1" parent="1">
+     <mxGeometry x="1040" y="380" width="636" height="250" as="geometry"/>
+    </mxCell>
+    <mxCell id="n1" value="Signal to remove a topic: no consumer for a full release. v3 added none: every topic that came up failed one of the three answers." style="html=1;whiteSpace=wrap;fontFamily=Helvetica;text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#475569;spacingLeft=2;spacingRight=2;spacingTop=0;spacingBottom=0;" vertex="1" parent="1">
+     <mxGeometry x="1040" y="660" width="636" height="70" as="geometry"/>
+    </mxCell>
+   </root>
+  </mxGraphModel>
+ </diagram>
+</mxfile>
