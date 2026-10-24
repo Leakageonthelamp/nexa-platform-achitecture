@@ -11,7 +11,7 @@ Aggregator orders are skipped. Grab, LINE MAN, and Shopee Food already notify th
 | **Owns** | Templates, the message log, the inbox, device tokens, channel reachability, and brand channel config. |
 | **Does not own** | The contact, the consent, or the OTP code. Identity generates the OTP and calls `SendOtp` because the shopper is waiting on that screen. |
 | **How it is called** | `customer-bff` registers devices, reads the inbox, and holds the WebSocket. `admin-bff` writes templates and channel config, and CSC reads the log and resends. Provider receipts (SES, SMS, LINE) arrive at `webhook-adapter` and become a command. |
-| **Kafka** | Publishes nothing. Consumes `order.events`, `payment.events` (refunded only), and `notification.requested` (send, broadcast, receipt). |
+| **Kafka** | Publishes nothing. Consumes `order.events`, `payment.events` (refunded only), `delivery.events` (shopper status), and `notification.requested` (send, broadcast, receipt). |
 
 ## Diagrams
 
@@ -27,7 +27,7 @@ One page: who asks for a message, delivery status told by Delivery rather than a
 
 **HLD** — `notification-hld.drawio`
 
-One page: the three consumes, the path from event to message log to channel, and the call to Identity for contacts.
+One page: the consumes, including `delivery.events`, the path from event to message log to channel, and the call to Identity for contacts.
 
 **LLD** — `notification-lld.drawio`
 
@@ -49,3 +49,4 @@ One page: the three consumes, the path from event to message log to channel, and
 | 14 | WebSocket fanout |
 | 15 | Channel sender |
 | 16 | UnregisterDevice |
+| 17 | `delivery.events` consumer |

@@ -15,10 +15,10 @@ The charge, the capture, the refund, and the rider payout. The shopper waits for
 - **Contact:** Orders ask
 - **Technology:** gRPC
 - **From:** HLD Checkout and Top-up · LLD CreateTransaction
-- The shopper waits for a page to finish paying
-- The charge is saved before the gateway is called
-- A top-up uses the same call, from the shopper’s app
-- The same key never charges twice
+- A card or a QR waits for a page to finish paying
+- A wallet hold comes back at once, with no page
+- The charge is saved before the gateway, or Wallet, is called
+- A top-up uses the same call and is captured at once
 
 ### Capture
 - **Contact:** Kafka from Orders
@@ -36,7 +36,7 @@ The charge, the capture, the refund, and the rider payout. The shopper waits for
 - Part or all of a captured payment
 - The agent waits for “accepted”, not for the gateway
 - The gateway is called after the commit
-- A wallet tender is credited back through the wallet, not the card
+- A wallet tender is credited back through Wallet, not the card
 
 ### Rider pay
 - **Contact:** Kafka from Delivery
@@ -62,8 +62,8 @@ On the bar: the attempt, the brand’s gateway account, and the outbox. Food is 
 - **Customer service** — solid, both ends, `asks`. A refund.
 - **Orders** — dashed into this domain, `Kafka`. Capture or void.
 - **The gateway** — dashed into this domain, `Kafka`. The pay result, after the edge has checked the signature.
-- **Delivery** — dashed into this domain, `Kafka`. A rider payout.
-- **Orders, Wallet, and Delivery** — dashed out, `Kafka`. Authorized, captured, failed, voided, refunded, paid out, or payout failed.
+- **Delivery** — dashed into this domain, `Kafka`. A rider payout, and a delivered trip to invoice.
+- **Orders, Wallet, Delivery, and Notification** — dashed out, `Kafka`. Authorized, captured, failed, voided, refunded, paid out, or payout failed. Notification keeps a refund only.
 
 <!-- ai:anchor:infrastructure -->
 ## Infrastructure

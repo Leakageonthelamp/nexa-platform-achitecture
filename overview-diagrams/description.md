@@ -16,4 +16,4 @@ Who uses the platform, what it can do, who it depends on, and how one order runs
 
 **HLD** — `mfg-eplatform-hld.drawio`
 
-The drifted container picture. [`architecture.md`](../architecture.md) wins where they disagree.
+The container picture: four edges, two adapters, the twelve topics, and one schema per domain. [`architecture.md`](../architecture.md) wins where they disagree.

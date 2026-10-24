@@ -8,10 +8,10 @@ A completed order earns points. The first one enrols the member, because Identit
 | --- | --- |
 | **Owns** | The member per brand, the level, the card you scan, receipts, earn rules, the points ledger, and reward prices. |
 | **Does not own** | The person (Identity), voucher codes and the redemption book (Voucher & Campaign), the basket price (Voucher & Campaign), stored value (Wallet), the order, or message delivery. |
-| **How it is called** | `customer-bff` reads the profile and calls `RedeemPoints`. `admin-bff` calls `AdjustPoints` and publishes rules, with the `loyalty.adjust` grant, a reason, and a limit. Orders never call. |
+| **How it is called** | `customer-bff` reads the profile and calls `RedeemPoints`. `admin-bff` calls `AdjustPoints` and publishes rules, with the `loyalty.adjust` grant, a reason, and a limit. Orders never call. `RedeemPoints` calls Voucher `IssueReward` with the redemption id. |
 | **Kafka** | Consumes `order.events` (`completed` earns, `cancelled` reverses). Sends `notification.requested`. There is no loyalty topic. |
 
-The source is the [Loyalty target architecture](https://minordigital.atlassian.net/wiki/spaces/BackEnd/pages/3898146819/Loyalty+Domain+-+Target+Architecture) (reviewed 2026-10-15). Topics are the ones in [`kafka-topics.md`](../kafka-topics.md). `loyalty.events`, `customer.lifecycle.fact`, and a consume of `payment.events` are not drawn: they are not in that list. The voucher diagram still says it owns the member card. That split is open; see [`architecture.md`](../architecture.md) §14.
+The source is the [Loyalty target architecture](https://minordigital.atlassian.net/wiki/spaces/BackEnd/pages/3898146819/Loyalty+Domain+-+Target+Architecture) (reviewed 2026-10-15). Topics are the ones in [`kafka-topics.md`](../kafka-topics.md). `loyalty.events`, `customer.lifecycle.fact`, and a consume of `payment.events` are not drawn: they are not in that list. The card you scan lives here. Voucher owns the code. `RedeemPoints` and a level change call `IssueReward` and wait.
 
 ## Diagrams
 

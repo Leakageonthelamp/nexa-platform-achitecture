@@ -26,7 +26,7 @@ Points, the level, and the card you scan, one profile per brand. A completed ord
 - **From:** HLD Redeem · LLD Redeem points
 - Points buy a reward voucher
 - Oldest points are spent first
-- Voucher issues the code, and a retry cannot issue it twice
+- Voucher `IssueReward` issues the code, and a retry cannot issue it twice
 - A failed issue is given back
 
 ### Correct
@@ -59,10 +59,10 @@ On the bar: one member per brand, the card, and append-only postings. A posting 
 
 - **Customers** — solid, both ends, `asks`. Redeem, or read their own profile.
 - **Customer service** — solid, both ends, `asks`. A correction, new rules, or a replacement card.
-- **Voucher** — solid, one way, `asks`. Issue the reward. Voucher does not call here.
+- **Voucher** — solid, one way, `asks`. `IssueReward`. Voucher does not call here.
 - **Orders** — dashed into this domain, `Kafka`. Completed earns. Cancelled reverses. Orders do not ask.
 - **Notifications** — dashed out, `Kafka`. Earned, reversed, expiring, expired, a new level, or a reward. There is no loyalty fact.
-- **Nightly check** — solid, `inside Loyalty`. Technology: Daily job. Points expire at 01:00. The level is reviewed at 02:00. A level change asks Voucher for the new benefit.
+- **Nightly check** — solid, `inside Loyalty`. Technology: Daily job. Points expire at 01:00. The level is reviewed at 02:00. A level change calls `IssueReward` for the new code. The card itself stays here.
 
 <!-- ai:anchor:infrastructure -->
 ## Infrastructure

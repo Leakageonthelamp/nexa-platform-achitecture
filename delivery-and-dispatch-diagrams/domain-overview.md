@@ -61,6 +61,7 @@ On the bar: the quote, the job, the status log, and the earnings row. Riders and
 
 - **Customers** — solid, both ends, `asks`. A quote, or the status of their job.
 - **Orders** — solid, both ends, `asks`. The quote at checkout.
+- **Identity** — solid, one way, `asks`. The drop-off address, when the job is created. It is not copied.
 - **Partners** — solid, both ends, `asks`. A quote and a job for an external brand.
 - **Customer service** — solid, both ends, `asks`. Assign, cancel, redispatch, mark delivered, and rider admin.
 - **Orders** — dashed into this domain, `Kafka`. Accepted starts dispatch. Cancelled stops it.

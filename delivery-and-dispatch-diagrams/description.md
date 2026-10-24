@@ -10,7 +10,7 @@ Riders use `brand_id = mfg`, because one pool serves every brand. The delivery i
 | --- | --- |
 | **Owns** | The delivery, the quote, the fee, the provider job, the rider, the roster, and the earnings ledger. |
 | **Does not own** | The store zone (Brand & Store), the order (Cart & Order), or a real-money payout (Payment). |
-| **How it is called** | `customer-bff` calls `Quote`. Order calls `GetQuote` at `PlaceOrder` and stores that fee. `admin-bff` assigns, cancels, redispatches, and approves a rider. Fleet webhooks arrive as `delivery.requested` through `partner-adapter`. |
+| **How it is called** | `customer-bff` calls `Quote`. Order calls `GetQuote` at `PlaceOrder` and stores that fee. Dispatch calls Identity `GetAddress` and does not copy it. `admin-bff` assigns, cancels, redispatches, and approves a rider. Fleet webhooks arrive as `delivery.requested` through `partner-adapter`. |
 | **Kafka** | Publishes `delivery.events` and `payment.requested` (payout). Consumes `order.events`, `delivery.requested`, `store.changed`, and `payment.events`. |
 
 ## Diagrams

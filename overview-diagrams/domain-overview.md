@@ -1,7 +1,7 @@
 # Platform — system overview
 
 Plain reading of [`mfg-eplatform-hld.drawio`](mfg-eplatform-hld.drawio). There is no platform LLD.
-The HLD still shows a store portal, an admin-and-store edge, one combined adapter, a database per service, and topic families that do not exist. Those boxes are drift in [`architecture.md`](../architecture.md) §14. This file follows the rulebook and [`kafka-topics.md`](../kafka-topics.md), not those boxes.
+The picture names the four edges, the two adapters, one Aurora schema per domain, and the twelve topics in [`kafka-topics.md`](../kafka-topics.md).
 
 <!-- ai:anchor:sentence -->
 ## Sentence
@@ -73,4 +73,4 @@ On the bar: `brand_id` on the call and on the message key. A rider’s pay and a
 <!-- ai:anchor:not-here -->
 ## Not here
 
-A store portal, a second admin edge for stores, one adapter for every outsider, a search engine for the menu, and topic families named delivery, customer, or loyalty. Those are on the platform picture and are not what is being built.
+A store portal, a second admin edge for stores, one adapter for every outsider, a search engine for the menu, and topic families named delivery, customer, or loyalty.

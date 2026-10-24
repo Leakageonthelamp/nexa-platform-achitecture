@@ -103,10 +103,8 @@ the domain `description.md`, then the HLD.
 3. Read the folder's `description.md` before the picture. It names which file is current. For a system overview, read `domain-overview.md` and do not open `*-overview.drawio` for the words.
 4. Export a PNG with `draw.io -x -f png` only to check layout by eye. Leave the PNG uncommitted.
 
-Files without a suffix are the baseline. Superseded `-v2` drafts live in
-[`archive/`](archive/). The overview `-v2` file is still in
-[`overview-diagrams/`](overview-diagrams/) and is called out as drift in
-[`architecture.md` §14](architecture.md#14-known-drift).
+Files without a suffix are the baseline. Superseded `-v2` drafts, including the
+overview, live in [`_archive/`](_archive/).
 
 <!-- ai:anchor:structure -->
 ## Project Structure
@@ -127,10 +125,10 @@ Files without a suffix are the baseline. Superseded `-v2` drafts live in
 ├── delivery-and-dispatch-diagrams/ Quote, dispatch, rider, earnings ledger.
 ├── wallet-diagrams/                Stored-value ledger and holds. Overview reference.
 ├── loyalty-and-membercard-diagrams/ Points, tier, and the member card.
-├── voucher-and-campaign-diagrams/  Campaigns, vouchers, member cards.
+├── voucher-and-campaign-diagrams/  Campaigns, vouchers, and the redemption book.
 ├── notification-diagrams/          Templates, inbox, and outbound channels.
 ├── refs/                           Source notes and the 2029 HTML demo.
-└── archive/                        Pre-EDA and v2 drafts. Historical.
+└── _archive/                       Pre-EDA and v2 drafts. Historical.
 ```
 
 Loyalty & MemberCard is drawn from the [Loyalty target architecture](https://minordigital.atlassian.net/wiki/spaces/BackEnd/pages/3898146819/Loyalty+Domain+-+Target+Architecture). Topics follow [`kafka-topics.md`](kafka-topics.md): `order.events` in, `notification.requested` out.

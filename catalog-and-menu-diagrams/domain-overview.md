@@ -60,6 +60,7 @@ On the bar: the item, the modifiers, the price book, and the sold-out flag. A dr
 - **Staff** — solid, both ends, `asks`. Publish a menu, or mark sold out by hand.
 - **Customers** — solid, both ends, `asks`. Read a menu. Guests and partners use the same read.
 - **Orders** — solid, both ends, `asks`. The price of each line at checkout.
+- **Voucher** — solid, one way, `asks`. The item list, only when a rule names items.
 - **Brand & Store** — solid, both ends, `asks`. A live check that the brand and the store exist, at create time.
 - **The store** — dashed into this domain, `Kafka`. Sold out, and a brand or store change.
 - **Partners** — dashed out, `Kafka`. A new menu version, and a sold-out change.

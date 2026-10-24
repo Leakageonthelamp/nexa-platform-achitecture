@@ -6,7 +6,7 @@ Ownership stays in [`description.md`](description.md).
 <!-- ai:anchor:sentence -->
 ## Sentence
 
-The deals, the vouchers, and the member card on the basket. The shopper waits for the price and the hold. Settling the hold rides the order, because nobody is waiting once it is placed.
+The deals and the vouchers on the basket. The shopper waits for the price and the hold. Settling the hold rides the order, because nobody is waiting once it is placed. The card you scan is Loyalty.
 
 <!-- ai:anchor:features -->
 ## Features
@@ -41,10 +41,11 @@ The deals, the vouchers, and the member card on the basket. The shopper waits fo
 ### Write and read
 - **Contact:** Staff ask, customers read
 - **Technology:** gRPC
-- **From:** HLD Admin write and Reads · LLD Admin write, ListVouchers and GetMembercard
-- Staff write campaigns, vouchers, member cards, and an audience
+- **From:** HLD Admin write and Reads · LLD Admin write, ListVouchers, IssueReward
+- Staff write campaigns, vouchers, and an audience
+- Loyalty asks for a reward code, and waits
 - A message to the customer is written in that same commit
-- A shopper reads their own vouchers and member card
+- A shopper reads their own vouchers
 - A shopper never writes
 
 <!-- ai:anchor:shared -->
@@ -52,14 +53,15 @@ The deals, the vouchers, and the member card on the basket. The shopper waits fo
 
 **The book** — rules, what was issued, and one hold per order
 
-On the bar: campaigns, vouchers, member cards, holds, and the redemption record. A hold is a row, so it cannot be spent twice by a cache miss.
+On the bar: campaigns, vouchers, holds, and the redemption record. A hold is a row, so it cannot be spent twice by a cache miss. The card you scan is not on this bar.
 
 <!-- ai:anchor:neighbours -->
 ## Neighbours
 
 - **Orders** — solid, both ends, `asks`. Price the basket, then hold the deals.
-- **Customers** — solid, both ends, `asks`. Their own vouchers and member card.
-- **Staff** — solid, both ends, `asks`. Campaigns, vouchers, member cards, and the audience.
+- **Customers** — solid, both ends, `asks`. Their own vouchers.
+- **Staff** — solid, both ends, `asks`. Campaigns, vouchers, and the audience.
+- **Loyalty** — solid, one way, `asks`. `IssueReward`. This domain does not call Loyalty.
 - **Catalog** — solid, one way, `asks`. The item list, only when a rule names items.
 - **Orders** — dashed into this domain, `Kafka`. Placed, cancelled, or rejected.
 - **Notifications** — dashed out, `Kafka`. A send, or a broadcast. There is no campaign fact.
@@ -68,7 +70,7 @@ On the bar: campaigns, vouchers, member cards, holds, and the redemption record.
 <!-- ai:anchor:infrastructure -->
 ## Infrastructure
 
-- **Aurora PostgreSQL** — Rules, vouchers, member cards, holds, and redemptions.
+- **Aurora PostgreSQL** — Rules, vouchers, holds, and redemptions.
 - **S3** — The broadcast audience. Customer ids only.
 - **Kafka** — The dashed lines run on this.
 
@@ -77,4 +79,4 @@ No cache. Amounts are integer minor units.
 <!-- ai:anchor:not-here -->
 ## Not here
 
-The cart, the agreed total, the menu price, points, and message delivery. The app never calls this domain. Orders do.
+The cart, the agreed total, the menu price, points, the card you scan, and message delivery. The shopper reads their own vouchers. Orders price and hold the deals. Loyalty asks for a reward code.

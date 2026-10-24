@@ -13,7 +13,7 @@ If a diagram or the code breaks a rule here, either it changes, or this file cha
 - **Target concept (2029):** [`platform-concept.md`](platform-concept.md) is where the platform is heading: one Minor ID, wallet, and points balance across brands, AI ordering, and smart payment routing. It is direction, not a rule. Where it disagrees with this file, this file wins until an Open decision ([O-19 to O-26](#open--needs-a-business-answer)) is answered.
 - **Kafka topics:** [`kafka-topics.md`](kafka-topics.md) is the only list of topics. A topic that is not in that file does not exist.
 - **Reference HLD:** [`catalog-and-menu-diagrams/catalog-menu-hld.drawio`](catalog-and-menu-diagrams/catalog-menu-hld.drawio) is the layout every other HLD copies. [`wallet-diagrams/wallet-hld.drawio`](wallet-diagrams/wallet-hld.drawio) is the reference for the relation lines ([§11](#required-lines-on-every-hld)).
-- **Baseline files** are the ones without a suffix. The old domain `-v2.drawio` drafts are in [`archive/2026-10-05-v2-drafts/`](archive/2026-10-05-v2-drafts/). The overview `-v2` is still in place (see [§14](#14-known-drift)).
+- **Baseline files** are the ones without a suffix. The old `-v2.drawio` drafts, including the overview, are in [`_archive/2026-10-05-v2-drafts/`](_archive/2026-10-05-v2-drafts/).
 
 ---
 
@@ -80,8 +80,8 @@ A BFF talks to domains over gRPC. The one exception is `customer-bff`, which sub
 | Cart & Order | the cart, the order, the POS ticket, the checkout saga | the price (it asks Catalog), the charge (it asks Payment) |
 | Payment & Billing | the transaction, gateway keys per brand, invoices and receipts | the order status, the wallet balance |
 | Delivery | the delivery, the quote, the fee, the provider job, the rider, the roster, the earnings ledger | the store zone, the order, a real-money payout |
-| Loyalty | points and tier | the order |
-| Voucher & Membercard & Campaign | vouchers, member cards, campaign segments and audiences | message delivery |
+| Loyalty | points, the tier, and the card you scan | the order, voucher codes |
+| Voucher & Campaign | vouchers, campaigns, holds, the redemption book, audiences | the member card, message delivery, points |
 | Wallet | the wallet per brand and customer, the stored-value ledger, holds | real money, the charge, loyalty points |
 | Notification | templates, the message log, the inbox, device tokens, reachability | the contact, the consent, the OTP code |
 
@@ -96,14 +96,14 @@ Each domain has one owner of truth. A second domain that needs that data calls t
 | Brand & Store | `brand.changed`, `store.changed` | — | [`brand-store-hld`](brand-and-store-diagrams/brand-store-hld.drawio) | [`brand-store-lld`](brand-and-store-diagrams/brand-store-lld.drawio) |
 | Catalog | `catalog.menu.published`, `catalog.availability.changed` | `catalog.requested`, `brand.changed`, `store.changed` | [`catalog-menu-hld`](catalog-and-menu-diagrams/catalog-menu-hld.drawio) | [`catalog-menu-lld`](catalog-and-menu-diagrams/catalog-menu-lld.drawio) |
 | Cart & Order | `order.events`, `payment.requested` | `order.requested`, `payment.events`, `delivery.events` | [`cart-order-hld`](cart-and-order-domain-diagrams/cart-order-hld.drawio) | [`cart-order-lld`](cart-and-order-domain-diagrams/cart-order-lld.drawio) |
-| Payment & Billing | `payment.events` | `payment.requested` | [`payment-billing-hld`](payment-domain-diagrams/payment-billing-hld.drawio) | [`payment-billing-lld`](payment-domain-diagrams/payment-billing-lld.drawio) |
+| Payment & Billing | `payment.events` | `payment.requested`, `delivery.events` (FAAS invoice on `delivered`) | [`payment-billing-hld`](payment-domain-diagrams/payment-billing-hld.drawio) | [`payment-billing-lld`](payment-domain-diagrams/payment-billing-lld.drawio) |
 | Delivery | `delivery.events`, `payment.requested` (payout) | `order.events`, `store.changed`, `delivery.requested`, `payment.events` | [`delivery-dispatch-hld`](delivery-and-dispatch-diagrams/delivery-dispatch-hld.drawio) | [`delivery-dispatch-lld`](delivery-and-dispatch-diagrams/delivery-dispatch-lld.drawio) |
 | Loyalty & MemberCard | `notification.requested` | `order.events` | [`loyalty-membercard-hld`](loyalty-and-membercard-diagrams/loyalty-membercard-hld.drawio) | [`loyalty-membercard-lld`](loyalty-and-membercard-diagrams/loyalty-membercard-lld.drawio) |
-| Voucher & Membercard & Campaign | `notification.requested` | `order.events` | [`voucher-campaign-hld`](voucher-and-campaign-diagrams/voucher-campaign-hld.drawio) | [`voucher-campaign-lld`](voucher-and-campaign-diagrams/voucher-campaign-lld.drawio) |
+| Voucher & Campaign | `notification.requested` | `order.events` | [`voucher-campaign-hld`](voucher-and-campaign-diagrams/voucher-campaign-hld.drawio) | [`voucher-campaign-lld`](voucher-and-campaign-diagrams/voucher-campaign-lld.drawio) |
 | Wallet | `notification.requested` | `payment.events` | [`wallet-hld`](wallet-diagrams/wallet-hld.drawio) | [`wallet-lld`](wallet-diagrams/wallet-lld.drawio) |
-| Notification | — | `order.events`, `payment.events`, `notification.requested` | [`notification-hld`](notification-diagrams/notification-hld.drawio) | [`notification-lld`](notification-diagrams/notification-lld.drawio) |
+| Notification | — | `order.events`, `payment.events`, `delivery.events`, `notification.requested` | [`notification-hld`](notification-diagrams/notification-hld.drawio) | [`notification-lld`](notification-diagrams/notification-lld.drawio) |
 
-Each LLD covers five core flows per domain, as a draft to be aligned with the business. The remaining entry points are added one page each, using the [template](#lld-page-template). The Identity draft has six pages and publishes nothing: every caller is waiting, so there is no topic (principle 1). The Wallet draft instead has one page for every entry point (seven), plus page 8, the end-to-end pay-with-wallet checkout. The Delivery draft has one page per entry point (fourteen), plus page 15, the end-to-end delivery order. The Cart & Order draft adds page 6, the `delivery.events` consumer, and page 7, the cart. The Voucher & Campaign draft has one page per entry point (six). The Loyalty & MemberCard draft has six pages and publishes no fact of its own.
+Each LLD covers five core flows per domain, as a draft to be aligned with the business. The remaining entry points are added one page each, using the [template](#lld-page-template). The Identity draft has six pages and publishes nothing: every caller is waiting, so there is no topic (principle 1). The Wallet draft instead has one page for every entry point (seven), plus page 8, the end-to-end pay-with-wallet checkout. The Delivery draft has one page per entry point (fourteen), plus page 15, the end-to-end delivery order. The Cart & Order draft adds page 6, the `delivery.events` consumer, and page 7, the cart. The Voucher & Campaign draft has one page per entry point (seven, including `IssueReward`). The Loyalty & MemberCard draft has six pages and publishes no fact of its own. The Notification draft adds a `delivery.events` consumer. The Payment draft adds the wallet tender on charge and refund, and a Statement page for the FAAS invoice. The Catalog draft adds `ListSkus`.
 
 This table must agree with the registry in [`kafka-topics.md`](kafka-topics.md). If they differ, the registry wins and this table is fixed.
 
@@ -250,7 +250,7 @@ poll ─▶ dedupe ─▶ apply + commit (Postgres) ─▶ Ack (commit offset)
 
 ## 7. Sagas and long-running flows
 
-- **The domain that owns the outcome runs the saga.** Order runs checkout: it asks Catalog for the price, asks Payment for an authorization, dispatches to the POS, then sends capture or void.
+- **The domain that owns the outcome runs the saga.** Order runs checkout: it asks Brand & Store whether the store can take the order, Catalog for the price, Delivery for the quote, Voucher for the deals, and Payment for an authorization, then dispatches to the POS and sends capture or void.
 - **Saga state is a status column plus the outbox,** in the owning domain's Postgres. Each step commits before the next one starts. A crash resumes from the last committed status.
 - **Food payments are authorized first and captured later.** Payment holds the money at authorize. Capture happens only after the POS accepts the ticket; a rejection becomes a void.
 - **Timeouts are a sweeper, not a timer service.** Order's cron finds checkouts that never got `authorized` and tickets the POS never answered, then closes them and sends a void.
@@ -261,20 +261,26 @@ poll ─▶ dedupe ─▶ apply + commit (Postgres) ─▶ Ack (commit offset)
 This is the cross-domain baseline every Order and Payment LLD follows. The shopper waits on steps 1 to 5 only.
 
 ```
- 0  customer-bff ──gRPC GetCart / UpdateCart──▶ Order ──gRPC PriceLines──▶ Catalog     the cart, priced live
+ 0  customer-bff ──gRPC GetCart / UpdateCart──▶ Order ──gRPC PriceLines──▶ Catalog
+    then ──gRPC EvaluateBasket──▶ Voucher                                        the cart, priced live
  1  customer-bff ──gRPC PlaceOrder(idempotency_key, cart_version, expected total)──▶ Order
- 2  Order ──gRPC ResolveStore──▶ Brand & Store, then ──gRPC PriceLines──▶ Catalog
- 3  Order commits the order with its price lines (not placed yet)
+ 2  Order ──gRPC ResolveStore──▶ Brand & Store, then ──gRPC PriceLines──▶ Catalog,
+    then ──gRPC GetQuote──▶ Delivery, then ──gRPC EvaluateBasket──▶ Voucher
+ 3  Order ──gRPC ReserveRedemptions(order_id)──▶ Voucher, then commits the order
+    with its price lines and the quoted fee (not placed yet)
  4  Order ──gRPC CreateTransaction(idempotency_key)──▶ Payment ──HTTP──▶ Omise
+    (a wallet tender calls Wallet Hold here instead; see below)
  5  authorize_url ──▶ Order ──▶ customer-bff                  shopper finishes 3DS / QR at the gateway
  ─────────────────────────────────────────────── nobody waits from here ───────────────────────────────
  6  Omise ──webhook──▶ webhook-adapter ──payment.requested{webhook}──▶ Payment
  7  Payment commits ──▶ payment.events{authorized}                                              · Ack
  8  Order commits placed, deletes the cart ──▶ order.events{placed}                            · Ack
+    Voucher spends the hold on that fact
  9  Order POS worker ──gRPC──▶ BSL proxy ──▶ POS ticket
 10  POS ──webhook──▶ partner-adapter ──order.requested{pos_status}──▶ Order
 11  accepted: commit accepted + capture ──▶ order.events{accepted} · payment.requested{capture} · Ack
     rejected: commit rejected + void    ──▶ order.events{rejected} · payment.requested{void}    · Ack
+    Delivery starts dispatch on accepted
 12  Payment captures or voids ──▶ payment.events{captured | voided} ──▶ Order closes the step  · Ack
 ```
 
@@ -282,7 +288,8 @@ This is the cross-domain baseline every Order and Payment LLD follows. The shopp
 | --- | --- |
 | Store hidden, not live, or closed at step 2 | `PlaceOrder` returns `FAILED_PRECONDITION`. Nothing is committed. |
 | Live total differs from the total the shopper saw at step 2 | `PlaceOrder` returns `FAILED_PRECONDITION` (`price_changed`). Nothing is committed. The app re-reads the cart. |
-| Brand & Store or Catalog down at step 2 | `PlaceOrder` returns `UNAVAILABLE`. Nothing is committed. The app retries with the same `idempotency_key`. |
+| Brand & Store, Catalog, Delivery, or Voucher down at step 2 or 3 | `PlaceOrder` returns `UNAVAILABLE`. Nothing is committed. The app retries with the same `idempotency_key`. |
+| Quote expired, used, or for another brand | `PlaceOrder` returns `FAILED_PRECONDITION`. Nothing is committed. |
 | Payment down at step 4 | The order stays unplaced. A retry with the same key returns the same order and calls `CreateTransaction` again. |
 | Shopper abandons 3DS | No `authorized` arrives. The sweeper closes the order after the payment window and sends `payment.requested{void}`. |
 | `payment.events{failed}` | Order commits `cancelled` with reason `payment_failed` and publishes `order.events{cancelled}`. Notification messages from that fact only. |
@@ -609,19 +616,7 @@ These diagrams disagree with this file. Fix the diagram, then delete the row.
 
 | File | What is wrong | Fix |
 | --- | --- | --- |
-| [`overview-diagrams/mfg-eplatform-hld.drawio`](overview-diagrams/mfg-eplatform-hld.drawio) | "Admin / Store BFF" and a "Brand & Store portal" | `admin-bff` only, and remove the portal (guardrails) |
-| same | "per-service OLTP" and "polyglot per service" | Aurora with one schema per domain (P-08) |
-| same | topic families `delivery.*`, `customer.*`, `loyalty.*` | point at `kafka-topics.md`; those topics do not exist |
-| same | one "Partner / Aggregator / Webhook adapter" box, and no `partner-bff` | the four BFFs and two adapters (D-03) |
-| [`overview-diagrams/mfg-eplatform-hld-v2.drawio`](overview-diagrams/mfg-eplatform-hld-v2.drawio) | an older overview draft | move to `archive/` once the overview is fixed (D-06) |
-| [`payment-domain-diagrams/payment-billing-hld.drawio`](payment-domain-diagrams/payment-billing-hld.drawio) | no Wallet provider port, and a top-up is not captured at authorize | add `Hold`, `Capture`, `Release`, and `Refund`; capture a `purpose=top_up` charge at authorize (P-17, D-09) |
-| [`payment-domain-diagrams/payment-billing-lld.drawio`](payment-domain-diagrams/payment-billing-lld.drawio) | `method` has no `wallet`; `purpose` has no `voucher`, `membercard`, or `coupon`; Refund does not call Wallet | `method=wallet` returns no `authorize_url` and calls Wallet; extend `purpose`; a wallet-tender refund calls `Wallet.Refund` |
-| [`overview-diagrams/mfg-eplatform-hld.drawio`](overview-diagrams/mfg-eplatform-hld.drawio) | the Wallet box says only "digital wallets" | one wallet per brand per customer, and the stored-value ledger is here (D-10, D-11) |
-| [§7](#reference-flow-own-app-checkout) | the reference checkout never asks Delivery for a quote or a dispatch | add `GetQuote` before the commit, and dispatch on `accepted` (P-21, P-22) |
-| [`payment-domain-diagrams/payment-billing-hld.drawio`](payment-domain-diagrams/payment-billing-hld.drawio) and its LLD | Statement does not invoice a FAAS brand from `delivery.events{delivered}` | add that Statement consumer (P-26). Rider payout and TrueMoney are on the diagram (P-25) |
-| [`notification-diagrams/notification-hld.drawio`](notification-diagrams/notification-hld.drawio) | does not consume `delivery.events` | shopper status messages come from `delivery.events`, not from a second send (P-24) |
-| [`overview-diagrams/mfg-eplatform-hld.drawio`](overview-diagrams/mfg-eplatform-hld.drawio) | the partner-adapter box does not show fleet-provider webhooks | ZEEK and Grab Express webhooks enter there and leave as `delivery.requested` (P-18) |
-| [`loyalty-and-membercard-diagrams/loyalty-membercard-hld.drawio`](loyalty-and-membercard-diagrams/loyalty-membercard-hld.drawio) and [`voucher-and-campaign-diagrams/description.md`](voucher-and-campaign-diagrams/description.md) | both claim the member card. §3 still gives the card to Voucher & Campaign | the card you scan is Loyalty; codes stay in Voucher. Update §3 and the voucher diagram once that split is accepted |
+| — | None open. The skeleton, the wallet port, checkout, the FAAS invoice, `delivery.events`, and the member-card split were aligned in this pass. | Add a row here when a diagram next disagrees with this file. |
 
 ---
 

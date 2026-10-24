@@ -8,7 +8,7 @@ Admin writes the draft. Publish emits the facts. Shoppers and aggregators only r
 | --- | --- |
 | **Owns** | SKU, modifier groups, price book, menu draft and published version, sold-out flag. |
 | **Does not own** | The store, the order, or the price on an order. Cart & Order calls `PriceLines` at checkout and stores the lines it was given. |
-| **How it is called** | `admin-bff` is the only write door (draft, publish, sold-out). `customer-bff`, `guest-bff`, and `partner-adapter` call `GetMenu`. Cart & Order calls `PriceLines`. |
+| **How it is called** | `admin-bff` is the only write door (draft, publish, sold-out). `customer-bff`, `guest-bff`, and `partner-adapter` call `GetMenu`. Cart & Order calls `PriceLines`. Voucher calls `ListSkus` when a rule names items. |
 | **Kafka** | Consumes `catalog.requested` (sold-out from the BSL POS, via `partner-adapter`), `brand.changed`, and `store.changed`. Publishes `catalog.menu.published` and `catalog.availability.changed`. The master feed is a worker, not a topic. |
 
 ## Diagrams
@@ -25,7 +25,7 @@ Who reads and writes the menu, how a menu goes live and an item sells out, and t
 
 **HLD** — `catalog-menu-hld.drawio`
 
-One page: the draft and publish path, sold-out, `GetMenu`, `PriceLines`, and the facts that leave after commit. This is the layout the other domain HLDs copy.
+One page: the draft and publish path, sold-out, `GetMenu`, `PriceLines`, `ListSkus`, and the facts that leave after commit. This is the layout the other domain HLDs copy.
 
 **LLD** — `catalog-menu-lld.drawio`
 
@@ -36,3 +36,4 @@ One page: the draft and publish path, sold-out, `GetMenu`, `PriceLines`, and the
 | 3 | GetMenu |
 | 4 | PriceLines |
 | 5 | `brand.changed` and `store.changed` |
+| 6 | ListSkus |

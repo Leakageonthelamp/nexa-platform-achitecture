@@ -60,6 +60,7 @@ On the bar: the cart, the order, the prices the shopper agreed, and the kitchen 
 - **Customers** — solid, both ends, `asks`. The cart and checkout.
 - **Catalog, Brand & Store, Delivery, Voucher, Payments** — solid, both ends, `asks`. Price, the store, the quote, the deals, and the charge, while the shopper waits.
 - **Partners and the kitchen** — dashed into this domain, `Kafka`. A new aggregator order, or the kitchen’s answer.
+- **Payments** — dashed out, `Kafka`. Capture or void.
 - **Payments** — dashed into this domain, `Kafka`. Authorized, captured, failed, or voided.
 - **Delivery** — dashed into this domain, `Kafka`. Delivered, failed, or cancelled.
 - **Delivery, Notification, Loyalty, Voucher, and partners** — dashed out, `Kafka`. The order’s life: placed, accepted, rejected, ready, completed, cancelled.

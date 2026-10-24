@@ -62,6 +62,7 @@ On the bar: the template, the inbox, the device token, and whether that channel 
 - **Staff** — solid, both ends, `asks`. Templates, channel setup, the log, and a resend.
 - **Campaign** — solid, both ends, `asks`. Counts for a broadcast.
 - **Orders** — dashed into this domain, `Kafka`. The order’s life.
+- **Delivery** — dashed into this domain, `Kafka`. The trip, so the shopper hears the rider without a second send.
 - **Payments** — dashed into this domain, `Kafka`. A refund only.
 - **Loyalty, Wallet, Voucher, and the edge** — dashed into this domain, `Kafka`. A send, a broadcast, or a provider receipt.
 - **Push, email, text, and LINE** — solid, `HTTP`, outward. Not a consume, so there is no ack on that hop.

@@ -8,8 +8,8 @@ Food payments are authorized first and captured later. The hold is placed at aut
 | --- | --- |
 | **Owns** | The transaction, the attempt, gateway keys per brand, the invoice, and the receipt. |
 | **Does not own** | The order status, the wallet balance, or the price. Order runs the saga. Wallet owns the stored-value ledger. |
-| **How it is called** | Order calls `CreateTransaction` at checkout. `customer-bff` calls it only for a wallet top-up. `admin-bff` calls refund. Omise and TrueMoney are reached by this engine. They never call it. Webhooks land at `webhook-adapter`. |
-| **Kafka** | Publishes `payment.events` (authorized, captured, failed, voided, refunded, paid_out, payout_failed). Consumes `payment.requested` (capture, void, webhook, payout). Charge and refund stay gRPC, because someone is waiting. |
+| **How it is called** | Order calls `CreateTransaction` at checkout. A wallet tender calls Wallet `Hold` and returns no `authorize_url`. Capture and void call Wallet `Capture` or `Release`. `customer-bff` calls `CreateTransaction` only for a wallet top-up, captured at authorize. `admin-bff` calls refund, and a wallet tender calls Wallet `Refund`. Omise and TrueMoney are reached by this engine. They never call it. Webhooks land at `webhook-adapter`. |
+| **Kafka** | Publishes `payment.events` (authorized, captured, failed, voided, refunded, paid_out, payout_failed). Consumes `payment.requested` (capture, void, webhook, payout) and `delivery.events` (`delivered` invoices a FAAS brand). Charge and refund stay gRPC, because someone is waiting. |
 
 ## Diagrams
 
@@ -25,7 +25,7 @@ One page: hold, then capture or release, a refund, and the Thai tax invoice. A w
 
 **HLD** — `payment-billing-hld.drawio`
 
-One page: checkout, the command in, the transaction, statement mode, and who consumes `payment.events` (Order, Wallet, Delivery, Notification).
+One page: checkout, the wallet port, the command in, the transaction, statement mode (including the FAAS invoice), and who consumes `payment.events` (Order, Wallet, Delivery, Notification).
 
 **LLD** — `payment-billing-lld.drawio`
 
