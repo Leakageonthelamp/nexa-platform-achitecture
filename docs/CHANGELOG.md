@@ -6,6 +6,37 @@ Baseline v2 (2026-10-05) is superseded by baseline v3 (2026-10-24). v2 content i
 
 ---
 
+## Addendum 2026-10-25: postpaid QR table ordering (proposal)
+
+A new requirement was added to the first draft: a customer scans a QR code at the table, orders from the phone, and pays after eating. The order stays on the table until it is paid, and the food is served to the table. Everything below is a **proposal in the design phase**. Nothing is fixed.
+
+| Area | Change |
+| --- | --- |
+| New note | [`design/postpaid-table-ordering.md`](design/postpaid-table-ordering.md): the open tab in Cart & Order, table and QR, lifecycle, flow, payment at the end, POS add-on, data and contracts, edge cases, decisions, open questions |
+| Rulebook | `architecture.md`: new decisions **P-44 to P-52** and open items **O-37 to O-48** in section 13. A postpaid flow in section 7. The component rows (section 3), the OMS capabilities, section 10, two drift rows (section 14) and three glossary terms were extended. The text of section 2, 5 and 8 is unchanged |
+| POS | `design/pos-adapters.md`: new section 14 (open checks and table service) and a BSL postpaid paragraph. BSL flags for the new operations are recorded as unknown |
+| Config | `design/brand-configuration.md`: a postpaid switch row in the axis and ownership tables, and a new section 7 with the switches. The open items moved to section 8 |
+| Kafka | `kafka-topics.md`: **no new topic**. `order.events` gains `round_updated`. `payment` records carry a `purpose`. The `tab.events` idea is listed as already covered |
+| Domains | `description.md` of Cart & Order, Brand & Store, Payment & Billing, Notification, Identity & Customer, Delivery & Dispatch (not used) and Voucher & Campaign got a "v-next (2026-10-25)" section |
+| Diagrams | New `diagrams/13-postpaid-table-ordering.drawio` (6 pages) with previews and the generator module `diagrams/tools/d13_postpaid.py`. `drawio_lib.py` `frame()` gained an optional `date` argument whose default is unchanged. The other 12 files were not regenerated and are unchanged |
+
+Decisions I made for this addendum (each is also a P- row):
+
+| # | Point | Choice | Why |
+| --- | --- | --- | --- |
+| 1 | Who owns the table session and tab | Cart & Order (P-44). Rejected: Brand & Store, a new Dining domain, the Delivery domain | Principle 3 and 5: one write path per aggregate and no new service |
+| 2 | Guest identity | A guest token: a customer-family JWT with scope `dine_in`, signed by Identity, 5 minutes (P-45). A fourth token family is written down as an alternative. The text of section 8 is unchanged and flagged | Do not change an accepted rule without the owner |
+| 3 | When an order is "placed" | At the first round, with no payment gate. This changes the cost line of P-09 and is flagged | A tab has no payment before the meal |
+| 4 | Payment | Pay first, then close the POS check. Capture at authorize as in P-17. A card hold (P-48) is optional per brand | A POS close can be retried safely, a split authorize and capture cannot be done with QR |
+| 5 | POS without open check | Degrade modes `ticket_per_round` and `staff_settle`. No vendor capability is asserted | O-42 is open for every vendor |
+| 6 | Kafka | No new topic (P-51) | A `tab.events` topic fails the third answer of the growth rule |
+| 7 | Split bill | Whole bill only in the first draft. Equal split next, by item later, flagged against P-16 | Conservative scope |
+| 8 | "Deliver to table" | Table service by staff, from POS or kitchen signals plus a staff tap. Not the Delivery domain | No rider, no fee, no zone |
+
+Diagrams to update next (they do not yet show postpaid): 03 identity (guest token), 04 checkout (postpaid variant), 05 POS adapters (open check and flags), 07 Kafka map (`round_updated`, `purpose`), 10 domain map and 11 other domains (new calls). Public facts about the card hold were read on the Omise pages named in the note on 2026-10-25. MFG's own account settings are to confirm (O-43).
+
+---
+
 ## 1. Summary
 
 | Area | Change |

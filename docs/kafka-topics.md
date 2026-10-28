@@ -2,7 +2,7 @@
 
 **First draft, design phase (baseline v3 · 2026-10-24).** Twelve business topics are registered. Each high-level diagram must use this list and no other topic name.
 
-The first draft keeps topics minimal on purpose. Twelve is considered low for a platform of this size, so the list **may grow** once the platform is in use. A topic is added only when it passes the three-answers rule (producer, consumer, and why gRPC or an existing topic does not cover it). The rules for growth, and the candidates that are **not** registered, are at the end of this file: [Growth policy](#growth-policy) and [Candidates, not registered](#candidates-not-registered). **No topic was added in v3.** The registry below is the only list.
+The first draft keeps topics minimal on purpose. Twelve is considered low for a platform of this size, so the list **may grow** once the platform is in use. A topic is added only when it passes the three-answers rule (producer, consumer, and why gRPC or an existing topic does not cover it). The rules for growth, and the candidates that are **not** registered, are at the end of this file: [Growth policy](#growth-policy) and [Candidates, not registered](#candidates-not-registered). **No topic was added in v3, and none was added for postpaid table ordering on 2026-10-25** (see [Postpaid table ordering](#postpaid-table-ordering--no-new-topic)). The registry below is the only list.
 
 The rules come from two Confluent notes and from how food-delivery checkouts actually run:
 
@@ -45,15 +45,15 @@ The rules come from two Confluent notes and from how food-delivery checkouts act
 
 `catalog.menu.published` is thin: version and `effective_at` only. The consumer calls `GetMenu(version)`. A menu can pass Kafka's 1 MB default, so the body stays off the topic.
 
-`order.requested` is one `oneof`: create, replace, cancel, POS status. The same order id stays in one partition, so a cancel cannot pass the create. The POS status variant carries one canonical `PosUpdate` that the vendor's mapper in `partner-adapter` builds, with a deterministic `event_id` so a vendor duplicate and a redelivery dedupe the same way. Order applies it by rank and version. The shape and the rules are in [`design/pos-adapters.md`](design/pos-adapters.md#4-canonical-shapes). This does not add a topic.
+`order.requested` is one `oneof`: create, replace, cancel, POS status. The same order id stays in one partition, so a cancel cannot pass the create. The POS status variant carries one canonical `PosUpdate` that the vendor's mapper in `partner-adapter` builds, with a deterministic `event_id` so a vendor duplicate and a redelivery dedupe the same way. Order applies it by rank and version. The shape and the rules are in [`design/pos-adapters.md`](design/pos-adapters.md#4-canonical-shapes). For a postpaid table order the same variant also carries the round and the POS check references and the check state ([`design/pos-adapters.md` §14](design/pos-adapters.md#14-open-checks-and-table-service-proposal-p-49)). This does not add a topic.
 
 `payment.requested` is one `oneof`: capture, void, webhook, payout. Charge and refund are not on it. Charge is the checkout gRPC, because the shopper is waiting for `authorize_url`. Refund is an admin gRPC. The webhook variant is published by webhook-adapter after it has checked the gateway signature. `payout` is published by Delivery in the same commit as `delivered`, one payout per delivery. Delivery chooses the id and Payment uses it as the transaction id, so the key stays `brand_id:transaction_id`. A rider payout uses `brand_id = mfg` (P-23).
 
-`payment.events` is one `oneof`: authorized, captured, failed, voided, refunded, paid_out, payout_failed. Wallet acts on `captured` with `purpose=top_up` only. Delivery acts on `paid_out` and `payout_failed` only. Every other variant is an Ack with no work for that consumer. It does not have its own topic.
+`payment.events` is one `oneof`: authorized, captured, failed, voided, refunded, paid_out, payout_failed. Wallet acts on `captured` with `purpose=top_up` only. Delivery acts on `paid_out` and `payout_failed` only. Every other variant is an Ack with no work for that consumer. It does not have its own topic. A postpaid table bill rides on the same variants, with `purpose = table_bill` or `table_preauth` on the record (P-47, P-48). Wallet acts on `captured` with `purpose=top_up` only, so it ignores both.
 
 A wallet spend is not on this bus. Payment calls Wallet over gRPC (`Hold`, `Capture`, `Release`, `Refund`) and the caller is waiting, so a command cannot return the hold (D-09).
 
-`order.events` is one `oneof`: placed, accepted, rejected, ready, completed, cancelled. Delivery acts on `accepted` (start dispatch) and `cancelled` (cancel the provider job). Every other variant is an Ack with no work.
+`order.events` is one `oneof`: placed, accepted, rejected, ready, completed, cancelled, and, proposed on 2026-10-25 for postpaid table orders, `round_updated` (P-51). Delivery acts on `accepted` (start dispatch) and `cancelled` (cancel the provider job), for delivery orders only: a postpaid `accepted` carries `fulfillment = dine_in`. Every other variant is an Ack with no work.
 
 Notification reads `payment.events` for `refunded` only. Every other variant is an Ack with no work.
 
@@ -161,6 +161,23 @@ These are **not** topics. They do not exist, and a diagram must not draw them. E
 | Idea | Covered by |
 | --- | --- |
 | A topic per POS vendor, or `pos.requested` | `order.requested{pos_status}`. The vendor mapper is at the edge (P-36) |
+| A table session or tab topic (`tab.events`) for postpaid table ordering | `order.events{round_updated}` and the existing `placed`, `accepted`, `completed`, `cancelled`, keyed by the order. The only consumers outside Order are Notification, Voucher, and Loyalty, which already read `order.events` (P-51) |
 | A reconciliation result topic | A `reconciled` variant on `order.events` if another domain ever needs it, otherwise Order's own table and CSC queue |
 | Brand feature switches changing | `brand.changed`, plus gRPC reads from the owner of each setting |
 | Changes detected in a legacy system | The domain's existing facts and commands, published by the bridge worker through the outbox ([`design/legacy-bridge.md`](design/legacy-bridge.md)) |
+
+## Postpaid table ordering — no new topic
+
+Added 2026-10-25 ([`design/postpaid-table-ordering.md`](design/postpaid-table-ordering.md#kafka-no-new-topic), P-51). The three answers for a possible table-events topic: **who produces it** (Order), **who consumes it** (Notification, Voucher, and Loyalty, all of which already read `order.events`), and **why an existing topic does not cover it** (it does: one more `oneof` variant, keyed by the order, keeps the tab's events in order). The third answer fails, so no topic is added.
+
+| Event | Topic | Notes |
+| --- | --- | --- |
+| first round committed | `order.events{placed}` | no payment gate for a postpaid tab. `order_type = dine_in_postpaid`, `fulfillment = dine_in` |
+| a round changes status | `order.events{round_updated}` (new variant) | round number and status. No personal data |
+| first round accepted by the POS | `order.events{accepted}` | Delivery ignores it for `dine_in` |
+| tab closed | `order.events{completed}` | totals, `customer_id` if any, `settlement`. Voucher commits its hold, Loyalty earns |
+| tab cancelled | `order.events{cancelled}` | Voucher releases its hold |
+| table bill paid | `payment.events{captured}` with `purpose = table_bill` | Order marks the tab `paid` |
+| POS check state | `order.requested{pos_status}` | carries `check_ref`, `round_ref`, `check_state` |
+
+**Promote a topic only if** a second, high-rate consumer of table events outside these appears (for example a kitchen display service that is not the POS), or `round_updated` volume swamps `order.events`. The extra load is estimated in [`design/postpaid-table-ordering.md` §11](design/postpaid-table-ordering.md#11-scale-assumptions-recommended-to-be-rewritten) (an assumption), and the partition counts above stay as registered until O-01 is answered.

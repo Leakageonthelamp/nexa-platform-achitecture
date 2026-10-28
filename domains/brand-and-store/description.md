@@ -16,6 +16,10 @@ Open-now is not stored. A reader derives it from hours, status, and the current 
 ## v3 additions: brand configuration
 
 Baseline v3 (2026-10-24) proposes that Brand & Store also owns each brand's **feature switches** (which capabilities the brand has turned on) and its **onboarding state** (draft, configured, ready, testing, live). It does not own other domains' settings: each domain owns its own per-brand slice. A new brand is mostly configuration, and a readiness check reads each owner before the live flag turns on. See [`brand-configuration.md`](../../docs/design/brand-configuration.md). The HLD does not show this yet (see [`architecture.md` §14](../../docs/architecture.md#14-known-drift)).
+## v-next (2026-10-25): table registry for postpaid ordering (proposal)
+
+Brand & Store would also own the **table registry** (`store_table`: table, label, active flag) and the **QR key version** for postpaid QR table ordering, plus the brand and store switch `postpaid_table_ordering`. It adds `ResolveTable` (verifies the signed QR and returns the table and store facts), `ListTables`, `UpsertTable`, and `RotateTableKey`. It does not own the table session or the tab: Cart & Order does, so the one-owner rule holds. Design: [`postpaid-table-ordering.md`](../../docs/design/postpaid-table-ordering.md) (P-44, P-45). The HLD does not show this yet.
+
 ## Diagrams
 
 **Overview** — `brand-store-overview.drawio`

@@ -13,6 +13,10 @@ The shopper waits on the price and the hold. Settling the hold rides `order.even
 
 Deals on the cart are a draft answer to O-21. v1 applies the rules in a fixed order. It does not search for the best stack, and it does not enforce a margin floor.
 
+## v-next (2026-10-25): vouchers at the table bill (proposal)
+
+For postpaid table ordering ([`postpaid-table-ordering.md`](../../docs/design/postpaid-table-ordering.md), P-47, P-51), Order calls `EvaluateBasket` on the whole tab at bill time (`channel = dine_in`) and `ReserveRedemptions(order_id)` only when the diner pays. A postpaid hold is committed on `order.events{completed}` and released on `cancelled`, not committed on `placed`. This is a change to this domain's consumer. Whether a voucher may be used after rounds were sent is open (O-45).
+
 ## Diagrams
 
 **Overview** — `voucher-campaign-overview.drawio`

@@ -14,6 +14,10 @@ Every caller is waiting, so every door is gRPC. Kong reads the public half of th
 ## v3 additions: Minor ID per brand
 
 Baseline v3 (2026-10-24): one Minor ID works across all brands and can be **enabled or disabled per brand**. A customer may stay in one brand. The profile is shared across brands with PDPA consent. Loyalty and the wallet stay separate per brand (D-11, confirmed). See [`identity-model.md`](../../docs/design/identity-model.md). The HLD and LLD page 3 (`JoinBrand`) do not show the membership status yet (see [`architecture.md` §14](../../docs/architecture.md#14-known-drift)).
+## v-next (2026-10-25): guest token for table ordering (proposal)
+
+For postpaid QR table ordering ([`postpaid-table-ordering.md`](../../docs/design/postpaid-table-ordering.md), P-45), Identity would sign a **guest token**: a customer-family JWT with scope `dine_in`, a session and member claim, and a 5-minute life, issued by one new call, `IssueGuestToken`, callable by `guest-bff` only. Identity keeps no guest state and no personal data. A diner who signs in joins the table session with the normal customer token and the brand's membership (D-11, P-40). This extends the meaning of the customer token family and is flagged in the rulebook. The HLD does not show it yet.
+
 ## Diagrams
 
 **Overview** — `identity-customer-overview.drawio`

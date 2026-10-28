@@ -13,6 +13,10 @@ Aggregator orders are skipped. Grab, LINE MAN, and Shopee Food already notify th
 | **How it is called** | `customer-bff` registers devices, reads the inbox, and holds the WebSocket. `admin-bff` writes templates and channel config, and CSC reads the log and resends. Provider receipts (SES, SMS, LINE) arrive at `webhook-adapter` and become a command. |
 | **Kafka** | Publishes nothing. Consumes `order.events`, `payment.events` (refunded only), `delivery.events` (shopper status), and `notification.requested` (send, broadcast, receipt). |
 
+## v-next (2026-10-25): table orders (proposal)
+
+For postpaid table ordering ([`postpaid-table-ordering.md`](../../docs/design/postpaid-table-ordering.md), P-51), Notification reads one more `order.events` variant, `round_updated`, and messages a signed-in diner when a round is `ready` or `rejected`, and with the receipt link when the tab is `completed`. A guest has no contact, so a guest sees status on screen. Notification must not treat a postpaid `placed` as a paid order. Messages to staff (a bill request, a call for help) are an open question (O-44), because Notification has no staff recipient type today.
+
 ## Diagrams
 
 **Overview** — `notification-overview.drawio`

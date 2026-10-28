@@ -468,11 +468,12 @@ LEG_W = 880
 LEG_H = 104
 
 
-def frame(pg, title, maps_to, questions=None, q_title="Open questions and assumptions", legend=True, notes_h=None):
+def frame(pg, title, maps_to, questions=None, q_title="Open questions and assumptions", legend=True, notes_h=None,
+          date="2026-10-24"):
     """Title, subtitle, legend and the 'open questions' sticky. Content area: y from 84 to pg.h - LEG_H - 36."""
     pg.text("title", 24, 12, pg.w - 48, 32, "NEXA &#8211; %s" % title, size=22, color="#0F172A", bold=True, meta=True)
     pg.text("subtitle", 24, 46, pg.w - 48, 22,
-            "NEXA - first draft, 2026-10-24 &#183; design phase, nothing is fixed &#183; maps to: %s" % maps_to,
+            "NEXA - first draft, %s &#183; design phase, nothing is fixed &#183; maps to: %s" % (date, maps_to),
             size=12, color="#64748B", meta=True)
     y0 = pg.h - LEG_H - 16
     if legend:

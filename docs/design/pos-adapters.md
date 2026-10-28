@@ -1,6 +1,6 @@
 # POS adapters — the multi-vendor POS port in OMS
 
-**Status: first draft, proposed (P-36).** Nothing here is final. Rules that bind the design stay in [`architecture.md`](../architecture.md).
+**Status: first draft, proposed (P-36; open checks for postpaid table ordering added 2026-10-25, P-49).** Nothing here is final. Rules that bind the design stay in [`architecture.md`](../architecture.md).
 
 The Order Management System (OMS) is the Cart & Order domain ([description](../../domains/cart-and-order/description.md)). It sends each order to the store's point-of-sale (POS) and reads the POS answer. The POS is the one layer we do not control: it is vendor software and hardware, and each brand may use a different vendor. BSL is the first and main POS. Promise and VIVI may follow. Others may come.
 
@@ -97,7 +97,7 @@ type PosTarget struct{ BrandID, StoreID string }
 
 `Replace` is not on the port. A replace is `Cancel` then `Submit` for vendors with `supports_modify = false`, as the Cart & Order HLD already describes. A vendor with a native modify call can get a method later.
 
-Errors are typed so the use case can choose: `ErrNotSupported`, `ErrTooLate`, `ErrRejected{reason}`, `ErrUnavailable` (retry), `ErrAmbiguous` (the request may or may not have reached the POS: read the status before sending again).
+Errors are typed so the use case can choose: `ErrNotSupported`, `ErrTooLate`, `ErrRejected{reason}`, `ErrUnavailable` (retry), `ErrAmbiguous` (the request may or may not have reached the POS: read the status before sending again). Postpaid table ordering adds operations for an open check, in [section 14](#14-open-checks-and-table-service-proposal-p-49).
 
 ---
 
@@ -189,7 +189,7 @@ Capabilities say what a POS vendor (and a given store setup) can do. They are da
 | `supports_bill_readback` | `ReadBack` works | reconciliation reports `unknown` |
 | `supports_sold_out_push` | pushes sold-out changes | sold-out comes from the master feed only |
 
-More flags are added when a vendor needs one. A flag needs a reason and a behavior for `false`; a flag nobody reads is not added (principle 1).
+More flags are added when a vendor needs one. A flag needs a reason and a behavior for `false`; a flag nobody reads is not added (principle 1). Postpaid table ordering adds seven more flags, listed in [section 14](#14-open-checks-and-table-service-proposal-p-49).
 
 **Effective capability** for a shopper action is the AND of three things: the vendor supports it, the store's POS setup allows it, and the brand has the feature switched on (see [`brand-configuration.md`](brand-configuration.md)). Delivery, for example, also needs a fleet provider for the store (P-19).
 
@@ -316,6 +316,8 @@ A starting BSL profile (all values are **Assumptions** until the vendor confirms
 | `supports_bill_readback` | unknown, treat as false |
 | `guard_total_regression` | true |
 
+**Postpaid (added 2026-10-25).** Nothing is recorded about BSL and open checks, adding items to a check, payment taken outside the POS, table transfer, or check webhooks. Every new flag in section 14 is **unknown, treat as false** for BSL until the vendor answers (O-42). The recorded behaviors above (duplicate and out-of-order webhooks, a late or empty total overwriting the net total, dropped promotions) apply to a check the same way and are covered by the same generic rules.
+
 ---
 
 ## 11. Failure table
@@ -343,6 +345,7 @@ A starting BSL profile (all values are **Assumptions** until the vendor confirms
 | [`kafka-topics.md`](../kafka-topics.md) | `order.requested` note. No new topic | Done in this pass |
 | Cart & Order HLD and LLD page 3 | show the port, the registry, the rules R1 to R7, and the reconcile cron | **Diagram not updated.** Listed in [`CHANGELOG.md`](../CHANGELOG.md) under "Diagrams to update next" |
 | Cart & Order HLD script | still says "BSL only" | Marked as v2 at the top of the script |
+| [`postpaid-table-ordering.md`](postpaid-table-ordering.md) | uses the new port operations and flags in section 14 | Added 2026-10-25 (P-49) |
 
 ---
 
@@ -353,3 +356,53 @@ A starting BSL profile (all values are **Assumptions** until the vendor confirms
 | O-28 | Vendor contract limits per POS: rate limits, webhook guarantees (retries, signatures, ordering), versioning, delivery support dates, and the real capability matrix. Needed to replace the Assumptions above |
 | O-32 | When the POS disagrees with our priced order (dropped promotion, wrong total), what is the rule: keep the shopper's price, adjust, or send to CSC? |
 | O-04 | The POS answer window (already open) |
+| O-42 | The open-check capability of each vendor for postpaid table ordering (open check, add items, outside payment, table transfer, check webhooks). Extends O-28 |
+
+---
+
+## 14. Open checks and table service (proposal, P-49)
+
+Added 2026-10-25. A postpaid table order keeps a check open on the POS while the diners eat, and adds each round to it. The full design is in [`postpaid-table-ordering.md`](postpaid-table-ordering.md). This section is the part that touches the port. Names are proposals.
+
+### Flags
+
+| Flag | Meaning | If false |
+| --- | --- | --- |
+| `supports_dine_in` | accepts a ticket with fulfillment `dine_in` and a table reference | postpaid is not offered for the store |
+| `supports_open_check` | keeps one check open per table and adds items to it | use `ticket_per_round` |
+| `supports_add_items` | appends a round to an open check | use `ticket_per_round` |
+| `supports_get_check` | returns the check as the POS holds it | reconciliation reports `unknown` |
+| `supports_external_payment` | records a payment taken outside the POS and closes the check | use `staff_settle` |
+| `supports_table_transfer` | moves a check to another table | staff move it in the POS by hand |
+| `supports_check_webhooks` | pushes check paid, closed, and voided | poll `GetCheck`, or staff close in the admin console |
+
+For BSL all seven are unknown, and are treated as false (see section 10).
+
+### Operations
+
+```go
+// ports/out/pos.go — additions for postpaid (not compiled code)
+OpenCheck(ctx, t PosTarget, req OpenCheckRequest) (CheckRef, error)
+AddItems(ctx, ref CheckRef, rd RoundRequest) (RoundRef, error)   // idempotency_key = order_id:round_no
+GetCheck(ctx, ref CheckRef) (ReportedCheck, error)               // may subsume ReadBack
+ApplyPayment(ctx, ref CheckRef, p ExternalPayment) error
+CloseCheck(ctx, ref CheckRef, idempotencyKey string) error
+TransferTable(ctx, ref CheckRef, toTable string) error           // optional
+```
+
+- The **ticket request** gains `fulfillment = dine_in`, `table_ref`, `round_no`, `check_ref`, and `payment.kind = pay_later`.
+- The **POS update** gains `check_ref`, `round_ref`, and `check_state` (`open`, `payment_applied`, `closed`, `voided`), a small second rank ladder that follows the same rules R1 to R7.
+- A timeout on `AddItems` is `ErrAmbiguous`. Read `GetCheck` before any re-send, unless the vendor has `supports_idempotent_submit`.
+- **R5 still holds.** A POS update never writes the order's price lines. The bill for a tab is built from the lines NEXA agreed at each round, and `ReportedCheck` values are stored apart. A reported total of zero after a good one is an anomaly (R7).
+
+### Modes
+
+`postpaid_pos_mode` is a column in `pos_connection`, per store:
+
+| Mode | Needs | NEXA does |
+| --- | --- | --- |
+| `open_check` | open check, add items, external payment | `OpenCheck`, `AddItems` per round, `ApplyPayment` and `CloseCheck` at the end |
+| `ticket_per_round` | a table ticket | each round is its own ticket marked with table, round, and "pay later". NEXA keeps the tab. Staff settle in the POS, or a vendor-specific close is added (to confirm) |
+| `staff_settle` | none beyond tickets | NEXA runs the ordering, and payment is at the counter only. The POS update (or a staff action) closes the tab |
+
+The mode follows the same AND as every capability: vendor flags, store setting, brand switch.

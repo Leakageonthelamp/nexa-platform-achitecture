@@ -57,7 +57,7 @@ Own-app checkout, the reference saga, is in [`docs/architecture.md` §7](docs/ar
 1. [`docs/architecture.md`](docs/architecture.md) — principles, components, transports, and the decision register.
 2. [`docs/kafka-topics.md`](docs/kafka-topics.md) — the twelve registered topics, their keys, what was removed, and the growth policy.
 3. [`docs/design/tech-stack.md`](docs/design/tech-stack.md) — what is fixed, what is open, and what is verified.
-4. The other design notes in [`docs/design/`](docs/design/): [POS adapters](docs/design/pos-adapters.md), [brand configuration](docs/design/brand-configuration.md), [order payload log](docs/design/order-payload-log.md), [legacy bridge](docs/design/legacy-bridge.md), [identity model](docs/design/identity-model.md), [scale assumptions](docs/design/scale-assumptions.md).
+4. The other design notes in [`docs/design/`](docs/design/): [POS adapters](docs/design/pos-adapters.md), [brand configuration](docs/design/brand-configuration.md), [order payload log](docs/design/order-payload-log.md), [legacy bridge](docs/design/legacy-bridge.md), [identity model](docs/design/identity-model.md), [scale assumptions](docs/design/scale-assumptions.md), [postpaid table ordering](docs/design/postpaid-table-ordering.md) (proposal, 2026-10-25).
 5. [`domains/platform-overview/description.md`](domains/platform-overview/description.md) — the platform pictures.
 6. The domain folder you work on. Each `description.md` says what the domain owns and which diagram files are current.
 7. [`docs/platform-concept.md`](docs/platform-concept.md) — where the platform is heading, and where that picture still disagrees with the baseline.
@@ -113,7 +113,8 @@ Files without a suffix are the baseline. Superseded `-v2` drafts, including the 
 │   │   ├── order-payload-log.md    MongoDB parallel order payload log.
 │   │   ├── legacy-bridge.md        Anti-corruption layer and strangler cutover.
 │   │   ├── scale-assumptions.md    Recommended shape. All numbers are assumptions.
-│   │   └── identity-model.md       Minor ID across brands.
+│   │   ├── identity-model.md       Minor ID across brands.
+│   │   └── postpaid-table-ordering.md  QR table ordering, pay at the end (proposal).
 │   └── tools/                      check-links.py, lint-old-names.py, scale-calc.py.
 ├── domains/
 │   ├── platform-overview/          Platform overview and HLD.

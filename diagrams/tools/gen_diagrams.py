@@ -19,7 +19,7 @@ OUT = os.path.join(ROOT, "diagrams")
 import validate_diagrams as V
 
 MODULES = ["d01_overview", "d02_brand", "d03_identity", "d04_checkout", "d05_pos", "d06_paylog", "d07_kafka",
-           "d08_legacy", "d09_ai", "d10_domainmap", "d11_domains", "d12_infra"]
+           "d08_legacy", "d09_ai", "d10_domainmap", "d11_domains", "d12_infra", "d13_postpaid"]
 
 
 def slug(s):

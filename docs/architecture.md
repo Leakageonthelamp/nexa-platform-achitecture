@@ -1,6 +1,6 @@
 # NEXA — architecture baseline
 
-**Baseline v3 · 2026-10-24.** This is the rulebook for designing and building any domain on NEXA (next generation experience architecture), the Minor Food platform that was called "MFG ePlatform" until v2. Read it before drawing a high-level design (HLD), a low-level design (LLD), or writing the first line of a service.
+**Baseline v3 · 2026-10-24, with an addendum on 2026-10-25** (postpaid QR table ordering: P-44 to P-52, O-37 to O-48). This is the rulebook for designing and building any domain on NEXA (next generation experience architecture), the Minor Food platform that was called "MFG ePlatform" until v2. Read it before drawing a high-level design (HLD), a low-level design (LLD), or writing the first line of a service.
 
 **Status: first draft, design phase.** It is built from best practice and is not yet refined by business requirements or brand limits. Nothing in it is final, and there is plenty of room to improve. Where a section is a recommendation or an assumption, it says so. Baseline v2 (2026-10-05) is superseded by this file; v2 content is kept, and every change is listed in [`CHANGELOG.md`](CHANGELOG.md).
 
@@ -14,7 +14,7 @@ If a diagram or the code breaks a rule here, either it changes, or this file cha
 
 - **System overview:** [`domains/platform-overview/mfg-eplatform-hld.drawio`](../domains/platform-overview/mfg-eplatform-hld.drawio) (the title inside the picture still says MFG ePlatform) is the master map of channels, edge, domains, the event backbone, and data. Domain HLDs zoom into one box on that map. They do not redraw it.
 - **Management view (SHLD):** not yet drawn. Earlier versions of this file pointed at `SHLD-guideline.md` and `mfg-eplatform-shld.drawio`. Neither file is in this repo, so the links were removed (see [§14](#14-known-drift)). The overview rules are in [`overview-guideline.md`](overview-guideline.md).
-- **Design documents (v3):** [`design/tech-stack.md`](design/tech-stack.md), [`design/pos-adapters.md`](design/pos-adapters.md), [`design/brand-configuration.md`](design/brand-configuration.md), [`design/order-payload-log.md`](design/order-payload-log.md), [`design/legacy-bridge.md`](design/legacy-bridge.md), [`design/scale-assumptions.md`](design/scale-assumptions.md), and [`design/identity-model.md`](design/identity-model.md). They explain and extend this file. If one disagrees with this file, this file wins.
+- **Design documents (v3):** [`design/tech-stack.md`](design/tech-stack.md), [`design/pos-adapters.md`](design/pos-adapters.md), [`design/brand-configuration.md`](design/brand-configuration.md), [`design/order-payload-log.md`](design/order-payload-log.md), [`design/legacy-bridge.md`](design/legacy-bridge.md), [`design/scale-assumptions.md`](design/scale-assumptions.md), [`design/identity-model.md`](design/identity-model.md), and, added 2026-10-25, [`design/postpaid-table-ordering.md`](design/postpaid-table-ordering.md). They explain and extend this file. If one disagrees with this file, this file wins.
 - **Target concept (2029):** [`platform-concept.md`](platform-concept.md) is where the platform is heading: one Minor ID, wallet, and points balance across brands, AI ordering, and smart payment routing. It is direction, not a rule. Where it disagrees with this file, this file wins until an Open decision ([O-19 to O-26](#open--needs-a-business-answer)) is answered. The cross-brand wallet and points (O-19, O-20) are a deferred, later option: D-11 was confirmed on 2026-10-24.
 - **Kafka topics:** [`kafka-topics.md`](kafka-topics.md) is the only list of topics. A topic that is not in that file does not exist.
 - **Reference HLD:** [`domains/catalog-and-menu/catalog-menu-hld.drawio`](../domains/catalog-and-menu/catalog-menu-hld.drawio) is the layout every other HLD copies. [`domains/wallet/wallet-hld.drawio`](../domains/wallet/wallet-hld.drawio) is the reference for the relation lines ([§11](#required-lines-on-every-hld)).
@@ -73,7 +73,7 @@ Use these in order. When two of them conflict, the earlier one wins.
 | Component | Who calls it | What it does | Never does |
 | --- | --- | --- | --- |
 | `customer-bff` | the customer app, with a customer JWT | shopper reads, the cart (`GetCart`, `UpdateCart`), `PlaceOrder`, wallet top-up, the inbox, and the WebSocket | write catalog, store, or admin state |
-| `guest-bff` | the app with no login | `ListNearest` and `GetMenu` only | anything that needs a principal |
+| `guest-bff` | the app with no login | `ListNearest` and `GetMenu`, and (proposed, P-45) the dine-in table routes, which accept only a guest token with scope `dine_in` | anything else that needs a principal |
 | `admin-bff` | the admin console and CSC, with an admin JWT | every admin write, after it checks the grant in `X-Roles` | serve a shopper |
 | `partner-bff` | partners with a partner JWT (`client_credentials`) | the partner API and the partner token endpoint | accept a customer or admin token |
 | `partner-adapter` | aggregators (Grab, LINE MAN, Shopee Food), POS vendors (BSL first, then others), and fleet providers (ZEEK, Grab Express) | checks the signature, runs the vendor mapper (one per POS vendor, aggregator, and fleet provider) that turns the payload into one canonical command, publishes `order.requested`, `catalog.requested`, or `delivery.requested`, consumes facts and pushes them to the aggregator or the FAAS brand | own any state except its delivery log |
@@ -85,11 +85,11 @@ A BFF talks to domains over gRPC. The one exception is `customer-bff`, which sub
 
 | Domain | Owns | Never owns |
 | --- | --- | --- |
-| Identity & Profile | the customer (the Minor ID: one account across brands), the brand membership (enabled or disabled per brand), login, the customer signing key, OTP generate and verify, the shared profile, addresses, contacts, PDPA consent | admin or partner identity, message delivery, loyalty or wallet balances |
+| Identity & Profile | the customer (the Minor ID: one account across brands), the brand membership (enabled or disabled per brand), login, the customer signing key (and the guest tokens it signs for dine-in, proposed in P-45), OTP generate and verify, the shared profile, addresses, contacts, PDPA consent | admin or partner identity, message delivery, loyalty or wallet balances |
 | Admin & Partner | the admin principal, the grant, the session, the partner OAuth client, the only call to Azure AD | the customer |
-| Brand & Store | the brand, the store, the group, the hours, the zone, the brand's feature switches and onboarding state (proposed, [`design/brand-configuration.md`](design/brand-configuration.md)) | menu, delivery fee, payment keys, other domains' settings |
+| Brand & Store | the brand, the store, the group, the hours, the zone, the brand's feature switches and onboarding state (proposed, [`design/brand-configuration.md`](design/brand-configuration.md)), the table registry and QR key versions for postpaid table ordering (proposed, P-45) | menu, delivery fee, payment keys, other domains' settings |
 | Catalog | SKUs, modifiers, menu versions, the sold-out flag, the price book | the store, the order |
-| Cart & Order (the OMS) | the cart, the order, the POS ticket and its `pos_connection` per store, the POS adapter port and one adapter per vendor, the checkout saga, the order payload log in MongoDB | the price (it asks Catalog), the charge (it asks Payment) |
+| Cart & Order (the OMS) | the cart, the order, the POS ticket and its `pos_connection` per store, the POS adapter port and one adapter per vendor, the checkout saga, the order payload log in MongoDB, the table session and the postpaid tab with its rounds and bill (proposed, P-44) | the price (it asks Catalog), the charge (it asks Payment) |
 | Payment & Billing | the transaction, gateway keys per brand, invoices and receipts | the order status, the wallet balance |
 | Delivery | the delivery, the quote, the fee, the provider job, the rider, the roster, the earnings ledger | the store zone, the order, a real-money payout |
 | Loyalty | points, the tier, and the card you scan | the order, voucher codes |
@@ -113,7 +113,7 @@ Cart & Order is the Order Management System (OMS). It does not call a POS vendor
 - **Out:** one Go adapter package per vendor, behind the port. The BSL proxy is the transport of the BSL adapter until replaced.
 - **In:** `partner-adapter` stays the only webhook entry. It checks the signature, maps the vendor payload to one canonical `PosUpdate`, and publishes `order.requested{pos_status}`. Per-vendor mapping lives in two small places: the Go adapter and the Bun mapper (the same shape as fleet providers, P-18).
 - **Rules for updates:** apply by rank and version, never blindly. A POS update never rewrites the order's price lines. Reconciliation finds a POS that disagrees with the priced order. See [`design/pos-adapters.md`](design/pos-adapters.md).
-- **Capabilities** (for example `supports_delivery`, `supports_promotions_passthrough`) are data per vendor, per brand, and per store.
+- **Capabilities** (for example `supports_delivery`, `supports_promotions_passthrough`) are data per vendor, per brand, and per store. Postpaid table ordering adds open-check flags and port operations (`supports_open_check`, `supports_external_payment`, and others; P-49, [`design/postpaid-table-ordering.md`](design/postpaid-table-ordering.md#8-pos-adapter-implications)).
 
 ### Topics and diagram status
 
@@ -282,7 +282,7 @@ poll ─▶ dedupe ─▶ apply + commit (Postgres) ─▶ Ack (commit offset)
 
 - **The domain that owns the outcome runs the saga.** Order runs checkout: it asks Brand & Store whether the store can take the order, Catalog for the price, Delivery for the quote, Voucher for the deals, and Payment for an authorization, then dispatches to the POS and sends capture or void.
 - **Saga state is a status column plus the outbox,** in the owning domain's Postgres. Each step commits before the next one starts. A crash resumes from the last committed status.
-- **Food payments are authorized first and captured later.** Payment holds the money at authorize. Capture happens only after the POS accepts the ticket; a rejection becomes a void.
+- **Food payments are authorized first and captured later.** Payment holds the money at authorize. Capture happens only after the POS accepts the ticket; a rejection becomes a void. Postpaid table orders are the one exception: they are charged and captured at the end ([below](#postpaid-flow-qr-table-ordering-proposal)).
 - **Timeouts are a sweeper, not a timer service.** Order's cron finds checkouts that never got `authorized` and tickets the POS never answered, then closes them and sends a void.
 - **No workflow engine in v1.** Temporal or Cadence comes in only when a step needs a durable timer that a sweeper cron can't cover. That limit is written on the Order HLD as a `ponytail:` note.
 
@@ -336,6 +336,34 @@ This is the cross-domain baseline every Order and Payment LLD follows. The shopp
 **The payload log is not a step.** At steps 9 and 10, and when an aggregator order enters, adapters and Order capture the raw and converted payloads in memory. A writer sends them to MongoDB later, best effort. Nothing waits for it and a failure does not touch the order ([`design/order-payload-log.md`](design/order-payload-log.md#6-write-path-how-it-gets-written-without-breaking-commit-then-the-fact)).
 
 **Wallet orders** use the same steps with `method = wallet`. At step 4, Payment calls Wallet `Hold` instead of Omise. Step 5 returns `authorized` with no `authorize_url`, and step 6 is skipped. At step 12, Payment calls Wallet `Capture` or `Release`. A short balance at step 4 is `FAILED_PRECONDITION`, and the app offers a card for the whole order (P-16). See [Wallet LLD 8](../domains/wallet/wallet-lld.drawio).
+
+### Postpaid flow: QR table ordering (proposal)
+
+**Proposal (P-44 to P-52), first draft.** Postpaid inverts the reference flow: the order goes to the kitchen first, and the money moves at the end. Cart & Order owns the table session and the tab (an order with `order_type = dine_in_postpaid`, with one round per "send to kitchen"). The full design, the alternatives, and the open questions are in [`design/postpaid-table-ordering.md`](design/postpaid-table-ordering.md).
+
+```
+ 1  guest-bff or customer-bff ──gRPC StartTableSession(qr, table code)──▶ Order ──gRPC ResolveTable──▶ Brand & Store
+ 2  guest-bff or customer-bff ──gRPC PlaceRound(idempotency_key, lines, expected total)──▶ Order
+    Order prices live with Catalog, commits the round and the outbox row; the first round publishes order.events{placed}. No payment.
+ 3  Order POS worker ──PosGateway: OpenCheck once, AddItems per round (or one ticket per round)──▶ the store's POS
+ 4  POS ──webhook──▶ partner-adapter ──order.requested{pos_status}──▶ Order applies by rank and version ──▶ order.events{round_updated}
+ 5  diner RequestBill ──▶ Order builds the bill from the agreed lines, with EvaluateBasket, service charge, and tip
+ 6  diner PayBill ──▶ Order locks the tab, ReserveRedemptions, ──gRPC CreateTransaction(purpose=table_bill)──▶ Payment ──▶ gateway
+ ─────────────────────────────────────────────── nobody waits from here ─────────────────────────────
+ 7  gateway ──webhook──▶ webhook-adapter ──payment.requested{webhook}──▶ Payment ──▶ payment.events{captured}
+ 8  Order commits paid; the POS worker calls ApplyPayment and CloseCheck; Order commits closed ──▶ order.events{completed}
+ 9  Voucher commits its hold, Loyalty earns points, Notification messages a signed-in diner, Statement writes the receipt
+```
+
+| Failure | What happens |
+| --- | --- |
+| The POS never answers a round | The sweeper rejects the round after the POS window. Nothing is billed. The tab stays open |
+| Payment fails at step 6 | `payment.events{failed}` returns the tab to `bill_requested`. The diner retries |
+| The POS check cannot be closed after the diner paid | The tab stays `paid`. The close is retried, then goes to a staff queue. No second charge and no automatic refund |
+| The diner pays at the counter | The POS update closes the tab (`settlement = counter`), or staff use `ForceCloseTab` |
+| The diner walks out | Staff flag the tab (`MarkTabUnpaid`). No timer ever closes a tab as paid or unpaid |
+
+What differs from the reference flow: `placed` happens at the first round (an extension of P-09, in P-46), the charge is captured at authorize (as P-17, in P-47), no Kafka topic is added (P-51), and the bill never takes its total from the POS (P-49, R5).
 
 ---
 
@@ -393,6 +421,8 @@ These were cut on purpose. Do not bring them back without a written reason and a
 **Kept on purpose:** the channel price book (aggregator prices differ), the thin menu publish, Valkey keyed by menu version (lunch peak), PostGIS zones, and per-brand gateway accounts.
 
 **Added in v3, each with a cost and a flag:** the POS adapter port (P-36), the MongoDB order payload log (P-38, flagged against principles 1 and 3), and the legacy bridge (P-39, flagged against principle 3 while a capability is still on legacy). No topic was added in v3 ([`kafka-topics.md`](kafka-topics.md#growth-policy)).
+
+**Added 2026-10-25:** the postpaid table tab (P-44 to P-52), with its own cost list in [`design/postpaid-table-ordering.md`](design/postpaid-table-ordering.md#15-conflicts-and-flags). It adds no topic, service, or database engine. It extends P-09, P-01, and the `guest-bff` scope, and it is flagged against P-16 and the three token families of §8.
 
 ---
 
@@ -629,6 +659,15 @@ Development starts on these. Change them here before code depends on something e
 | P-41 | **Tech stack for the draft.** Core domains are Go with a hexagonal structure (ports and adapters), mapped onto the modes `api`, `consumer`, `worker`, and `cron`. The edge is Bun and Elysia v2, REST only, with stable OpenAPI contracts and AI-ready rules (idempotent operations, scoped tokens, audit). Infrastructure is run by DevOps on AWS as much as possible; new tools may be non-AWS if clearly better. Names of domains, protos, topics, and the tenant `mfg` do not change. **Align with the owner's boilerplates when shared** | [`design/tech-stack.md`](design/tech-stack.md), [§9](#9-runtime-shape) | Elysia 2 is a release candidate, so a version pin and a re-check at the final release are needed (O-34) |
 | P-42 | **Kafka topic growth policy.** Keep topics minimal in the first draft. Twelve is considered low, and more may be added when each passes the three-answers rule (producer, consumer, why gRPC or an existing topic does not cover it). Candidates not yet registered are listed, with the trigger that would promote each. No topic was added in v3 | [`kafka-topics.md`](kafka-topics.md#growth-policy) | a candidate waits until it has a named consumer; some later work may need a topic sooner |
 | P-43 | **Scale and uptime numbers are recommendations, not facts.** The sizing tiers, load figures, latency and availability targets, RPO and RTO, and partition counts in the scale file are assumptions that the owner will rewrite. They give the design a shape to size against until O-01 to O-03 are answered | [`design/scale-assumptions.md`](design/scale-assumptions.md) | decisions that depend on a number (partition counts, Aurora split) wait for the business answer |
+| P-44 | **Postpaid table ordering is one tab in Cart & Order.** A QR table order is an order with `order_type = dine_in_postpaid` and many rounds, each round fired to the POS at once. Cart & Order owns and writes the table session, the tab, the rounds, and the bill. Alternatives not taken: Brand & Store owning the session, a new Dining domain, and the Delivery domain | [`design/postpaid-table-ordering.md`](design/postpaid-table-ordering.md#2-where-it-lives) | the Order aggregate grows from one ticket to a tab with many tickets; a Dining domain stays an option if dine-in grows |
+| P-45 | **Tables, QR, and guest access.** Brand & Store owns the table registry and QR key versions. The QR is signed and holds no personal data. A session starts through `guest-bff` or `customer-bff`. A guest uses a guest token: a customer-family JWT with scope `dine_in`, issued by Identity (`IssueGuestToken`, callable by `guest-bff` only). Guard levels G1 (always) to G4 are a per-store setting, G2 (table code) proposed as the default. **Flags:** extends the `guest-bff` scope and the meaning of the customer token family; the text of §8 is unchanged until this is signed off | [`design/postpaid-table-ordering.md`](design/postpaid-table-ordering.md#4-table-qr-and-session) | a guest token is a token with no customer behind it; a table code adds a little staff effort; the guard level waits on O-39 |
+| P-46 | **Tab and round lifecycle.** Tab states: `open`, `active`, `bill_requested`, `payment_pending`, `paid`, `closed`, `cancelled`, `abandoned_unpaid`. Round states follow the POS ranks (`fired` to `served`, plus `rejected` and `voided`). `placed` happens when the first round commits, with no payment (this extends P-09). `completed` is the close. "Served" is derived. "Deliver to table" is table service shown from POS and staff signals, and does not use the Delivery domain | [`design/postpaid-table-ordering.md`](design/postpaid-table-ordering.md#5-lifecycle-tab-rounds-and-deliver-to-table) | P-09's cost "Notification never sees an unpaid order" no longer holds for postpaid; a POS that never says served needs a staff tap (O-48) |
+| P-47 | **Pay at the end.** The bill is built from the lines agreed at each round and never from POS totals. Payment charges it with `purpose = table_bill`, captured at authorize (as P-17). The money moves first, then Order closes the POS check. The voucher hold is made at pay time and committed on `completed`. The first draft pays the whole bill. Equal split is next, by item later. **Flag:** several payments on one order read as one tender per payment (P-16) | [`design/postpaid-table-ordering.md`](design/postpaid-table-ordering.md#7-payment-at-the-end) | no cover against a walk-out unless P-48 is on; a paid tab whose check cannot be closed waits for staff; the split scope waits on O-40 |
+| P-48 | **Optional card hold.** A brand may require a `table_preauth` card hold at the first round, up to `max_open_amount`, released or partly captured at close. Cards only. It needs gateway support | [`design/postpaid-table-ordering.md`](design/postpaid-table-ordering.md#how-payment-handles-a-pay-later-transaction) | a partial capture on a hold is new for Payment; the hold shows on the card statement; legal wording and gateway settings are open (O-38, O-43) |
+| P-49 | **POS port for open checks.** `PosGateway` gains `OpenCheck`, `AddItems`, `GetCheck`, `ApplyPayment`, `CloseCheck`, and `TransferTable`, with flags `supports_dine_in`, `supports_open_check`, `supports_add_items`, `supports_get_check`, `supports_external_payment`, `supports_table_transfer`, and `supports_check_webhooks`. Adapters degrade to `ticket_per_round` or `staff_settle` per store. The new flags are unknown for BSL and treated as false until the vendor confirms | [`design/pos-adapters.md`](design/pos-adapters.md#14-open-checks-and-table-service-proposal-p-49) | each vendor needs a capability answer before the clean mode works (O-42); the fallback modes leave payment or closing to staff |
+| P-50 | **Counter settlement and staff control.** A POS update that shows the check paid or closed closes the tab (`settlement = counter`). Staff can mark a round served, void a round, move a tab, force-close a tab, or flag a walk-out from the admin console, with new grants (`table.manage`, `tab.view`, `tab.serve`, `tab.manage`, `tab.override`), a reason, and an audit row. No timer closes a tab as paid or unpaid | [`design/postpaid-table-ordering.md`](design/postpaid-table-ordering.md#pay-at-the-counter-fallback) | staff time per walk-out; an app payment and a counter settlement can collide and need a CSC refund |
+| P-51 | **No new topic for postpaid.** `order.events` gains one variant, `round_updated`. `payment` records carry a `purpose`. The POS status variant carries round and check references. The payload log records the postpaid POS traffic. `PlaceRound`, `PayBill`, `ForceCloseTab`, and `MarkTabUnpaid` take an `idempotency_key` (extends P-01). Voucher commits a postpaid hold on `completed` | [`design/postpaid-table-ordering.md`](design/postpaid-table-ordering.md#kafka-no-new-topic), [`kafka-topics.md`](kafka-topics.md) | a change to Voucher's consumer; `order.events` volume rises, see P-52 |
+| P-52 | **Dine-in numbers are recommended assumptions.** Time limits, caps, defaults, and the load figures are examples for the owner to rewrite, the same status as P-43 | [`design/postpaid-table-ordering.md`](design/postpaid-table-ordering.md#11-scale-assumptions-recommended-to-be-rewritten) | the poll load and the `order.events` partition count depend on them (O-01, O-46) |
 
 ### Open — needs a business answer
 
@@ -669,6 +708,18 @@ Development starts on these. Change them here before code depends on something e
 | O-34 | Elysia 2: the final release date, the exact version to pin, and whether the HTTP error body stays our `{ code, message, trace_id }` or moves to RFC 9457 problem details | the edge apps (P-41) |
 | O-35 | AI assistant identity: does it act as the customer with a scoped token, or as a service principal, and which operations are allowed? | the AI-ready edge (P-41), with O-24 |
 | O-36 | How Kafka topics, schemas, and ACLs are created: by DevOps from the registry, or by us? | the topic growth policy (P-42) |
+| O-37 | Postpaid: which brands and stores, and which formats (full table service only, or also order-at-counter with a table number)? Which store is the pilot? | the scope and the guard defaults (P-44, P-45) |
+| O-38 | Postpaid: the walk-out policy. Is a card hold required, who bears an unpaid loss, may a signed-in member be blocked, and what wording may be shown when a hold can be captured? | P-48, `max_open_amount` |
+| O-39 | Postpaid: which QR guard level, and how much staff effort at seating is acceptable (a table code, a staff confirm)? | the `qr_guard` default (P-45) |
+| O-40 | Postpaid: which split bill is needed (equal, by item, by person, custom), in which release, and is several payments on one order accepted next to P-16? | the split model (P-47) |
+| O-41 | Postpaid: service charge, tip, VAT display, and the tax invoice for a guest, per brand, with finance and legal confirmation, and e-tax | the bill and Statement mode (P-47) |
+| O-42 | Postpaid: the real open-check capability of each POS vendor (BSL, Promise, VIVI): open check, add items, outside payment, table transfer, check webhooks, table reference. Extends O-28. Also whether any brand feeds its kitchen from outside the POS | the flags and degrade mode per vendor (P-49) |
+| O-43 | Postpaid: the gateway's card hold and partial capture on MFG's merchant accounts, the hold time limit, fees, a hold amount increase, and PromptPay QR for a tab | P-48 |
+| O-44 | Postpaid: how staff learn of a bill request or a call for help (the admin board only, a POS-side alert, or a staff recipient type in Notification), and on which devices | the table board, Notification |
+| O-45 | Postpaid: who earns points when several diners share a tab, may a voucher be used after rounds were sent, may points be spent, and may POS-added lines be billed? | Loyalty and Voucher behavior, the bill (P-47) |
+| O-46 | Postpaid: idle and maximum session time, the payment window, the caps, the tip margin, and polling versus push | P-52, the tab sweeper |
+| O-47 | Postpaid: a guest receipt on screen only or by email (which needs a Notification call that keeps no address), taxpayer details, and how long guest tab records are kept (PDPA, with O-07) | Statement mode, retention |
+| O-48 | Postpaid: who confirms "served", how a "never arrived" dispute and a bill dispute are settled, and the table move and merge rules | the served signal and staff tools (P-46, P-50) |
 
 ---
 
@@ -688,6 +739,8 @@ The text of v3 is ahead of these diagrams. The `.drawio` files were not edited i
 | `domains/identity-and-customer/identity-customer-hld.drawio` and `identity-customer-lld.drawio` page 3 (`JoinBrand`) | No membership status (enabled or disabled), no brand-scoped token | Add them (P-40) |
 | `domains/platform-overview/mfg-eplatform-hld.drawio` and `mfg-eplatform-overview.drawio` | Title says MFG ePlatform. No MongoDB box. Partner adapter lane says BSL only | Rename to NEXA, add MongoDB, name POS vendors (P-36, P-38) |
 | `domains/cart-and-order/cart-order-hld-script.md` | The presenter script says "BSL only" and "Promise and VIVI wait" | Marked as a v2 script at the top. Rewrite it after the HLD is redrawn |
+| `domains/cart-and-order/cart-order-hld.drawio` and `cart-order-lld.drawio` (added 2026-10-25) | No table session, postpaid tab, rounds, bill, or open-check POS calls | Add them with the POS port work above (P-44, P-49). A first view is in [`diagrams/13-postpaid-table-ordering.drawio`](../diagrams/13-postpaid-table-ordering.drawio) |
+| `domains/brand-and-store/brand-store-hld.drawio`, `domains/payment-and-billing/payment-billing-hld.drawio`, `domains/identity-and-customer/identity-customer-hld.drawio` (added 2026-10-25) | No table registry and QR keys; no `table_bill` or `table_preauth` purpose; no guest token | Add them (P-45, P-47, P-48) |
 
 ### Fixed in the v3 pass
 
@@ -732,6 +785,9 @@ Add a row to the open table when a diagram next disagrees with this file.
 | Payload log | The parallel MongoDB log of raw and converted order payloads (P-38). Not a source of truth. |
 | Legacy bridge | An anti-corruption adapter that puts a legacy system behind a domain port, moved to native one capability and one brand at a time (P-39). |
 | Hexagonal | Ports and adapters. The domain core knows no transport, database, or vendor. |
+| Table session | The period one party of diners uses one table, started by scanning the table QR. One open session per table (P-44). |
+| Tab | The order of a table session (`order_type = dine_in_postpaid`). It stays open until it is paid and closed. The "open check" on the POS side. |
+| Round | One "send to kitchen" action in a tab, fired to the POS at once (P-44). |
 | Building block | One of the 8 shared capabilities in the 2029 concept. A block maps to one or more domains. |
 | Command | A request to one domain to change its state. Lives on `<domain>.requested`. The sender does not wait. |
 | Fact | Something that already happened and was committed. Lives on `.changed`, `.published`, or `.events`. |

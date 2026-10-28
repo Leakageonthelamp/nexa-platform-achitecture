@@ -22,6 +22,7 @@ This list comes from the baseline docs and the owner's chat. It is the starting 
 | Ownership | owned or franchised; what a franchisor sees | O-26 |
 | Aggregators | Grab, LINE MAN, Shopee Food on or off, per store | `partner-adapter` |
 | Fulfillment | pickup, delivery, FAAS | POS capability and Delivery |
+| Table ordering | postpaid QR table ordering on or off, tables, QR guard level, open-amount cap, tip and service charge, card hold, split bill | [`postpaid-table-ordering.md`](postpaid-table-ordering.md), P-44 to P-52 |
 | Delivery fleet | ordered provider list per store | P-19 |
 | Notification | channels, templates, sender settings | Notification (brand channel config) |
 | Loyalty | earn rules, tiers, reward prices | Loyalty (D-11: per brand) |
@@ -49,6 +50,9 @@ Each setting has one owning domain (principle 3). There is no central "config se
 | Gateway keys and provider choice | Payment & Billing | `brand_id` | `admin-bff` | Payment |
 | Menu, price book, channel prices | Catalog | `brand_id` | `admin-bff` | as today |
 | Provider list per store, quote scheme | Delivery & Dispatch | `brand_id:store_id` | `admin-bff` | Delivery |
+| Postpaid table ordering switch, tables, QR key version | Brand & Store | `brand_id:store_id`, `table_id` | `admin-bff` | Cart & Order (`ResolveTable`) |
+| Postpaid settings: guard level, POS mode, caps, TTLs, service charge, tip, split mode | Cart & Order | `brand_id:store_id` | `admin-bff` | Cart & Order |
+| Postpaid card hold and table-bill methods | Payment & Billing | `brand_id` | `admin-bff` | Payment |
 | Channel config and templates | Notification | `brand_id` | `admin-bff` | Notification |
 | Earn rules, tiers, reward prices | Loyalty & MemberCard | `brand_id` | `admin-bff` | Loyalty |
 | Wallet limits | Wallet | `brand_id` | `admin-bff` | Wallet |
@@ -157,7 +161,21 @@ If a request is "make brand X behave differently" and the answer is code, check 
 
 ---
 
-## 7. Open items
+## 7. Postpaid table ordering switches (proposal)
+
+Added 2026-10-25. Postpaid QR table ordering is a feature a brand switches on, and it follows the same rules as every other one: an unset setting is off, the owner of each setting is one domain, and the effective capability is the AND of the POS vendor flags (`supports_dine_in`, `supports_open_check`, and the others in [`pos-adapters.md` §14](pos-adapters.md#14-open-checks-and-table-service-proposal-p-49)), the brand feature, and the store setup (registered tables, a POS mode, a payment method).
+
+| Setting | Owner | Default |
+| --- | --- | --- |
+| `postpaid_table_ordering` (brand and store) | Brand & Store | off |
+| `qr_guard`, `postpaid_pos_mode`, `allow_guest`, `max_open_amount_satang`, `max_rounds_per_10min`, `max_lines_per_round`, `session_idle_ttl`, `session_max_ttl`, `service_charge_bps`, `tip_enabled`, `tip_presets`, `split_mode` | Cart & Order | off or the proposed default in the design note |
+| `preauth_required`, `preauth_amount`, `table_bill_methods` | Payment & Billing | off, and the brand's checkout methods |
+
+The values and their meaning are in [`postpaid-table-ordering.md` §9](postpaid-table-ordering.md#9-data-and-contract-changes). The readiness check gains: every store with the switch on has at least one active table, a valid `pos_connection` with a `postpaid_pos_mode`, and a payment method for a table bill. `GetFulfillmentOptions` gains the option `dine_in_postpaid`.
+
+---
+
+## 8. Open items
 
 | Id | Question |
 | --- | --- |
@@ -165,3 +183,5 @@ If a request is "make brand X behave differently" and the answer is code, check 
 | O-28 | The real capability matrix for each POS vendor (needs vendor input) |
 | O-26 | What a franchisor sees (already open) |
 | O-31 | Which capabilities run on a legacy system, per brand ([`legacy-bridge.md`](legacy-bridge.md)) |
+| O-37 | Which brands and stores offer postpaid table ordering, and in which formats |
+| O-42 | The open-check capability of each POS vendor |

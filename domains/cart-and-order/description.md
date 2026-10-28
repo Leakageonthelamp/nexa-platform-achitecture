@@ -25,6 +25,10 @@ Cart & Order is the Order Management System (OMS) of NEXA. Baseline v3 (2026-10-
 
 The line above that says the ticket "goes to the store" means the store's POS vendor adapter in v3.
 
+## v-next (2026-10-25): postpaid table tab (proposal)
+
+A new requirement, QR ordering at the table with payment after the meal, is designed in [`postpaid-table-ordering.md`](../../docs/design/postpaid-table-ordering.md) (P-44 to P-52). Cart & Order would own the **table session** and the **tab**: an order with `order_type = dine_in_postpaid` and one **round** per "send to kitchen". Each round goes to the POS at once, through the `PosGateway` port, as an add-on to the same check (or as its own ticket, for a vendor that cannot append). The bill is built from the lines agreed at each round and never from POS totals. Payment charges it at the end, and Order closes the POS check after the money has moved. `placed` happens at the first round with no payment, and `completed` is the close. This is a proposal. The diagrams below do not show it yet (see [`architecture.md` §14](../../docs/architecture.md#14-known-drift)); a first view is in [`diagrams/13-postpaid-table-ordering.drawio`](../../diagrams/13-postpaid-table-ordering.drawio).
+
 ## Diagrams
 
 **Overview** — `cart-order-overview.drawio`
