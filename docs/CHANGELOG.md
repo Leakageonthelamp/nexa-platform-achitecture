@@ -6,7 +6,36 @@ Baseline v2 (2026-10-05) is superseded by baseline v3 (2026-10-24). v2 content i
 
 ---
 
+## Addendum 2026-10-28: four new requirements (proposals)
+
+The owner gave four new requirements on 2026-10-28. Everything below is a **proposal in the design phase**. Nothing is fixed, and nothing in the repo outside these docs was touched.
+
+| # | Requirement (owner's words, shortened) | What was designed | Where |
+| --- | --- | --- | --- |
+| 1 | Postpaid: no action or callback from the POS. Fire the order again and again without payment until the customer pays the session bill, then close the session | **Amended.** Fire and forget: NEXA keeps the whole tab and closes it itself. The POS gets one ticket per round and sends nothing back. Staff handle rejection, void, resend, served and counter settlement in NEXA | [`design/postpaid-table-ordering.md`](design/postpaid-table-ordering.md) (§16 is the amendment log), [`design/pos-adapters.md`](design/pos-adapters.md) §14; P-53 to P-55, O-49 to O-51 |
+| 2 | Menu and catalog: set up and sync outward (the service is the source of truth), or sync inward from the POS (the POS is the source), converted to the same structure | A per-brand setting, one writer per field group, one canonical structure, a mapping table, staged and diffed inbound sync with the normal publish, outbound sync runs per store | New [`design/catalog-sync-and-sot.md`](design/catalog-sync-and-sot.md), [`design/pos-adapters.md`](design/pos-adapters.md) §15; P-56 to P-58, O-52 to O-55 |
+| 3 | Multi-brand, using the same cart to "shard" order | Read as "share" (O-56). One basket with a brand on every line, split into one order per brand, one payment per brand order, and a gate that places nothing until every payment is authorized | New [`design/multi-brand-cart.md`](design/multi-brand-cart.md); P-59 to P-61, O-56 to O-60 |
+| 4 | Payment information can choose between sharing or not with Minor ID | A consent owned by Identity, off by default, with the saved methods owned by Payment, usable across brands only inside one gateway account. The gateway limit is stated plainly | New [`design/payment-methods-sharing.md`](design/payment-methods-sharing.md); P-62 to P-64, O-61 to O-63 |
+
+| Area | Change |
+| --- | --- |
+| Rulebook | `architecture.md`: new decisions **P-53 to P-66** and open items **O-49 to O-63**. **P-46, P-47, P-49, P-50, P-51, P-31, P-09, O-42** are amended or superseded with their ids kept and the old text struck through, and P-38 has a note. A new subsection lists every conflict with an older rule and how it was handled ([§13](architecture.md#conflicts-of-the-2026-10-28-updates)). The postpaid flow in §7 was rewritten, two short flow notes were added, and §3, §4, §10, §14 and the glossary were updated |
+| Flagged, not hidden | The basket touches principle 6 (a call's brand is set by Order for a basket group). A cross-brand charge adds a third hop to read the consent (an explicit exception to the two-hop rule). Payment-method sharing may reverse "one Omise account per brand". Catalog may need its own copy of vendor connection data |
+| Kafka | `kafka-topics.md`: **no new topic.** One thin `pos_menu_changed` variant on `catalog.requested`, and an optional `basket_order_id` on `order.events{placed}`. The postpaid section lost `accepted` and the POS check state. A new section applies the three-answers rule to each update. The registry stays at twelve |
+| Config | `design/brand-configuration.md`: a new §7b with the new settings and their owners |
+| Identity | `design/identity-model.md`: the second consent purpose and the membership check |
+| Domains | `description.md` of Cart & Order, Payment & Billing, Identity & Customer, Catalog & Menu, Brand & Store (new "v-next 2026-10-28" sections), and small corrections in Notification and Delivery |
+| Payload log | `design/order-payload-log.md`: a note that menu payloads go to S3 and that no card data may be logged. P-38 is unchanged |
+| README | The new notes are linked |
+| Diagrams | **13** regenerated for the no-callback model (an intended change). New **14** (4 pages), **15** (3 pages) and **16** (3 pages), with previews and the generator modules `d14_catalog.py`, `d15_cart.py` and `d16_paymethods.py`. `gen_diagrams.py` registers them. Files **01 to 12 are byte-identical**. They lag the new text and are listed in [`../diagrams/00-README.md`](../diagrams/00-README.md) and in [`architecture.md` §14](architecture.md#14-known-drift) |
+
+What is **not** known, and is marked "to confirm" in the notes: what each POS vendor can do for menu sync and for dine-in tickets (every flag is unknown, including BSL's), whether a gateway can use a saved card across merchant accounts (no public feature was found), Thai PDPA wording for the payment-method consent, who is the merchant of record for a shared cart, and tax invoicing for a table bill and a basket. The numbers in the new notes (menu sizes, sync intervals, the gate window, basket shares, saved-card shares) are recommended assumptions (P-66).
+
+---
+
 ## Addendum 2026-10-25: postpaid QR table ordering (proposal)
+
+**Amended 2026-10-28:** the POS parts of this addendum (open check, add items, outside payment, POS webhooks, the three POS modes) were replaced by a fire-and-forget model. See the addendum above and `design/postpaid-table-ordering.md` §16. The text below is kept as the record of 2026-10-25.
 
 A new requirement was added to the first draft: a customer scans a QR code at the table, orders from the phone, and pays after eating. The order stays on the table until it is paid, and the food is served to the table. Everything below is a **proposal in the design phase**. Nothing is fixed.
 

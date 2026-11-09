@@ -163,7 +163,7 @@ If a request is "make brand X behave differently" and the answer is code, check 
 
 ## 7. Postpaid table ordering switches (proposal)
 
-Added 2026-10-25. Postpaid QR table ordering is a feature a brand switches on, and it follows the same rules as every other one: an unset setting is off, the owner of each setting is one domain, and the effective capability is the AND of the POS vendor flags (`supports_dine_in`, `supports_open_check`, and the others in [`pos-adapters.md` §14](pos-adapters.md#14-open-checks-and-table-service-proposal-p-49)), the brand feature, and the store setup (registered tables, a POS mode, a payment method).
+Added 2026-10-25. Postpaid QR table ordering is a feature a brand switches on, and it follows the same rules as every other one: an unset setting is off, the owner of each setting is one domain, and the effective capability is the AND of the POS vendor flags (`supports_dine_in`, `supports_pay_later_marker`, and the others in [`pos-adapters.md` §14](pos-adapters.md#14-fire-only-table-service-for-postpaid-p-54); amended 2026-10-28, the open-check flags of 2026-10-25 are a later upgrade), the brand feature, and the store setup (registered tables, a POS mode, a payment method).
 
 | Setting | Owner | Default |
 | --- | --- | --- |
@@ -172,6 +172,27 @@ Added 2026-10-25. Postpaid QR table ordering is a feature a brand switches on, a
 | `preauth_required`, `preauth_amount`, `table_bill_methods` | Payment & Billing | off, and the brand's checkout methods |
 
 The values and their meaning are in [`postpaid-table-ordering.md` §9](postpaid-table-ordering.md#9-data-and-contract-changes). The readiness check gains: every store with the switch on has at least one active table, a valid `pos_connection` with a `postpaid_pos_mode`, and a payment method for a table bill. `GetFulfillmentOptions` gains the option `dine_in_postpaid`.
+
+---
+
+## 7b. Settings added on 2026-10-28 (proposal)
+
+Four updates add settings. They follow the same rules: an unset setting is off, and each setting has one owning domain. The values and their meaning are in the design notes.
+
+| Setting | Owner | Default | Note |
+| --- | --- | --- | --- |
+| `postpaid_pos_mode` | Cart & Order (`pos_connection`) | unset, so off. One value in the first draft: `fire_only` | [`postpaid-table-ordering.md` §9](postpaid-table-ordering.md#9-data-and-contract-changes) (replaces the three modes of 2026-10-25) |
+| `pos_payment_report` | Cart & Order (`pos_connection`) | `marker` (proposal). Also `none` and `marker_and_report` | what the POS learns about a payment made in NEXA (O-49) |
+| `send_retry_window` | Cart & Order | an Assumption: 2 minutes | when a round that could not be sent needs staff (O-50) |
+| `catalog_sync_mode` (brand, with an optional store override): `service`, `pos`, or `mixed` with `field_owner.<group>` | Catalog | unset: today's behavior, nothing synced outward | who is the source of truth for menu and catalog (P-56, O-52). A switch needs a dry run and an audit row |
+| `inbound_publish` (`review` or `auto`), `inbound_guard`, `poll_interval`, `sync_retry_window`, `pos_menu_connection` | Catalog | `review`, and Assumptions in the note | [`catalog-sync-and-sot.md` §9](catalog-sync-and-sot.md#9-settings-grpc-and-rest-proposals) (O-54, O-55) |
+| `cross_brand_basket` | Brand & Store (feature switch) | off | the brand's lines may be in a basket of another brand's app, and other brands' lines may be in its own (P-59) |
+| `basket_group` | Brand & Store | unset | which brands may share a basket (O-59) |
+| `basket_pay_window` | Cart & Order | an Assumption: 15 minutes | how long the gate waits for all payments (P-60, O-04) |
+| `saved_methods_enabled` | Payment & Billing | off | the brand lets customers save a card (P-62) |
+| `payment_account_group` | Payment & Billing | a group of one brand | which gateway account group the brand pays through (P-63, O-62) |
+
+The readiness check gains: a brand with `catalog_sync_mode = pos` has a working `PosMenuGateway` connection and a first import that was reviewed and published; a brand with the basket switch on has a live store for each brand it shares with. The payment-method sharing consent is **not** a brand setting. It is the customer's choice in Minor ID ([`payment-methods-sharing.md`](payment-methods-sharing.md#2-where-the-setting-lives)).
 
 ---
 
@@ -184,4 +205,8 @@ The values and their meaning are in [`postpaid-table-ordering.md` §9](postpaid-
 | O-26 | What a franchisor sees (already open) |
 | O-31 | Which capabilities run on a legacy system, per brand ([`legacy-bridge.md`](legacy-bridge.md)) |
 | O-37 | Which brands and stores offer postpaid table ordering, and in which formats |
-| O-42 | The open-check capability of each POS vendor |
+| O-42 | The fire-only capability of each POS vendor (amended 2026-10-28) |
+| O-49 to O-51 | Postpaid: what the POS learns about a payment, what "the kitchen has it" means, and counter settlement by staff |
+| O-52 to O-55 | Catalog source of truth, vendor menu capability, vendor connection data and payload home, and the inbound publish policy |
+| O-56 to O-60 | The shared cart: meaning, payment, partial failure, scope, and deals |
+| O-61 to O-63 | Payment-method sharing: PDPA, gateway, and scope |

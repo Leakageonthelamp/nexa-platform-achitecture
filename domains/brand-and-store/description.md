@@ -20,6 +20,10 @@ Baseline v3 (2026-10-24) proposes that Brand & Store also owns each brand's **fe
 
 Brand & Store would also own the **table registry** (`store_table`: table, label, active flag) and the **QR key version** for postpaid QR table ordering, plus the brand and store switch `postpaid_table_ordering`. It adds `ResolveTable` (verifies the signed QR and returns the table and store facts), `ListTables`, `UpsertTable`, and `RotateTableKey`. It does not own the table session or the tab: Cart & Order does, so the one-owner rule holds. Design: [`postpaid-table-ordering.md`](../../docs/design/postpaid-table-ordering.md) (P-44, P-45). The HLD does not show this yet.
 
+## v-next (2026-10-28): the cross-brand basket switch (proposal)
+
+Brand & Store would hold one more feature switch, `cross_brand_basket` (default off), and the optional `basket_group` that says which brands may share a basket (P-59, O-59). It owns no basket. Design: [`multi-brand-cart.md`](../../docs/design/multi-brand-cart.md). The HLD does not show this yet.
+
 ## Diagrams
 
 **Overview** — `brand-store-overview.drawio`

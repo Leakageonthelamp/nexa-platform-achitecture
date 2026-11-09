@@ -18,6 +18,10 @@ Baseline v3 (2026-10-24): one Minor ID works across all brands and can be **enab
 
 For postpaid QR table ordering ([`postpaid-table-ordering.md`](../../docs/design/postpaid-table-ordering.md), P-45), Identity would sign a **guest token**: a customer-family JWT with scope `dine_in`, a session and member claim, and a 5-minute life, issued by one new call, `IssueGuestToken`, callable by `guest-bff` only. Identity keeps no guest state and no personal data. A diner who signs in joins the table session with the normal customer token and the brand's membership (D-11, P-40). This extends the meaning of the customer token family and is flagged in the rulebook. The HLD does not show it yet.
 
+## v-next (2026-10-28): consent to share payment methods, and the membership check for a shared cart (proposal)
+
+Identity would record one more consent purpose, `payment_method_sharing` (P-62): off by default, withdrawable at any time, with the time, policy version, and channel. Identity stores no payment data: the saved cards belong to Payment, which reads this consent live (`GetConsent`). For a shared multi-brand cart, Cart & Order reads whether the customer is `enabled` in each brand (`GetMembership`, P-59). The customer token stays one brand. Design: [`payment-methods-sharing.md`](../../docs/design/payment-methods-sharing.md), [`multi-brand-cart.md`](../../docs/design/multi-brand-cart.md). The HLD does not show these yet.
+
 ## Diagrams
 
 **Overview** — `identity-customer-overview.drawio`

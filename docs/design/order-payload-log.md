@@ -210,6 +210,8 @@ flowchart LR
 | [`pos-adapters.md`](pos-adapters.md) | outcomes and `payload_ref` |
 | Cart & Order HLD | needs a Mongo box in the Data lane, and the reason in Decisions. **Diagram not updated** |
 | Platform HLD and overview | need the MongoDB infrastructure box. **Diagram not updated** |
+| [`catalog-sync-and-sot.md`](catalog-sync-and-sot.md) (2026-10-28) | the log stays limited to **order** payloads (P-38 unchanged). Raw menu payloads of the catalog sync go to S3 with a pointer in Postgres. Using this log for them would need P-38 amended (O-54). Postpaid tickets are logged like any POS call, and a vendor status pushed for a postpaid order is logged and not applied (P-53) |
+| [`payment-methods-sharing.md`](payment-methods-sharing.md) (2026-10-28) | no card field may be logged. The masking list gains the card fields. **To confirm** how the current masking treats payment fields |
 
 ---
 

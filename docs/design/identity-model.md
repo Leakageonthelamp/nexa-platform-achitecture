@@ -77,6 +77,10 @@ P-33 says sharing a profile across brands is a PDPA consent purpose owned by Ide
 | Withdrawing | Stops cross-brand reads at once. It does not delete rows. Deleting is `DeleteCustomer` | Proposed |
 | Franchise brands | Whether a franchisor can see shared data is open (O-26) | Open |
 
+**Added 2026-10-28 (P-62): a second consent purpose, `payment_method_sharing`.** Whether a customer's saved payment methods may be used in other brands is a separate consent that Identity owns, with the same shape as the profile consent: the customer opts in and can withdraw at any time, and each change writes the purpose, time, policy version, and channel. It is **off by default**. It is a separate record so that it is not bundled with the profile consent unless legal says it may be (O-61). Identity stores **no payment data**: the saved methods are owned by Payment, which reads this consent live when a method of another brand is listed or used ([`payment-methods-sharing.md`](payment-methods-sharing.md)). A brand that is disabled for the customer (P-40) can neither list nor use shared methods.
+
+**Added 2026-10-28 (P-59): the membership check for a shared cart.** A line of another brand in a basket needs an `enabled` membership in that brand. Cart & Order asks Identity (a new read, `GetMembership`). The brand-scoped customer token is not changed ([`multi-brand-cart.md`](multi-brand-cart.md#4-the-basket-ownership-and-keys)).
+
 **Assumption:** the minimum an account needs is the login identifier and sign-in methods. Which fields count as the minimum is for the owner and legal to settle (O-33).
 
 ---
@@ -110,4 +114,5 @@ D-11 stands. One customer across brands means many loyalty profiles and many wal
 | --- | --- |
 | O-06 | How Kong sets `X-Brand-Id` for a customer in more than one brand. The proposal above awaits confirmation |
 | O-26 | What a franchisor sees (already open) |
+| O-61 | Payment-method sharing consent under Thai PDPA: wording, bundling with the profile consent, default, retention, and delete (added 2026-10-28) |
 | O-33 | Default consent state and when it is asked. Which fields are the sign-in minimum. What happens to a wallet balance, points and notifications when a membership is disabled. How a delete works across brands |

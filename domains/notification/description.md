@@ -15,7 +15,7 @@ Aggregator orders are skipped. Grab, LINE MAN, and Shopee Food already notify th
 
 ## v-next (2026-10-25): table orders (proposal)
 
-For postpaid table ordering ([`postpaid-table-ordering.md`](../../docs/design/postpaid-table-ordering.md), P-51), Notification reads one more `order.events` variant, `round_updated`, and messages a signed-in diner when a round is `ready` or `rejected`, and with the receipt link when the tab is `completed`. A guest has no contact, so a guest sees status on screen. Notification must not treat a postpaid `placed` as a paid order. Messages to staff (a bill request, a call for help) are an open question (O-44), because Notification has no staff recipient type today.
+For postpaid table ordering ([`postpaid-table-ordering.md`](../../docs/design/postpaid-table-ordering.md), P-51), Notification reads one more `order.events` variant, `round_updated`, and messages a signed-in diner when a round is `rejected` (amended 2026-10-28: the POS reports no `ready`), and with the receipt link when the tab is `completed`. A guest has no contact, so a guest sees status on screen. Notification must not treat a postpaid `placed` as a paid order. Messages to staff (a bill request, a call for help) are an open question (O-44), because Notification has no staff recipient type today.
 
 ## Diagrams
 

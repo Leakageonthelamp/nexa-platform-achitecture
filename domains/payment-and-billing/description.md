@@ -13,7 +13,13 @@ Food payments are authorized first and captured later. The hold is placed at aut
 
 ## v-next (2026-10-25): the table bill (proposal)
 
-For postpaid table ordering ([`postpaid-table-ordering.md`](../../docs/design/postpaid-table-ordering.md), P-47, P-48), `CreateTransaction` gains `purpose = table_bill`: the final bill is charged and captured at once, like a wallet top-up, and only then does Order close the POS check. An optional `purpose = table_preauth` is a card hold at the first round, partly captured or released at close. A partial capture is new for this domain and depends on the gateway (to confirm). Statement mode writes the receipt and tax invoice from the paid bill. Rates, tips, service charge, and the guest tax invoice are to confirm with finance and legal (O-41). A split bill is several transactions, each with one tender (flagged against P-16, O-40). The HLD does not show this yet.
+For postpaid table ordering ([`postpaid-table-ordering.md`](../../docs/design/postpaid-table-ordering.md), P-47, P-48), `CreateTransaction` gains `purpose = table_bill`: the final bill is charged and captured at once, like a wallet top-up, and only then does Order close the tab (amended 2026-10-28: NEXA closes it, not the POS). An optional `purpose = table_preauth` is a card hold at the first round, partly captured or released at close. A partial capture is new for this domain and depends on the gateway (to confirm). Statement mode writes the receipt and tax invoice from the paid bill. Rates, tips, service charge, and the guest tax invoice are to confirm with finance and legal (O-41). A split bill is several transactions, each with one tender (flagged against P-16, O-40). The HLD does not show this yet.
+
+## v-next (2026-10-28): the table bill closes in NEXA, and saved methods (proposal)
+
+**Table bill (amended, P-53).** The 2026-10-25 text above said Order closes the POS check after the money moved. Now the POS takes no action: when `payment.events{captured}` with `purpose = table_bill` arrives, Order closes the tab and the session itself. Payment's part is unchanged.
+
+**Saved payment methods and sharing (P-62 to P-64).** Payment would own a saved card as a gateway reference plus display fields (never a card number), the `payment_account_group` that says which brands use one gateway account, and an audit of every use. A method saved in one brand is usable in another only if both brands are in the same account group **and** the customer has switched on the Minor ID consent that Identity owns. Payment reads that consent live. Calls (proposals): `SavePaymentMethod`, `ListPaymentMethods`, `RemovePaymentMethod`, `EraseCustomerMethods`, and `payment_method_id` on `CreateTransaction`. Design and open gateway questions: [`payment-methods-sharing.md`](../../docs/design/payment-methods-sharing.md). The HLD does not show this yet.
 
 ## Diagrams
 

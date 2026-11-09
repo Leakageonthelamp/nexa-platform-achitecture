@@ -18,7 +18,7 @@ Riders use `brand_id = mfg`, because one pool serves every brand. The delivery i
 Fleet Management, FAAS, and Driver Management are the legacy side of the cutover in O-18. Baseline v3 allows that cutover per capability and per brand through a legacy bridge behind the same ports. See [`legacy-bridge.md`](../../docs/design/legacy-bridge.md). The LLD below has sixteen pages as drawn.
 ## v-next (2026-10-25): not used for table service
 
-Postpaid QR table ordering ([`postpaid-table-ordering.md`](../../docs/design/postpaid-table-ordering.md), P-46) does **not** use this domain. "Deliver to table" is table service by store staff, shown from POS and staff signals. There is no quote, fee, rider, or provider job. Because Delivery starts dispatch on `order.events{accepted}` (P-21), the postpaid `accepted` event carries `fulfillment = dine_in` and Delivery must act only on delivery orders. To verify in the LLD page 2 that it filters on fulfillment.
+Postpaid QR table ordering ([`postpaid-table-ordering.md`](../../docs/design/postpaid-table-ordering.md), P-46) does **not** use this domain. "Deliver to table" is table service by store staff, shown from NEXA's send result and a staff tap (amended 2026-10-28). There is no quote, fee, rider, or provider job. A postpaid tab has no `accepted` event since 2026-10-28 (P-53), so Delivery's dispatch trigger (`order.events{accepted}`, P-21) never fires for it. The postpaid `placed` carries `fulfillment = dine_in`, and Delivery must act only on delivery orders. To verify in the LLD page 2 that it filters on fulfillment. Each child order of a multi-brand basket is its own delivery with its own quote (P-61).
 
 ## Diagrams
 

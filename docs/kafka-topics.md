@@ -45,7 +45,9 @@ The rules come from two Confluent notes and from how food-delivery checkouts act
 
 `catalog.menu.published` is thin: version and `effective_at` only. The consumer calls `GetMenu(version)`. A menu can pass Kafka's 1 MB default, so the body stays off the topic.
 
-`order.requested` is one `oneof`: create, replace, cancel, POS status. The same order id stays in one partition, so a cancel cannot pass the create. The POS status variant carries one canonical `PosUpdate` that the vendor's mapper in `partner-adapter` builds, with a deterministic `event_id` so a vendor duplicate and a redelivery dedupe the same way. Order applies it by rank and version. The shape and the rules are in [`design/pos-adapters.md`](design/pos-adapters.md#4-canonical-shapes). For a postpaid table order the same variant also carries the round and the POS check references and the check state ([`design/pos-adapters.md` §14](design/pos-adapters.md#14-open-checks-and-table-service-proposal-p-49)). This does not add a topic.
+`catalog.requested` is one `oneof` (sold-out and the like). **Proposed 2026-10-28 (P-58):** one more thin variant, `pos_menu_changed`, published by `partner-adapter` after it has checked the signature of a POS menu-change webhook. It carries only the vendor, the store, a change kind, and an S3 key or a vendor reference, never a menu body, and it is keyed `brand_id:store_id` so one store's changes stay in order. A POS menu that is polled or sent as a file needs no record: Catalog's own scheduler reads it. Outbound menu sync to a POS or a channel is Catalog's own outbox worker and publishes nothing ([`design/catalog-sync-and-sot.md`](design/catalog-sync-and-sot.md)).
+
+`order.requested` is one `oneof`: create, replace, cancel, POS status. The same order id stays in one partition, so a cancel cannot pass the create. The POS status variant carries one canonical `PosUpdate` that the vendor's mapper in `partner-adapter` builds, with a deterministic `event_id` so a vendor duplicate and a redelivery dedupe the same way. Order applies it by rank and version. The shape and the rules are in [`design/pos-adapters.md`](design/pos-adapters.md#4-canonical-shapes). A postpaid table order does **not** use this variant: since 2026-10-28 the POS takes no action and sends no callback for it (P-53), so nothing is published, and a status a vendor pushes anyway is logged and not applied ([`design/pos-adapters.md` §14](design/pos-adapters.md#14-fire-only-table-service-for-postpaid-p-54)). This does not add a topic.
 
 `payment.requested` is one `oneof`: capture, void, webhook, payout. Charge and refund are not on it. Charge is the checkout gRPC, because the shopper is waiting for `authorize_url`. Refund is an admin gRPC. The webhook variant is published by webhook-adapter after it has checked the gateway signature. `payout` is published by Delivery in the same commit as `delivered`, one payout per delivery. Delivery chooses the id and Payment uses it as the transaction id, so the key stays `brand_id:transaction_id`. A rider payout uses `brand_id = mfg` (P-23).
 
@@ -53,7 +55,7 @@ The rules come from two Confluent notes and from how food-delivery checkouts act
 
 A wallet spend is not on this bus. Payment calls Wallet over gRPC (`Hold`, `Capture`, `Release`, `Refund`) and the caller is waiting, so a command cannot return the hold (D-09).
 
-`order.events` is one `oneof`: placed, accepted, rejected, ready, completed, cancelled, and, proposed on 2026-10-25 for postpaid table orders, `round_updated` (P-51). Delivery acts on `accepted` (start dispatch) and `cancelled` (cancel the provider job), for delivery orders only: a postpaid `accepted` carries `fulfillment = dine_in`. Every other variant is an Ack with no work.
+`order.events` is one `oneof`: placed, accepted, rejected, ready, completed, cancelled, and, proposed on 2026-10-25 for postpaid table orders, `round_updated` (P-51). Delivery acts on `accepted` (start dispatch) and `cancelled` (cancel the provider job), for delivery orders only. A postpaid tab has no `accepted` (amended 2026-10-28, P-53): its `placed` carries `fulfillment = dine_in`, which Delivery ignores. **Proposed 2026-10-28 (P-60):** the `placed` payload of a child order of a multi-brand basket carries `basket_order_id` (a new optional field, BACKWARD compatible). The parent basket order publishes nothing. Every other variant is an Ack with no work.
 
 Notification reads `payment.events` for `refunded` only. Every other variant is an Ack with no work.
 
@@ -168,16 +170,30 @@ These are **not** topics. They do not exist, and a diagram must not draw them. E
 
 ## Postpaid table ordering — no new topic
 
-Added 2026-10-25 ([`design/postpaid-table-ordering.md`](design/postpaid-table-ordering.md#kafka-no-new-topic), P-51). The three answers for a possible table-events topic: **who produces it** (Order), **who consumes it** (Notification, Voucher, and Loyalty, all of which already read `order.events`), and **why an existing topic does not cover it** (it does: one more `oneof` variant, keyed by the order, keeps the tab's events in order). The third answer fails, so no topic is added.
+Added 2026-10-25, amended 2026-10-28 (fire and forget: fewer events, still no topic) ([`design/postpaid-table-ordering.md`](design/postpaid-table-ordering.md#kafka-no-new-topic), P-51). The three answers for a possible table-events topic: **who produces it** (Order), **who consumes it** (Notification, Voucher, and Loyalty, all of which already read `order.events`), and **why an existing topic does not cover it** (it does: one more `oneof` variant, keyed by the order, keeps the tab's events in order). The third answer fails, so no topic is added.
 
 | Event | Topic | Notes |
 | --- | --- | --- |
-| first round committed | `order.events{placed}` | no payment gate for a postpaid tab. `order_type = dine_in_postpaid`, `fulfillment = dine_in` |
-| a round changes status | `order.events{round_updated}` (new variant) | round number and status. No personal data |
-| first round accepted by the POS | `order.events{accepted}` | Delivery ignores it for `dine_in` |
+| first round committed | `order.events{placed}` | no payment gate for a postpaid tab (a basket's gate does not apply). `order_type = dine_in_postpaid`, `fulfillment = dine_in` |
+| a round changes status | `order.events{round_updated}` (new variant) | round number and NEXA's own status (`sent`, `served`, `rejected`, `voided`, `needs_staff`). No personal data |
+| ~~first round accepted by the POS~~ | ~~`order.events{accepted}`~~ | **Removed 2026-10-28 (P-53):** the POS reports no acceptance for a postpaid tab, so there is no `accepted` |
 | tab closed | `order.events{completed}` | totals, `customer_id` if any, `settlement`. Voucher commits its hold, Loyalty earns |
 | tab cancelled | `order.events{cancelled}` | Voucher releases its hold |
-| table bill paid | `payment.events{captured}` with `purpose = table_bill` | Order marks the tab `paid` |
-| POS check state | `order.requested{pos_status}` | carries `check_ref`, `round_ref`, `check_state` |
+| table bill paid | `payment.events{captured}` with `purpose = table_bill` | Order closes the tab and the session in the same commit (`completed`, `settlement = app`). There is no `paid` state |
+| ~~POS check state~~ | ~~`order.requested{pos_status}`~~ | **Removed 2026-10-28 (P-53):** no POS status for postpaid. A status a vendor pushes anyway is logged and not published |
 
 **Promote a topic only if** a second, high-rate consumer of table events outside these appears (for example a kitchen display service that is not the POS), or `round_updated` volume swamps `order.events`. The extra load is estimated in [`design/postpaid-table-ordering.md` §11](design/postpaid-table-ordering.md#11-scale-assumptions-recommended-to-be-rewritten) (an assumption), and the partition counts above stay as registered until O-01 is answered.
+
+## 2026-10-28 updates — no new topic
+
+The three answers (P-65) for each of the four updates of 2026-10-28. The registry stays at twelve.
+
+| Update | Possible topic | Producer, consumer, why not an existing topic | Result |
+| --- | --- | --- | --- |
+| Postpaid, no POS callback (P-53) | none needed. A POS status topic for postpaid | there is no POS status, so there is nothing to publish | Fewer events than on 2026-10-25. `order.requested{pos_status}` is not used for postpaid |
+| Catalog sync, inbound (P-58) | `catalog.sync.events` | the producer would be Catalog and the only consumer would be the admin console, which reads a table over gRPC. The third answer fails | **No topic.** One thin `pos_menu_changed` variant on `catalog.requested` for a POS webhook (the producer is `partner-adapter`, and a webhook is not waited on) |
+| Catalog sync, outbound (P-58) | `catalog.sync.requested` | it is Catalog's own background work, so it is an outbox table and a worker (ask 3 of the order above) | **No topic** |
+| Multi-brand basket (P-60) | `basket.events` | the producer would be Order and the only consumer would be the app, over gRPC and WebSocket. Each child already publishes `order.events` | **No topic.** `placed` gains an optional `basket_order_id` |
+| Payment-method sharing (P-64) | `payment.method.events`, `consent.changed` | Payment reads the consent live from Identity, so no consumer needs a fact. Putting a card or a consent on the bus is also against principle 8 | **No topic and no variant** |
+
+**Candidates, not registered, with their trigger:** `catalog.sync.events` (a second consumer wants sync results, for example a support tool or analytics), `basket.events` (a consumer needs the parent basket as a fact, for example analytics or a support tool). The existing candidate `customer.changed` is **not** promoted by the payment-method sharing, because Payment reads the consent live. No personal data rides on any of these.
